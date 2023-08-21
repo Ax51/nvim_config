@@ -53,4 +53,4 @@ vim.keymap.set("n", "gr", telescope.lsp_references, { noremap = true, silent = t
 vim.keymap.set("n", "gd", telescope.lsp_definitions, { noremap = true, silent = true })
 
 -- LazyGit
--- vim.keymap.set("n", "<leader>lg", '<LazyGit>', {})
+vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>", {})
