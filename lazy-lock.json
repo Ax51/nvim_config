@@ -6,6 +6,7 @@
   "darkplus.nvim": { "branch": "master", "commit": "7c236649f0617809db05cd30fb10fed7fb01b83b" },
   "hop.nvim": { "branch": "master", "commit": "03f0434869f1f38868618198b5f4f2ab6d39aef2" },
   "lazy.nvim": { "branch": "main", "commit": "dac844ed617dda4f9ec85eb88e9629ad2add5e05" },
+  "lazygit.nvim": { "branch": "main", "commit": "22e51e03268fabe068a77e2bd316ac25ff2084f9" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "7e8208a4d936f93303cc229af865a2cd226c807f" },
   "mason.nvim": { "branch": "main", "commit": "a51c2d063c5377ee9e58c5f9cda7c7436787be72" },
   "neo-tree.nvim": { "branch": "v3.x", "commit": "cac2e1bfa1ecd5bd0ce7ae29e12efb3ba5a7347d" },
