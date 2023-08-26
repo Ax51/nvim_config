@@ -2,6 +2,7 @@ vim.g.mapleader = " "
 
 -- NeoTree
 vim.keymap.set("n", "<leader>e", ":Neotree toggle position=float<CR>")
+vim.keymap.set("n", "<leader>E", ":Neotree right reveal<CR>")
 vim.keymap.set("n", "<leader>o", ":Neotree float git_status<CR>")
 
 -- LSP
@@ -53,4 +54,4 @@ vim.keymap.set("n", "gr", telescope.lsp_references, { noremap = true, silent = t
 vim.keymap.set("n", "gd", telescope.lsp_definitions, { noremap = true, silent = true })
 
 -- LazyGit
-vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>", {})
+vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", {})
