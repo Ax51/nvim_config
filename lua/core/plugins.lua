@@ -64,4 +64,8 @@ require("lazy").setup({
 			"s1n7ax/nvim-window-picker",
 		},
 	},
+	{
+		"akinsho/bufferline.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 })
