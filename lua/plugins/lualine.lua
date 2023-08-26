@@ -37,7 +37,18 @@ require("lualine").setup({
 		lualine_z = {},
 	},
 	tabline = {},
-	winbar = {},
+	winbar = {
+		lualine_b = {
+			"filename",
+		},
+		lualine_c = {
+			{
+				"navic",
+				color_correction = nil,
+				navic_opts = nil,
+			},
+		},
+	},
 	inactive_winbar = {},
 	extensions = {},
 })

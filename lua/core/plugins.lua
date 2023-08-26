@@ -91,4 +91,5 @@ require("lazy").setup({
 	},
 	{ "nvim-tree/nvim-web-devicons" },
 	{ "nvim-treesitter/nvim-treesitter-context" },
+	{ "SmiteshP/nvim-navic" },
 })

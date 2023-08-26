@@ -3,13 +3,24 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 -- Sntup language servers.
 local lspconfig = require("lspconfig")
 lspconfig.pyright.setup({})
-lspconfig.tsserver.setup({})
+lspconfig.tsserver.setup({
+	on_attach = function(client, bufnr)
+		if client.server_capabilities.documentSymbolProvider then
+			require("nvim-navic").attach(client, bufnr)
+		end
+	end,
+})
 lspconfig.prismals.setup({})
 lspconfig.cssls.setup({
 	capabilities = capabilities,
 })
 lspconfig.golangci_lint_ls.setup({})
 lspconfig.rust_analyzer.setup({
+	on_attach = function(client, bufnr)
+		if client.server_capabilities.documentSymbolProvider then
+			require("nvim-navic").attach(client, bufnr)
+		end
+	end,
 	settings = {
 		["rust-analyzer"] = {
 			diagnostics = {
