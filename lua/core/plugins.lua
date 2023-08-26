@@ -82,4 +82,12 @@ require("lazy").setup({
 			vim.o.timeoutlen = 300
 		end,
 	},
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"linrongbin16/lsp-progress.nvim",
+		},
+	},
+	{ "nvim-tree/nvim-web-devicons" },
 })
