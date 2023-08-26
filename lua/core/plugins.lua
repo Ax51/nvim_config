@@ -44,4 +44,8 @@ require("lazy").setup({
 		"kdheepak/lazygit.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
+	{
+		"numToStr/Comment.nvim",
+		lazy = false,
+	},
 })
