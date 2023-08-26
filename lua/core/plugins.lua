@@ -22,7 +22,12 @@ require("lazy").setup({
 			"MunifTanjim/nui.nvim",
 		},
 	},
-	{ "nvim-treesitter/nvim-treesitter" },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			"JoosepAlviste/nvim-ts-context-commentstring",
+		},
+	},
 	{ "neovim/nvim-lspconfig" },
 	{ "lunarvim/darkplus.nvim" },
 
