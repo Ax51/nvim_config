@@ -93,4 +93,8 @@ require("lazy").setup({
 	{ "nvim-tree/nvim-web-devicons" },
 	{ "nvim-treesitter/nvim-treesitter-context" },
 	{ "SmiteshP/nvim-navic" },
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
 })
