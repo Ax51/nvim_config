@@ -14,6 +14,15 @@ lspconfig.prismals.setup({})
 lspconfig.cssls.setup({
 	capabilities = capabilities,
 })
+lspconfig.lua_ls.setup({
+	settings = {
+		Lua = {
+			completion = {
+				callSnippet = "Replace",
+			},
+		},
+	},
+})
 lspconfig.golangci_lint_ls.setup({})
 lspconfig.rust_analyzer.setup({
 	on_attach = function(client, bufnr)

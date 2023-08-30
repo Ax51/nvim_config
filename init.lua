@@ -6,6 +6,7 @@ require("core.config")
 
 -- Plugins
 require("plugins.hop")
+require("plugins.neodev")
 require("plugins.neotree")
 require("plugins.treesitter")
 require("plugins.cmp")
