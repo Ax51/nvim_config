@@ -35,4 +35,8 @@ wk.register({
 		a = "Action",
 		s = "Symbol",
 	},
+	r = {
+		name = "Run",
+		s = "Execute JS script with Bun",
+	},
 }, { prefix = "<leader>" })

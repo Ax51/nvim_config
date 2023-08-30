@@ -78,11 +78,11 @@ vim.keymap.set("n", "<leader>x", "<c-w>c")
 vim.keymap.set("n", "<leader>s", ":BufferLineSortByTabs<CR>")
 vim.keymap.set("i", "jj", "<Esc>")
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
+vim.keymap.set("n", "<leader>rs", ":!bun %<CR>")
 
 -- Tabs
 vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>")
 vim.keymap.set("n", "<s-Tab>", ":BufferLineCyclePrev<CR>")
 
 -- Navbuddy
-
 vim.keymap.set("n", "<leader>fv", ":Navbuddy<CR>")
