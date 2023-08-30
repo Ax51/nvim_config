@@ -109,4 +109,5 @@ require("lazy").setup({
 		},
 		opts = { lsp = { auto_attach = true } },
 	},
+	{ "olimorris/persisted.nvim" },
 })

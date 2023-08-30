@@ -1,5 +1,6 @@
 local actions = require("telescope.actions")
 
+require("telescope").load_extension("persisted")
 require("telescope").setup({
 	extensions = {
 		fzf = {
