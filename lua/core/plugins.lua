@@ -111,7 +111,6 @@ require("lazy").setup({
 		opts = { lsp = { auto_attach = true } },
 	},
 	{ "olimorris/persisted.nvim" },
-	{ "folke/neodev.nvim", opts = {} },
 	{
 		"linrongbin16/lsp-progress.nvim",
 		event = { "VimEnter" },
