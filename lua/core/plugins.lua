@@ -29,6 +29,7 @@ require("lazy").setup({
 		},
 	},
 	{ "neovim/nvim-lspconfig" },
+	{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 	{ "lunarvim/darkplus.nvim" },
 
 	{ "hrsh7th/cmp-nvim-lsp" },
