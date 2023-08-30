@@ -112,4 +112,12 @@ require("lazy").setup({
 	},
 	{ "olimorris/persisted.nvim" },
 	{ "folke/neodev.nvim", opts = {} },
+	{
+		"linrongbin16/lsp-progress.nvim",
+		event = { "VimEnter" },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("lsp-progress").setup()
+		end,
+	},
 })

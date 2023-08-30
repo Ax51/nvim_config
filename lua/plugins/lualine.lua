@@ -22,9 +22,13 @@ require("lualine").setup({
 		lualine_b = { "branch", "diff", "diagnostics" },
 		lualine_c = {
 			"%f",
-			-- require("lsp-progress").progress
 		},
-		lualine_x = { "encoding", "filetype", "filesize" },
+		lualine_x = {
+			require("lsp-progress").progress,
+			"encoding",
+			"filetype",
+			"filesize",
+		},
 		lualine_y = { "progress" },
 		lualine_z = { "location" },
 	},
