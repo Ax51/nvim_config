@@ -1,7 +1,10 @@
+local telescope = require("telescope")
 local actions = require("telescope.actions")
 
-require("telescope").load_extension("persisted")
-require("telescope").setup({
+telescope.load_extension("persisted")
+telescope.load_extension("fzf")
+
+telescope.setup({
 	extensions = {
 		fzf = {
 			fuzzy = true, -- false will only do exact matching
@@ -31,6 +34,12 @@ require("telescope").setup({
 			},
 		},
 	},
-})
 
-require("telescope").load_extension("fzf")
+	-- Show line numbers in preview
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "TelescopePreviewerLoaded",
+		callback = function(args)
+			vim.cmd("setlocal number")
+		end,
+	}),
+})
