@@ -8,6 +8,7 @@ wk.register({
 		h = { "Find Help" },
 		w = { "Find by word" },
 		p = { "Show persisted sessions" },
+		s = { "Show file Symbols" },
 	},
 	e = { "Float file Manager" },
 	E = { "Right side file Manager" },
