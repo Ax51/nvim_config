@@ -119,4 +119,5 @@ require("lazy").setup({
 			require("lsp-progress").setup()
 		end,
 	},
+	{ "kylechui/nvim-surround" },
 })
