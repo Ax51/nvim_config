@@ -83,3 +83,10 @@ vim.keymap.set("n", "<s-Tab>", ":BufferLineCyclePrev<CR>")
 
 -- Navbuddy
 vim.keymap.set("n", "<leader>fv", ":Navbuddy<CR>")
+
+-- Tests
+vim.keymap.set("n", "<leader>tt", ":Neotest run<CR>", {})
+vim.keymap.set("n", "<leader>tS", ":Neotest stop<CR>", {})
+vim.keymap.set("n", "<leader>ts", ":Neotest summary<CR>", {})
+vim.keymap.set("n", "<leader>ta", ":Neotest run file<CR>", {})
+vim.keymap.set("n", "<leader>tw", "<cmd>lua require('neotest').run.run({ jestCommand = 'npx jest --watch ' })<CR>", {})
