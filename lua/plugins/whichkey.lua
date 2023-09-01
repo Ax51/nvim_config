@@ -40,4 +40,15 @@ wk.register({
 		name = "Run",
 		s = "Execute JS script with Bun",
 	},
+	t = {
+		name = "Tests",
+		t = "Run nearest test",
+		S = "Stop running tests",
+		s = "Show summary",
+		a = "Run all nested tests",
+		l = "Run last test",
+		o = "Show error output",
+		["["] = "Navigate to the prev test",
+		["]"] = "Navigate to the next test",
+	},
 }, { prefix = "<leader>" })

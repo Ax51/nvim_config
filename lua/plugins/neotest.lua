@@ -4,8 +4,7 @@ local jest = require("neotest-jest")
 neotest.setup({
 	adapters = {
 		jest({
-			jestCommand = "npx jest --watch",
-			jestConfigFile = "custom.jest.config.ts",
+			jestCommand = "npx jest --silent",
 			env = { CI = true },
 			cwd = function(path)
 				return vim.fn.getcwd()
