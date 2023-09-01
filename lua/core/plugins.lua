@@ -101,7 +101,7 @@ require("lazy").setup({
 	{ "f-person/git-blame.nvim" },
 	{
 		"SmiteshP/nvim-navbuddy",
-		requires = {
+		dependencies = {
 			"neovim/nvim-lspconfig",
 			"SmiteshP/nvim-navic",
 			"MunifTanjim/nui.nvim",
