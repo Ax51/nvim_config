@@ -68,7 +68,7 @@ vim.keymap.set("n", "\\", ":split<CR>")
 
 -- Other
 vim.keymap.set("n", "<leader>w", ":w<CR>")
-vim.keymap.set("n", "<leader>q", ":bd<CR>")
+vim.keymap.set("n", "<leader>q", ":bp|bd #<CR>")
 vim.keymap.set("n", "<leader>Q", ":qall<CR>")
 vim.keymap.set("n", "<leader>X", ":BufferLinePickClose<CR>")
 vim.keymap.set("n", "<leader>x", "<c-w>c")
