@@ -129,4 +129,5 @@ require("lazy").setup({
 			"haydenmeade/neotest-jest",
 		},
 	},
+	{ "karb94/neoscroll.nvim" },
 })
