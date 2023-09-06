@@ -30,11 +30,14 @@ require("lazy").setup({
 	},
 	{ "neovim/nvim-lspconfig" },
 	{ "hrsh7th/cmp-nvim-lsp-signature-help" },
+	-- Themes
 	{ "lunarvim/darkplus.nvim" },
 	{ "rebelot/kanagawa.nvim" },
 	{ "Shatur/neovim-ayu" },
 	{ "savq/melange-nvim" },
 	{ "luisiacc/gruvbox-baby" },
+	{ "EdenEast/nightfox.nvim" },
+	-- END
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/cmp-buffer" },
 	{ "hrsh7th/cmp-path" },

@@ -1,6 +1,7 @@
 vim.opt.termguicolors = true
 -- vim.cmd.colorscheme("kanagawa")
-vim.cmd.colorscheme("ayu-mirage")
+-- vim.cmd.colorscheme("ayu-mirage")
+vim.cmd.colorscheme("nightfox")
 -- vim.cmd.colorscheme("darkplus")
 
 vim.cmd([[hi StatusLine guifg=#50bc43]])
