@@ -33,6 +33,7 @@ require("lazy").setup({
 	{ "lunarvim/darkplus.nvim" },
 	{ "rebelot/kanagawa.nvim" },
 	{ "Shatur/neovim-ayu" },
+	{ "savq/melange-nvim" },
 	{ "luisiacc/gruvbox-baby" },
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/cmp-buffer" },
