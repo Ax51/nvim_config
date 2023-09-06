@@ -23,6 +23,7 @@ telescope.setup({
 				["<s-tab>"] = actions.toggle_selection + actions.move_selection_previous,
 				["<c-a>"] = actions.send_to_qflist + actions.open_qflist,
 				["<c-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+				["<c-x>"] = actions.delete_buffer,
 			},
 			n = {
 				["<esc>"] = actions.close,
@@ -31,6 +32,7 @@ telescope.setup({
 				["<s-tab>"] = actions.toggle_selection + actions.move_selection_previous,
 				["<C-a>"] = actions.send_to_qflist + actions.open_qflist,
 				["<c-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+				["x"] = actions.delete_buffer,
 			},
 		},
 	},
