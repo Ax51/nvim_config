@@ -32,6 +32,8 @@ require("lazy").setup({
 	{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 	{ "lunarvim/darkplus.nvim" },
 	{ "rebelot/kanagawa.nvim" },
+	{ "Shatur/neovim-ayu" },
+	{ "luisiacc/gruvbox-baby" },
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/cmp-buffer" },
 	{ "hrsh7th/cmp-path" },
