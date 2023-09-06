@@ -94,3 +94,13 @@ vim.keymap.set("n", "<leader>tl", ":Neotest run last<CR>", {})
 vim.keymap.set("n", "<leader>to", ":Neotest output<CR>", {})
 vim.keymap.set("n", "<leader>t[", ":Neotest jump prev<CR>", {})
 vim.keymap.set("n", "<leader>t]", ":Neotest jump next<CR>", {})
+
+-- Hop
+vim.keymap.set("n", "<leader>ma", ":HopAnywhere<CR>", {})
+vim.keymap.set("n", "<leader>mC", ":HopChar1<CR>", {})
+vim.keymap.set("n", "<leader>mc", ":HopChar2<CR>", {})
+vim.keymap.set("n", "<leader>ml", ":HopLineStart<CR>", {})
+vim.keymap.set("n", "<leader>mL", ":HopLine<CR>", {})
+vim.keymap.set("n", "<leader>mv", ":HopVertical<CR>", {})
+vim.keymap.set("n", "<leader>mp", ":HopPattern<CR>", {})
+vim.keymap.set("n", "<leader>mw", ":HopWord<CR>", {})

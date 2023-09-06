@@ -51,4 +51,15 @@ wk.register({
 		["["] = "Navigate to the prev test",
 		["]"] = "Navigate to the next test",
 	},
+	m = {
+		name = "Hop",
+		a = "anywhere",
+		C = "by 1 char",
+		c = "by 1 or 2 chars",
+		V = "to line at start",
+		l = "to line at zero",
+		v = "vertical",
+		p = "by pattern",
+		w = "to the word",
+	},
 }, { prefix = "<leader>" })
