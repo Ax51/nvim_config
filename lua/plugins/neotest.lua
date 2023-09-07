@@ -1,5 +1,6 @@
 local neotest = require("neotest")
 local jest = require("neotest-jest")
+local playwright = require("neotest-playwright")
 
 neotest.setup({
 	adapters = {
@@ -9,6 +10,9 @@ neotest.setup({
 			cwd = function(path)
 				return vim.fn.getcwd()
 			end,
+		}),
+		playwright.adapter({
+			options = {},
 		}),
 	},
 })

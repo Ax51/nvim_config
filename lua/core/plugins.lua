@@ -133,6 +133,7 @@ require("lazy").setup({
 			"nvim-treesitter/nvim-treesitter",
 			"antoinemadec/FixCursorHold.nvim",
 			"haydenmeade/neotest-jest",
+			"thenbe/neotest-playwright",
 		},
 	},
 	{ "karb94/neoscroll.nvim" },
