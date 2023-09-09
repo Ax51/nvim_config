@@ -56,8 +56,3 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.bo.softtabstop = 2
-
--- GUI
-if vim.g.neovide then
-	vim.o.guifont = "GohuFont uni-14 Nerd Font:h12"
-end

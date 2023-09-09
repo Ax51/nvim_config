@@ -28,8 +28,4 @@ require("plugins.navbuddy")
 require("plugins.persisted")
 require("plugins.surround")
 require("plugins.neotest")
-
-if not vim.g.neovide then
-	-- Disabled plugins in neovide
-	require("plugins.neoscroll")
-end
+require("plugins.neoscroll")
