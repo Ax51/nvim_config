@@ -20,6 +20,7 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
+			"s1n7ax/nvim-window-picker",
 		},
 	},
 	{
@@ -67,16 +68,6 @@ require("lazy").setup({
 		opts = {}, -- this is equalent to setup({}) function
 	},
 	{ "windwp/nvim-ts-autotag" },
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v2.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"MunifTanjim/nui.nvim",
-			"s1n7ax/nvim-window-picker",
-		},
-	},
 	{
 		"akinsho/bufferline.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
