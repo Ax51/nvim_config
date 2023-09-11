@@ -12,7 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	{ "phaazon/hop.nvim" },
+	{ "smoka7/hop.nvim" },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
