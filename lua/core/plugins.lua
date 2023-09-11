@@ -38,6 +38,7 @@ require("lazy").setup({
 	{ "savq/melange-nvim" },
 	{ "luisiacc/gruvbox-baby" },
 	{ "EdenEast/nightfox.nvim" },
+	{ "folke/tokyonight.nvim", lazy = false, priority = 1000 },
 	-- END
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/cmp-buffer" },
