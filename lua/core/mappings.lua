@@ -106,7 +106,7 @@ vim.keymap.set("n", "<leader>ml", hop.hint_lines_skip_whitespace, {})
 vim.keymap.set("n", "<leader>mv", hop.hint_vertical, {})
 vim.keymap.set("n", "<leader>mp", hop.hint_patterns, {})
 vim.keymap.set("n", "<leader>mw", hop.hint_words, {})
--- Visual mode
+--
 vim.keymap.set({ "v", "i" }, "<c-m>a", hop.hint_anywhere, {})
 vim.keymap.set({ "v", "i" }, "<c-m>C", hop.hint_char1, {})
 vim.keymap.set({ "v", "i" }, "<c-m>c", hop.hint_char2, {})
