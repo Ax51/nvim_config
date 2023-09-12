@@ -38,7 +38,19 @@ require("lazy").setup({
 	{ "savq/melange-nvim" },
 	{ "luisiacc/gruvbox-baby" },
 	{ "EdenEast/nightfox.nvim" },
-	{ "folke/tokyonight.nvim", lazy = false, priority = 1000 },
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			on_highlights = function(hl)
+				-- change unused variable color
+				hl.DiagnosticUnnecessary = {
+					fg = "#5f7bb9",
+				}
+			end,
+		},
+	},
 	-- END
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/cmp-buffer" },
