@@ -62,4 +62,11 @@ wk.register({
 		p = "by pattern",
 		w = "to the word",
 	},
+	z = {
+		name = "Zen mode",
+		a = "Ataraxis mode",
+		m = "Minimalist mode",
+		n = "Narrow mode",
+		f = "Focus mode",
+	},
 }, { prefix = "<leader>" })

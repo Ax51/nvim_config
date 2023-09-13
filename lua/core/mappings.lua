@@ -115,3 +115,20 @@ vim.keymap.set({ "v", "i" }, "<c-m>l", hop.hint_lines_skip_whitespace, {})
 vim.keymap.set({ "v", "i" }, "<c-m>v", hop.hint_vertical, {})
 vim.keymap.set({ "v", "i" }, "<c-m>p", hop.hint_patterns, {})
 vim.keymap.set({ "v", "i" }, "<c-m>w", hop.hint_words, {})
+
+-- True-zen
+local truezen = require("true-zen")
+
+vim.keymap.set("n", "<leader>zn", function()
+	local first = 0
+	local last = vim.api.nvim_buf_line_count(0)
+	truezen.narrow(first, last)
+end, { noremap = true })
+vim.keymap.set("v", "<leader>zn", function()
+	local first = vim.fn.line("v")
+	local last = vim.fn.line(".")
+	truezen.narrow(first, last)
+end, { noremap = true })
+vim.keymap.set("n", "<leader>zf", truezen.focus, { noremap = true })
+vim.keymap.set("n", "<leader>zm", truezen.minimalist, { noremap = true })
+vim.keymap.set("n", "<leader>za", truezen.ataraxis, { noremap = true })

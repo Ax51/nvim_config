@@ -142,4 +142,5 @@ require("lazy").setup({
 	},
 	{ "karb94/neoscroll.nvim" },
 	{ "lukas-reineke/indent-blankline.nvim" },
+	{ "Pocco81/true-zen.nvim" },
 })
