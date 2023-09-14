@@ -41,7 +41,7 @@ telescope.setup({
 	-- Show line numbers in preview
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "TelescopePreviewerLoaded",
-		callback = function(args)
+		callback = function()
 			vim.cmd("setlocal number")
 		end,
 	}),
