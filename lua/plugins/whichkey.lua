@@ -4,9 +4,11 @@ wk.register({
 	f = {
 		name = "Find",
 		f = { "Find File" },
+		F = { "Find File in selected directories" },
 		b = { "Find Buffer" },
 		h = { "Find Help" },
 		w = { "Find by word" },
+		W = { "Find by word in selected directories" },
 		p = { "Show persisted sessions" },
 		s = { "Show file Symbols" },
 	},
