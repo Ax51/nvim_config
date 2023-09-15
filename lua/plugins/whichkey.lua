@@ -11,6 +11,7 @@ wk.register({
 		W = { "Find by word in selected directories" },
 		p = { "Show persisted sessions" },
 		s = { "Show file Symbols" },
+		m = { "Show marks" },
 	},
 	e = { "Float file Manager" },
 	E = { "Right side file Manager" },
