@@ -19,7 +19,11 @@ wk.register({
 	x = { "Close active splitted screen" },
 	X = { "Select tabs to close" },
 	q = { "Close Buffer" },
-	Q = { "Close NVIM" },
+	Q = {
+		name = "Close Buffer & it's tab",
+		["!"] = "Quit NVIM",
+		A = "Close all buffers except current",
+	},
 	w = { "Save" },
 	h = { "No highlight" },
 	g = {
