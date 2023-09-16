@@ -75,5 +75,6 @@ wk.register({
 		m = "Minimalist mode",
 		n = "Narrow mode",
 		f = "Focus mode",
+		t = "Toggle Twilight mode",
 	},
 }, { prefix = "<leader>" })

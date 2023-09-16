@@ -137,3 +137,6 @@ end, { noremap = true })
 vim.keymap.set("n", "<leader>zf", truezen.focus, { noremap = true })
 vim.keymap.set("n", "<leader>zm", truezen.minimalist, { noremap = true })
 vim.keymap.set("n", "<leader>za", truezen.ataraxis, { noremap = true })
+
+-- Twilight
+vim.keymap.set("n", "<leader>zt", ":Twilight<CR>", { noremap = true })

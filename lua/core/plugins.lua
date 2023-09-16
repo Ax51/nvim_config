@@ -144,4 +144,5 @@ require("lazy").setup({
 	{ "lukas-reineke/indent-blankline.nvim" },
 	{ "Pocco81/true-zen.nvim" },
 	{ "princejoogie/dir-telescope.nvim" },
+	{ "folke/twilight.nvim" },
 })
