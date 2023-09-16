@@ -61,8 +61,8 @@ wk.register({
 	m = {
 		name = "Hop",
 		a = "anywhere",
-		C = "by 1 char",
-		c = "by 1 or 2 chars",
+		c = "by 1 char",
+		C = "by 1 or 2 chars",
 		V = "to line at start",
 		l = "to line at zero",
 		v = "vertical",
