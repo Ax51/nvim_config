@@ -123,7 +123,10 @@ vim.keymap.set({ "v", "i" }, "<c-m>w", hop.hint_words, {})
 
 -- Zen Mode
 local zenmode = require("zen-mode")
-vim.keymap.set("n", "<leader>zz", zenmode.toggle, { noremap = true })
+vim.keymap.set("n", "<leader>zz", function()
+	vim.cmd("GitBlameDisable")
+	zenmode.toggle()
+end, { noremap = true })
 
 -- Twilight
 vim.keymap.set("n", "<leader>zt", ":Twilight<CR>", { noremap = true })
