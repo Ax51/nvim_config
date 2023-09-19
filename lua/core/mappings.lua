@@ -82,6 +82,7 @@ vim.keymap.set("n", "<leader>s", ":BufferLineSortByTabs<CR>")
 vim.keymap.set("i", "jj", "<Esc>")
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
 vim.keymap.set("n", "<leader>rs", ":!bun %<CR>")
+vim.keymap.set("v", "<leader>c", ":'<,'>t'><CR>") -- copy selected lines right below
 
 -- Tabs
 vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>")
