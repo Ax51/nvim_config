@@ -75,7 +75,16 @@ vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>q", ":bp|bd #<CR>")
 vim.keymap.set("n", "<leader>Q", ":bd<CR>")
 vim.keymap.set("n", "<leader>Q!", ":qall<CR>")
-vim.keymap.set("n", "<leader>QA", ":%bd|e#|bd#<CR>")
+vim.keymap.set("n", "<leader>QA", function() -- delete all buffers, expect active one
+	local rawBufArr = vim.api.nvim_list_bufs()
+	local currBufNum = vim.api.nvim_get_current_buf()
+
+	for _, value in ipairs(rawBufArr) do
+		if value ~= currBufNum and vim.fn.buflisted(value) then
+			vim.api.nvim_buf_delete(value, {})
+		end
+	end
+end)
 vim.keymap.set("n", "<leader>X", ":BufferLinePickClose<CR>")
 vim.keymap.set("n", "<leader>x", "<c-w>c")
 vim.keymap.set("n", "<leader>s", ":BufferLineSortByTabs<CR>")
