@@ -36,6 +36,7 @@ lspconfig.tsserver.setup({
 			require("nvim-navic").attach(client, bufnr)
 		end
 	end,
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 lspconfig.prismals.setup({})
 lspconfig.cssls.setup({
