@@ -1,6 +1,7 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
--- Sntup language servers.
+
+-- Setup language servers.
 local lspconfig = require("lspconfig")
 lspconfig.pyright.setup({})
 lspconfig.lua_ls.setup({
@@ -29,6 +30,7 @@ lspconfig.lua_ls.setup({
 		end
 		return true
 	end,
+	capabilities = capabilities,
 })
 lspconfig.tsserver.setup({
 	on_attach = function(client, bufnr)
@@ -36,7 +38,7 @@ lspconfig.tsserver.setup({
 			require("nvim-navic").attach(client, bufnr)
 		end
 	end,
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	capabilities = capabilities,
 })
 lspconfig.prismals.setup({})
 lspconfig.cssls.setup({
