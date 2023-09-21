@@ -1,6 +1,7 @@
 vim.wo.number = true
 vim.wo.relativenumber = true
 
+vim.g.mapleader = " "
 vim.g.did_load_filetypes = 1
 vim.g.formatoptions = "qrn1"
 vim.opt.showmode = false
@@ -49,6 +50,11 @@ vim.opt.fillchars = {
 	foldsep = "│",
 	foldclose = "▸",
 }
+
+-- Theme
+vim.opt.termguicolors = true
+-- local favoriteThemes = require("utils.themes")
+-- vim.cmd.colorscheme(favoriteThemes.tokyonight.day)
 
 vim.cmd([[highlight clear LineNr]])
 vim.cmd([[highlight clear SignColumn]])

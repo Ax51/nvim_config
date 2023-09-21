@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-
 -- NeoTree
 vim.keymap.set("n", "<leader>e", ":Neotree toggle position=float reveal<CR>")
 vim.keymap.set("n", "<leader>E", ":Neotree right reveal<CR>")
@@ -47,7 +45,7 @@ vim.keymap.set("n", "<leader>fb", tel_builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", tel_builtin.help_tags, {})
 vim.keymap.set("n", "<leader>fm", tel_builtin.marks, {})
 vim.keymap.set("n", "<leader>fp", ":Telescope persisted<CR>", {})
-vim.keymap.set("n", "<leader>fc", ":TodoTelescope", {})
+vim.keymap.set("n", "<leader>fc", ":TodoTelescope<CR>", {})
 vim.keymap.set("n", "<leader>gb", tel_builtin.git_branches, {})
 vim.keymap.set("n", "<leader>gc", tel_builtin.git_commits, {})
 vim.keymap.set("n", "<leader>gs", tel_builtin.git_status, {})
