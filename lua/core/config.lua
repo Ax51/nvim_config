@@ -1,6 +1,7 @@
 vim.wo.number = true
 vim.wo.relativenumber = true
 
+vim.opt.termguicolors = true
 vim.g.did_load_filetypes = 1
 vim.g.formatoptions = "qrn1"
 vim.opt.showmode = false

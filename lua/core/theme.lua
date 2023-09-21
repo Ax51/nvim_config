@@ -1,4 +1,3 @@
-vim.opt.termguicolors = true
 -- vim.cmd.colorscheme("kanagawa")
 -- vim.cmd.colorscheme("ayu-mirage")
 -- vim.cmd.colorscheme("dayfox")
