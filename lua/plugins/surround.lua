@@ -3,7 +3,7 @@ local surround = require("nvim-surround")
 surround.setup({
 	keymaps = {
 		insert = "<C-g>s",
-		insert_line = "C-gS",
+		insert_line = "<C-g>S",
 		normal = "ys",
 		normal_cur = "yss",
 		normal_line = "yS",
