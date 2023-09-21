@@ -146,4 +146,9 @@ require("lazy").setup({
 	{ "princejoogie/dir-telescope.nvim" },
 	{ "folke/twilight.nvim" },
 	{ "folke/zen-mode.nvim" },
+	{
+		"NvChad/nvim-colorizer.lua",
+		ft = { "css", "sass", "less", "scss" },
+		config = true,
+	},
 })
