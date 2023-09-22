@@ -4,6 +4,7 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"SmiteshP/nvim-navic",
 	},
+	event = { "BufReadPre", "BufNewFile" },
 
 	config = function()
 		local capabilities = vim.lsp.protocol.make_client_capabilities()

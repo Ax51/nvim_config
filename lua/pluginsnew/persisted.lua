@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"nvim-telescope/telescope.nvim",
 	},
+	lazy = false,
 
 	config = function()
 		require("persisted").setup({

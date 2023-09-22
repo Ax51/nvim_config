@@ -1,10 +1,6 @@
 return {
 	"numToStr/Comment.nvim",
-	-- TODO: doublecheck if lazy should be set to false?
-	lazy = false,
-	dependencies = {
-		"JoosepAlviste/nvim-ts-context-commentstring",
-	},
+	event = "VeryLazy",
 
 	config = function()
 		require("Comment").setup({
