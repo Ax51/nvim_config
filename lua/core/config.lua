@@ -51,10 +51,8 @@ vim.opt.fillchars = {
 	foldclose = "▸",
 }
 
--- Theme
+-- Colors
 vim.opt.termguicolors = true
--- local favoriteThemes = require("utils.themes")
--- vim.cmd.colorscheme(favoriteThemes.tokyonight.day)
 
 vim.cmd([[highlight clear LineNr]])
 vim.cmd([[highlight clear SignColumn]])

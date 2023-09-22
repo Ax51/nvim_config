@@ -23,3 +23,7 @@ lazy.setup({
 	{ import = "pluginsnew" },
 	{ import = "themes" },
 })
+
+-- TODO: move this somewhere else
+local favoriteThemes = require("utils.themes")
+vim.cmd.colorscheme(favoriteThemes.tokyonight.day)
