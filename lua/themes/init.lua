@@ -1,36 +1,51 @@
-local darkplus = { "lunarvim/darkplus.nvim" }
+local M = {}
 
-local kanagawa = { "rebelot/kanagawa.nvim" }
+M.darkplus = { "lunarvim/darkplus.nvim" }
 
-local ayu = { "Shatur/neovim-ayu" }
+M.kanagawa = { "rebelot/kanagawa.nvim" }
 
-local melange = { "savq/melange-nvim" }
+M.ayu = { "shatur/neovim-ayu" }
 
-local gruvbox = { "luisiacc/gruvbox-baby" }
+M.melange = { "savq/melange-nvim" }
 
-local fox = { "EdenEast/nightfox.nvim" }
+M.gruvbox = { "luisiacc/gruvbox-baby" }
 
-local tokyonight = {
+M.fox = { "edeneast/nightfox.nvim" }
+
+M.tokyonight = {
 	"folke/tokyonight.nvim",
-	lazy = false,
-	priority = 1000,
 	opts = {
 		on_highlights = function(hl)
 			-- change unused variable color
-			hl.DiagnosticUnnecessary = {
+			hl.diagnosticunnecessary = {
 				fg = "#5f7bb9",
 			}
 		end,
 	},
 }
 
--- TODO: add the ability to choose default theme either from there, or from the importing place
-return {
-	darkplus,
-	kanagawa,
-	ayu,
-	melange,
-	gruvbox,
-	fox,
-	tokyonight,
-}
+local function setDefaultTheme(theme)
+	local defThemeOpts = {
+		lazy = false,
+		priority = 1000,
+	}
+
+	local result = {}
+
+	for themeName, themeTable in pairs(M) do
+		if themeName == theme then
+			-- NOTE: selected theme
+			for opt, optValue in pairs(defThemeOpts) do
+				-- NOTE: add each def opt to the selected theme
+				themeTable[opt] = optValue
+			end
+		else
+			themeTable.lazy = true
+		end
+		table.insert(result, themeTable)
+	end
+
+	return result
+end
+
+return setDefaultTheme

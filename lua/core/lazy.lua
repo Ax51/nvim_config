@@ -18,12 +18,16 @@ if not installed then
 	return
 end
 
+local favoriteThemes = require("utils.themes")
+local theme = { name = "tokyonight", mode = "day" }
+
+local getThemesTable = require("themes")
+
 lazy.setup({
 	-- TODO: change foldername from pluginsnew to plugins after migration will be completed
 	{ import = "pluginsnew" },
-	{ import = "themes" },
+	getThemesTable(theme.name),
 })
 
 -- TODO: move this somewhere else
-local favoriteThemes = require("utils.themes")
-vim.cmd.colorscheme(favoriteThemes.tokyonight.day)
+vim.cmd.colorscheme(favoriteThemes[theme.name][theme.mode])
