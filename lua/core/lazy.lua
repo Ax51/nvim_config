@@ -18,7 +18,7 @@ if not installed then
 	return
 end
 
-local favoriteThemes = require("utils.themes")
+local favoriteThemes = require("themes.list")
 local theme = { name = "tokyonight", mode = "day" }
 
 local getThemesTable = require("themes")
