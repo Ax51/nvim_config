@@ -1,7 +1,7 @@
 -- NeoTree
 vim.keymap.set("n", "<leader>e", ":Neotree toggle position=float reveal<CR>")
 vim.keymap.set("n", "<leader>E", ":Neotree right reveal<CR>")
-vim.keymap.set("n", "<leader>o", ":Neotree float git_status<CR>")
+vim.keymap.set("n", "<leader>b", ":Neotree toggle left buffers<CR>")
 
 -- LSP
 vim.keymap.set("n", "<leader>lD", vim.diagnostic.open_float)
