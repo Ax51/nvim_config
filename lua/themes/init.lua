@@ -15,10 +15,10 @@ M.fox = { "edeneast/nightfox.nvim" }
 M.tokyonight = {
 	"folke/tokyonight.nvim",
 	opts = {
-		on_highlights = function(hl)
-			-- change unused variable color
+		on_highlights = function(hl, c)
+			-- NOTE: change unused variable color
 			hl.diagnosticunnecessary = {
-				fg = "#5f7bb9",
+				fg = c.comment,
 			}
 		end,
 	},
