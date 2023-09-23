@@ -1,8 +1,5 @@
 return {
 	"olimorris/persisted.nvim",
-	dependencies = {
-		"nvim-telescope/telescope.nvim",
-	},
 	lazy = false,
 
 	config = function()
@@ -21,8 +18,5 @@ return {
 				reset_prompt_after_deletion = true, -- whether to reset prompt after session deleted
 			},
 		})
-
-		local telescope = require("telescope")
-		telescope.load_extension("persisted")
 	end,
 }
