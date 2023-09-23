@@ -1,3 +1,11 @@
+--[[
+ NOTE:
+ To add new theme, just apply it's name to the themes list,
+ define source and add default theme name, that will be called
+ for day - light theme & night - for dark theme. If there is only
+ one theme name to call, its better to repeat day and night fields
+]]
+
 local themesList = {}
 
 themesList.darkplus = {
