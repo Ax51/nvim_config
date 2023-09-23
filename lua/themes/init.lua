@@ -1,19 +1,49 @@
-local M = {}
+local themesList = {}
 
-M.darkplus = { "lunarvim/darkplus.nvim" }
+themesList.darkplus = {
+	source = "lunarvim/darkplus.nvim",
 
-M.kanagawa = { "rebelot/kanagawa.nvim" }
+	day = "darkplus",
+	night = "darkplus",
+}
 
-M.ayu = { "shatur/neovim-ayu" }
+themesList.kanagawa = {
+	source = "rebelot/kanagawa.nvim",
 
-M.melange = { "savq/melange-nvim" }
+	day = "kanagawa-wave",
+	night = "kanagawa-dragon",
+}
 
-M.gruvbox = { "luisiacc/gruvbox-baby" }
+themesList.ayu = {
+	source = "shatur/neovim-ayu",
 
-M.fox = { "edeneast/nightfox.nvim" }
+	day = "ayu-mirage",
+	night = "ayu-dark",
+}
 
-M.tokyonight = {
-	"folke/tokyonight.nvim",
+themesList.melange = {
+	source = "savq/melange-nvim",
+
+	day = "melange",
+	night = "melange",
+}
+
+themesList.gruvbox = {
+	source = "luisiacc/gruvbox-baby",
+
+	day = "gruvbox-baby",
+	night = "gruvbox-baby",
+}
+
+themesList.fox = {
+	source = "edeneast/nightfox.nvim",
+
+	day = "duskfox",
+	night = "carbonfox",
+}
+
+themesList.tokyonight = {
+	source = "folke/tokyonight.nvim",
 	opts = {
 		on_highlights = function(hl, c)
 			-- NOTE: change unused variable color
@@ -22,6 +52,9 @@ M.tokyonight = {
 			}
 		end,
 	},
+
+	day = "tokyonight-storm",
+	night = "tokyonight-night",
 }
 
 local function setDefaultTheme(theme)
@@ -32,20 +65,33 @@ local function setDefaultTheme(theme)
 
 	local result = {}
 
-	for themeName, themeTable in pairs(M) do
+	for themeName, themeTable in pairs(themesList) do
+		local configuredTheme = {}
+
 		if themeName == theme then
 			-- NOTE: selected theme
 			for opt, optValue in pairs(defThemeOpts) do
 				-- NOTE: add each def opt to the selected theme
-				themeTable[opt] = optValue
+				configuredTheme[opt] = optValue
 			end
 		else
-			themeTable.lazy = true
+			configuredTheme.lazy = true
 		end
-		table.insert(result, themeTable)
+
+		-- NOTE: spread all theme specific opts
+		for opt, optValue in pairs(themeTable) do
+			if opt == "source" then
+				configuredTheme[1] = optValue
+			elseif opt == "day" or opt == "night" then
+				-- NOTE: continue
+			end
+			configuredTheme[opt] = optValue
+		end
+
+		table.insert(result, configuredTheme)
 	end
 
 	return result
 end
 
-return setDefaultTheme
+return { setDefaultTheme, themesList }

@@ -18,10 +18,8 @@ if not installed then
 	return
 end
 
-local favoriteThemes = require("themes.list")
 local theme = { name = "tokyonight", mode = "day" }
-
-local getThemesTable = require("themes")
+local getThemesTable, favoriteThemes = unpack(require("themes"))
 
 lazy.setup({
 	-- TODO: change foldername from pluginsnew to plugins after migration will be completed
