@@ -3,7 +3,6 @@ return {
 	tag = "0.1.2",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"princejoogie/dir-telescope.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},
 	cmd = "Telescope",
@@ -13,7 +12,6 @@ return {
 		local actions = require("telescope.actions")
 
 		telescope.load_extension("fzf")
-		telescope.load_extension("dir")
 		telescope.load_extension("persisted")
 
 		telescope.setup({
