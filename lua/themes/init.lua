@@ -23,7 +23,7 @@ themesList.kanagawa = {
 }
 
 themesList.ayu = {
-	source = "shatur/neovim-ayu",
+	source = "Shatur/neovim-ayu",
 
 	day = "ayu-mirage",
 	night = "ayu-dark",
@@ -44,7 +44,7 @@ themesList.gruvbox = {
 }
 
 themesList.fox = {
-	source = "edeneast/nightfox.nvim",
+	source = "EdenEast/nightfox.nvim",
 
 	day = "duskfox",
 	night = "carbonfox",
