@@ -76,6 +76,7 @@ nmap("<leader>/", "gcc")
 remap("jj", "<Esc>", "i")
 remap("<leader>c", ":'<,'>t'><CR>", "v") -- NOTE: copy selected lines and paste them below
 remap("<leader>C", require("utils.copy_and_comment"), "v")
+remap("<Esc>", "<C-\\><C-n>", "t")
 
 -- Tabs
 nmap("<Tab>", ":BufferLineCycleNext<CR>")
