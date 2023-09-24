@@ -22,8 +22,7 @@ local theme = { name = "tokyonight", mode = "day" }
 local getThemesTable, favoriteThemes = unpack(require("themes"))
 
 lazy.setup({
-	-- TODO: change foldername from pluginsnew to plugins after migration will be completed
-	{ import = "pluginsnew" },
+	{ import = "plugins" },
 	getThemesTable(theme.name),
 })
 
