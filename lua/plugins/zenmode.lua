@@ -63,15 +63,14 @@ return {
 				},
 			},
 			-- callback where you can add custom code when the Zen window opens
-			on_open = function()
-				-- NOTE: there is some bug, where disbled
-				-- gitblame line persisted in zen mode
-				-- if we disable it here. So we disable it by using lua keybing command
-				-- vim.cmd("GitBlameDisable")
-			end,
+			on_open = function() end,
 			-- callback where you can add custom code when the Zen window closes
 			on_close = function()
-				vim.cmd("GitBlameEnable")
+				if Git_blame_disabled_by_zenmode then
+					vim.cmd("GitBlameEnable")
+					Git_blame_enabled = true
+					Git_blame_disabled_by_zenmode = false
+				end
 			end,
 		})
 	end,

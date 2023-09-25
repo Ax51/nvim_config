@@ -43,7 +43,6 @@ nmap("<leader>fc", ":TodoTelescope<CR>")
 nmap("<leader>gb", ":Telescope git_branches<CR>")
 nmap("<leader>gc", ":Telescope git_commits<CR>")
 nmap("<leader>gs", ":Telescope git_status<CR>")
-nmap("<leader>gl", ":GitBlameToggle<CR>")
 nmap("<leader>fs", ":Telescope lsp_document_symbols<CR>")
 nmap("gr", ":Telescope lsp_references<CR>")
 nmap("gd", ":Telescope lsp_definitions<CR>")
@@ -113,10 +112,24 @@ remap("<c-m>v", ":HopVertical<CR>", { "v", "i" })
 remap("<c-m>p", ":HopPattern<CR>", { "v", "i" })
 remap("<c-m>w", ":HopWord<CR>", { "v", "i" })
 
+-- GitBlame
+nmap("<leader>gl", function()
+	if Git_blame_enabled then
+		vim.cmd("GitBlameDisable")
+		Git_blame_enabled = false
+	else
+		vim.cmd("GitBlameEnable")
+		Git_blame_enabled = true
+	end
+end)
+
 -- Zen Mode
 nmap("<leader>zz", function()
-	-- TODO: enable this line after installed gitBlame
-	-- vim.cmd("GitBlameDisable")
+	if Git_blame_enabled then
+		vim.cmd("GitBlameDisable")
+		Git_blame_enabled = false
+		Git_blame_disabled_by_zenmode = true
+	end
 	vim.cmd("ZenMode")
 end)
 
