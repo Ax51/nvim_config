@@ -31,7 +31,7 @@ return {
 				lualine_a = { "mode" },
 				lualine_b = { "branch", "diff", "diagnostics" },
 				lualine_c = {
-					"%f",
+					{ "filename", path = 1 },
 				},
 				lualine_x = {
 					-- require("lsp-progress").progress,
@@ -47,7 +47,8 @@ return {
 				lualine_b = {},
 				lualine_c = {
 					{
-						"%f",
+						"filename",
+						path = 1,
 						color = { fg = "#ffaa88" },
 					},
 				},
@@ -63,7 +64,7 @@ return {
 			tabline = {},
 			winbar = {
 				lualine_b = {
-					"filename",
+					{ "filename", file_status = true },
 				},
 				lualine_c = {
 					{
