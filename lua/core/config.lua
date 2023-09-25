@@ -2,8 +2,6 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 
 vim.g.mapleader = " "
--- FIXIT: find why this option should be disabled (becaulse now it disables defining filetypes)
--- vim.g.did_load_filetypes = 1
 vim.g.formatoptions = "qrn1"
 vim.opt.showmode = false
 vim.opt.updatetime = 100
