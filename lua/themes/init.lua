@@ -53,6 +53,9 @@ themesList.fox = {
 themesList.tokyonight = {
 	source = "folke/tokyonight.nvim",
 	opts = {
+		on_colors = function(colors)
+			colors.comment = "#7983b1"
+		end,
 		on_highlights = function(hl, c)
 			-- NOTE: change unused variable color
 			hl.diagnosticunnecessary = {
