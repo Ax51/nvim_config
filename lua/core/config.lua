@@ -1,8 +1,7 @@
 vim.wo.number = true
 vim.wo.relativenumber = true
 
-vim.opt.termguicolors = true
-vim.g.did_load_filetypes = 1
+vim.g.mapleader = " "
 vim.g.formatoptions = "qrn1"
 vim.opt.showmode = false
 vim.opt.updatetime = 100
@@ -50,6 +49,9 @@ vim.opt.fillchars = {
 	foldsep = "│",
 	foldclose = "▸",
 }
+
+-- Colors
+vim.opt.termguicolors = true
 
 vim.cmd([[highlight clear LineNr]])
 vim.cmd([[highlight clear SignColumn]])
