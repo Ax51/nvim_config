@@ -5,8 +5,10 @@ return {
 
 	config = function()
 		require("ibl").setup({
-			scope = {
+			indent = {
 				char = "▏",
+			},
+			scope = {
 				show_start = false,
 				show_end = false,
 			},
