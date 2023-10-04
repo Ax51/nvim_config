@@ -57,6 +57,7 @@ nmap("<c-k>", ":wincmd k<CR>")
 nmap("<c-j>", ":wincmd j<CR>")
 nmap("<c-h>", ":wincmd h<CR>")
 nmap("<c-l>", ":wincmd l<CR>")
+nmap("<C-I>", "<C-I>") -- NOTE: we need to separate <C-I> from <tab> by explicitly remap each key
 
 -- Splits
 nmap("|", ":vsplit<CR>")
