@@ -61,6 +61,9 @@ themesList.tokyonight = {
 			hl.diagnosticunnecessary = {
 				fg = c.comment,
 			}
+			hl.EndOfBuffer = {
+				fg = c.comment,
+			}
 			hl.LineNr = {
 				fg = "#8f97b2",
 			}
