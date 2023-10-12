@@ -58,14 +58,14 @@ themesList.tokyonight = {
 		end,
 		on_highlights = function(hl, c)
 			-- NOTE: change unused variable color
-			hl.diagnosticunnecessary = {
+			hl.DiagnosticUnnecessary = {
 				fg = c.comment,
 			}
 			hl.EndOfBuffer = {
 				fg = c.comment,
 			}
 			hl.LineNr = {
-				fg = "#8f97b2",
+				fg = c.comment,
 			}
 		end,
 	},
