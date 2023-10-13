@@ -4,10 +4,8 @@ return {
 		"neovim/nvim-lspconfig",
 		"SmiteshP/nvim-navic",
 		"MunifTanjim/nui.nvim",
-		-- "numToStr/Comment.nvim", -- Optional
-		-- "nvim-telescope/telescope.nvim", -- Optional
 	},
-	cmd = "Navbuddy",
+	event = "LspAttach",
 
 	config = function()
 		local navbuddy = require("nvim-navbuddy")
