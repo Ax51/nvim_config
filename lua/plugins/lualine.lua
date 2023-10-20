@@ -2,8 +2,6 @@ return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
-		-- NOTE: I'm not sure that I need this plugin
-		-- { "linrongbin16/lsp-progress.nvim", config = true },
 	},
 	event = { "BufReadPre", "BufNewFile" },
 
@@ -33,12 +31,7 @@ return {
 				lualine_c = {
 					{ "filename", path = 1 },
 				},
-				lualine_x = {
-					-- require("lsp-progress").progress,
-					-- "encoding",
-					-- "filetype",
-					-- "filesize",
-				},
+				lualine_x = {},
 				lualine_y = { "progress" },
 				lualine_z = { "location" },
 			},
