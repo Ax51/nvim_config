@@ -21,10 +21,16 @@ end
 local theme = { name = "tokyonight", mode = "day" }
 local getThemesTable, favoriteThemes = unpack(require("themes"))
 
+local lazyOpts = {
+	checker = {
+		check_pinned = true,
+	},
+}
+
 lazy.setup({
 	{ import = "plugins" },
 	getThemesTable(theme.name),
-})
+}, lazyOpts)
 
 -- TODO: move this somewhere else
 vim.cmd.colorscheme(favoriteThemes[theme.name][theme.mode])
