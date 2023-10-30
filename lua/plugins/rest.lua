@@ -2,6 +2,7 @@ return {
 	"rest-nvim/rest.nvim",
 	dependencies = { "nvim-lua/plenary.nvim" },
 	ft = "http",
+	commit = "8b62563", -- NOTE: fix commit until they fixed formatting response
 
 	config = function()
 		require("rest-nvim").setup({
