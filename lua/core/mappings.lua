@@ -104,23 +104,8 @@ nmap("<leader>t[", ":Neotest jump prev<CR>")
 nmap("<leader>t]", ":Neotest jump next<CR>")
 
 -- Hop
-nmap("<leader>ma", ":HopAnywhere<CR>")
-nmap("<leader>mc", ":HopChar1<CR>")
-nmap("<leader>mC", ":HopChar2<CR>")
-nmap("<leader>mV", ":HopLineStart<CR>")
-nmap("<leader>ml", ":HopLine<CR>")
-nmap("<leader>mv", ":HopVertical<CR>")
-nmap("<leader>mp", ":HopPattern<CR>")
-nmap("<leader>mw", ":HopWord<CR>")
---
-remap("<c-m>a", ":HopAnywhere<CR>", { "v", "i" })
-remap("<c-m>C", ":HopChar1<CR>", { "v", "i" })
-remap("<c-m>c", ":HopChar2<CR>", { "v", "i" })
-remap("<c-m>V", ":HopLineStart<CR>", { "v", "i" })
-remap("<c-m>l", ":HopLine<CR>", { "v", "i" })
-remap("<c-m>v", ":HopVertical<CR>", { "v", "i" })
-remap("<c-m>p", ":HopPattern<CR>", { "v", "i" })
-remap("<c-m>w", ":HopWord<CR>", { "v", "i" })
+nmap("<leader>M", ":HopChar1<CR>")
+nmap("<leader>m", ":HopWord<CR>")
 
 -- GitBlame
 nmap("<leader>gl", function()
