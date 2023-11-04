@@ -17,10 +17,22 @@ return {
 		neotest.setup({
 			adapters = {
 				jest({
-					jestCommand = "npx jest --silent",
+					jestCommand = "bunx jest --silent",
 					env = { CI = true },
 					cwd = function()
+						local file = vim.fn.expand("%:p")
+						if string.find(file, "/app/") then
+							return string.match(file, "(.-/[^/]+/)src")
+						end
 						return vim.fn.getcwd()
+					end,
+					jestConfigFile = function()
+						local file = vim.fn.expand("%:p")
+						if string.find(file, "/app/") then
+							return string.match(file, "(.-/[^/]+/)src") .. "jest.config.ts"
+						end
+
+						return vim.fn.getcwd() .. "/jest.config.ts"
 					end,
 				}),
 				playwright.adapter({
