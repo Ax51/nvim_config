@@ -43,15 +43,15 @@ nmap("<leader>fm", ":Telescope marks<CR>")
 nmap("<leader>fp", ":Telescope persisted<CR>")
 nmap("<leader>fr", ":Telescope resume<CR>")
 nmap("<leader>fc", ":TodoTelescope<CR>")
-nmap("<leader>gb", ":Telescope git_branches<CR>")
-nmap("<leader>gc", ":Telescope git_commits<CR>")
-nmap("<leader>gs", ":Telescope git_status<CR>")
+nmap("<leader>Gb", ":Telescope git_branches<CR>")
+nmap("<leader>Gc", ":Telescope git_commits<CR>")
+nmap("<leader>Gs", ":Telescope git_status<CR>")
 nmap("<leader>fs", ":Telescope lsp_document_symbols<CR>")
 nmap("gr", ":Telescope lsp_references<CR>")
 nmap("gd", ":Telescope lsp_definitions<CR>")
 
 -- LazyGit
-nmap("<leader>gg", ":LazyGit<CR>")
+nmap("<leader>g", ":LazyGit<CR>")
 
 -- Navigation
 nmap("<c-k>", ":wincmd k<CR>")
@@ -108,7 +108,7 @@ nmap("<leader>M", ":HopChar1<CR>")
 nmap("<leader>m", ":HopWord<CR>")
 
 -- GitBlame
-nmap("<leader>gl", function()
+nmap("<leader>Gl", function()
 	if Git_blame_enabled then
 		vim.cmd("GitBlameDisable")
 		Git_blame_enabled = false
