@@ -11,6 +11,7 @@ return {
 				{ "Foo", "Bar" },
 				{ "tic", "tac", "toe" },
 				{ "private", "protected", "public" },
+				{ "let", "const" },
 			},
 			allow_caps_additions = {
 				{ "enable", "disable" },
