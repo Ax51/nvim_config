@@ -8,8 +8,6 @@ return {
 
 			-- User defined loops
 			additions = {
-				{ "Foo", "Bar" },
-				{ "tic", "tac", "toe" },
 				{ "private", "protected", "public" },
 				{ "let", "const" },
 				{ "type", "interface" },
