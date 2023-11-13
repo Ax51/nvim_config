@@ -12,6 +12,7 @@ return {
 				{ "tic", "tac", "toe" },
 				{ "private", "protected", "public" },
 				{ "let", "const" },
+				{ "type", "interface" },
 			},
 			allow_caps_additions = {
 				{ "enable", "disable" },
