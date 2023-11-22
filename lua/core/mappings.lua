@@ -81,7 +81,6 @@ nmap("<leader>X", ":BufferLinePickClose<CR>")
 nmap("<leader>s", ":BufferLineSortByTabs<CR>")
 nmap("<leader>h", ":nohlsearch<CR>")
 nmap("<leader>rs", ":!bun %<CR>")
-nmap("<leader>/", "gcc")
 remap("jj", "<Esc>", "i")
 remap("<leader>c", ":'<,'>t'><CR>", "v") -- NOTE: copy selected lines and paste them below
 remap("<leader>C", require("utils.copy_and_comment"), "v")
