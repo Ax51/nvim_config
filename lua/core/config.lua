@@ -33,9 +33,10 @@ vim.opt.shortmess:append("c")
 
 -- Indent Settings
 vim.opt.expandtab = true
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.bo.softtabstop = 2
 vim.opt.smartindent = true
 
 -- Fillchars
@@ -55,7 +56,3 @@ vim.opt.termguicolors = true
 
 vim.cmd([[highlight clear LineNr]])
 vim.cmd([[highlight clear SignColumn]])
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-vim.bo.softtabstop = 2
