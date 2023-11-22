@@ -3,6 +3,8 @@ vim.wo.relativenumber = true
 
 vim.g.mapleader = " "
 vim.g.formatoptions = "qrn1"
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
 vim.opt.showmode = false
 vim.opt.updatetime = 100
 vim.wo.signcolumn = "yes"
