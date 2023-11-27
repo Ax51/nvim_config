@@ -37,10 +37,9 @@ return {
 			h = { "No highlight" },
 			g = {
 				name = "Git",
-				b = "Branches",
-				c = "Commits",
-				s = "Status",
-				g = "Open Lazygit",
+			},
+			G = {
+				name = "Git options",
 				l = "Toggle GitBlame",
 			},
 			l = {
@@ -69,14 +68,6 @@ return {
 			},
 			m = {
 				name = "Hop",
-				a = "anywhere",
-				c = "by 1 char",
-				C = "by 1 or 2 chars",
-				V = "to line at start",
-				l = "to line at zero",
-				v = "vertical",
-				p = "by pattern",
-				w = "to the word",
 			},
 			z = {
 				name = "Zen mode",
