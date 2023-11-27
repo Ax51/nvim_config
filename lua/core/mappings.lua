@@ -38,6 +38,7 @@ nmap("<leader>fW", ":Telescope dir live_grep<CR>")
 -- NOTE: this ext. require lua code to start. Doesn't want to work with `:Telescope live_grep_args<CR>`
 nmap("<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 nmap("<leader>fb", ":Telescope buffers<CR>")
+nmap("<leader>fd", ":Telescope diagnostics<CR>")
 nmap("<leader>fh", ":Telescope help_tags<CR>")
 nmap("<leader>fm", ":Telescope marks<CR>")
 nmap("<leader>fp", ":Telescope persisted<CR>")
