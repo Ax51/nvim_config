@@ -17,11 +17,13 @@ return {
 			-- but you can further control the types of nodes that should always be fully expanded
 			expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
 				"function",
-				"method_definition",
-				"arrow_function",
-				"interface_declaration",
-				-- "table",
-				-- "if_statement",
+				"method",
+				"table",
+				"if_statement",
+				-- "function",
+				-- "method_definition",
+				-- "arrow_function",
+				-- "interface_declaration",
 			},
 			exclude = {}, -- exclude these filetypes
 		})
