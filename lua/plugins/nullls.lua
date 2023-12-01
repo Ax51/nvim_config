@@ -33,7 +33,6 @@ return {
 						"yaml",
 						"markdown",
 						"markdown.mdx",
-						"graphql",
 						"handlebars",
 					},
 				}),
