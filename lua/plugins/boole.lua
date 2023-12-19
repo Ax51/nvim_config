@@ -11,6 +11,7 @@ return {
 				{ "private", "protected", "public" },
 				{ "let", "const" },
 				{ "type", "interface" },
+				{ "toBeVisible", "toBeHidden" },
 			},
 			allow_caps_additions = {
 				{ "enable", "disable" },
