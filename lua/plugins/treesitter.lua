@@ -16,6 +16,7 @@ return {
 			},
 			autotag = {
 				enable = true,
+				enable_close_on_slash = false,
 			},
 		})
 	end,
