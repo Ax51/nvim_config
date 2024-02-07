@@ -21,6 +21,7 @@ return {
 				p = { "Show persisted sessions" },
 				s = { "Show file Symbols" },
 				m = { "Show marks" },
+				c = { "Show `// COMMENTS:`" },
 			},
 			e = { "Float file Manager" },
 			E = { "Right side file Manager" },
