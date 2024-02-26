@@ -6,10 +6,10 @@ nmap("<leader>E", ":Neotree right reveal<CR>")
 nmap("<leader>b", ":Neotree toggle left buffers<CR>")
 
 -- LSP
-nmap("<leader>lD", vim.diagnostic.open_float)
+nmap("<leader>ld", vim.diagnostic.open_float)
 nmap("[d", vim.diagnostic.goto_prev)
 nmap("]d", vim.diagnostic.goto_next)
-nmap("<leader>ld", vim.diagnostic.setloclist)
+nmap("<leader>lD", vim.diagnostic.setloclist)
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
@@ -23,10 +23,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		nmap("gd", vim.lsp.buf.definition, opts)
 		nmap("K", vim.lsp.buf.hover, opts)
 		nmap("gi", vim.lsp.buf.implementation, opts)
-		nmap("<space>D", vim.lsp.buf.type_definition, opts)
-		nmap("<space>rn", vim.lsp.buf.rename, opts)
-		remap("<space>ca", vim.lsp.buf.code_action, { "n", "v" }, opts)
 		nmap("gr", vim.lsp.buf.references, opts)
+		nmap("<leader>lr", vim.lsp.buf.rename, opts)
+		nmap("<leader>D", vim.lsp.buf.type_definition, opts)
+		remap("<leader>la", vim.lsp.buf.code_action, { "n", "v" }, opts)
+		nmap("<leader>lf", function()
+			vim.lsp.buf.format({ async = true })
+		end, opts)
 	end,
 })
 
