@@ -1,6 +1,6 @@
 return {
 	"nvimtools/none-ls.nvim",
-	dependencies = { "williamboman/mason.nvim" },
+	dependencies = { "williamboman/mason.nvim", "nvimtools/none-ls-extras.nvim" },
 	event = { "BufReadPre", "BufNewFile" },
 
 	config = function()
@@ -9,18 +9,12 @@ return {
 
 		null_ls.setup({
 			sources = {
-				null_ls.builtins.formatting.eslint_d.with({
-					filetypes = {
-						"typescript",
-						"javascript",
-						"typescriptreact",
-						"javascriptreact",
-					},
-				}),
+				require("none-ls.code_actions.eslint_d"),
+				require("none-ls.diagnostics.eslint_d"),
+				require("none-ls.formatting.eslint_d"),
+				require("none-ls.formatting.rustfmt"),
 				-- null_ls.builtins.formatting.lua_format,
-				null_ls.builtins.diagnostics.eslint_d,
 				null_ls.builtins.formatting.stylua,
-				null_ls.builtins.formatting.rustfmt,
 				-- null_ls.builtins.formatting.rome,
 				null_ls.builtins.formatting.prettierd.with({
 					filetypes = {
