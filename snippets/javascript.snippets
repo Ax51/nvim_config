@@ -4,5 +4,8 @@ snippet cmt "Commented title"
 snippet clg "Trace some value to the console"
   console.log("${1:var}", ${1:var});
 
+snippet cl "Shortcut for the console.log"
+  console.log(${1:var});
+
 snippet exp "Async Playwright soft expectation"
   await expect.soft(${1:variable})${2:expectation}
