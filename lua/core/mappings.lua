@@ -20,7 +20,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
 		local opts = { buffer = ev.buf, silent = true }
 		nmap("gD", vim.lsp.buf.declaration, opts)
-		nmap("gd", vim.lsp.buf.definition, opts)
 		nmap("K", vim.lsp.buf.hover, opts)
 		nmap("gi", vim.lsp.buf.implementation, opts)
 		nmap("gr", vim.lsp.buf.references, opts)
