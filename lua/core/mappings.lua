@@ -140,3 +140,6 @@ nmap("<leader>rl", ':lua require("rest-nvim").last()<CR>')
 -- Boole
 nmap("<leader>a", ":Boole increment<CR>")
 nmap("<leader>x", ":Boole decrement<CR>")
+
+-- Grpc-nvim
+nmap("<leader>rg", ":Grpc<CR>")
