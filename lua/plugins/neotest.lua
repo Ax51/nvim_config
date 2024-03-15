@@ -13,6 +13,7 @@ return {
 		local neotest = require("neotest")
 		local jest = require("neotest-jest")
 		local playwright = require("neotest-playwright")
+		local rust = require("rustaceanvim.neotest")
 
 		neotest.setup({
 			adapters = {
@@ -38,7 +39,7 @@ return {
 				playwright.adapter({
 					options = {},
 				}),
-				require("rustaceanvim.neotest"),
+				rust,
 			},
 		})
 	end,
