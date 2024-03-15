@@ -54,22 +54,5 @@ return {
 			capabilities = capabilities,
 		})
 		lspconfig.golangci_lint_ls.setup({})
-		lspconfig.rust_analyzer.setup({
-			on_attach = function(client, bufnr)
-				if client.server_capabilities.documentSymbolProvider then
-					require("nvim-navic").attach(client, bufnr)
-				end
-			end,
-			settings = {
-				["rust-analyzer"] = {
-					diagnostics = {
-						enable = true,
-						experimental = {
-							enable = true,
-						},
-					},
-				},
-			},
-		})
 	end,
 }

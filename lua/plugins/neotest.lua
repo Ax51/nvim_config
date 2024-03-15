@@ -38,6 +38,7 @@ return {
 				playwright.adapter({
 					options = {},
 				}),
+				require("rustaceanvim.neotest"),
 			},
 		})
 	end,
