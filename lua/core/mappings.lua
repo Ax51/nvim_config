@@ -20,7 +20,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
 		local opts = { buffer = ev.buf, silent = true }
 		nmap("gD", vim.lsp.buf.declaration, opts)
-		nmap("K", vim.lsp.buf.hover, opts)
+		nmap("K", function()
+			local filename = vim.fn.expand("%:t")
+			print(filename)
+			if filename == "Cargo.toml" then
+				require("crates").show_popup()
+			else
+				vim.lsp.buf.hover()
+			end
+		end, opts)
 		nmap("gi", vim.lsp.buf.implementation, opts)
 		nmap("gr", vim.lsp.buf.references, opts)
 		nmap("<leader>lr", vim.lsp.buf.rename, opts)
