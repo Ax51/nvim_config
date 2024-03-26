@@ -25,6 +25,13 @@ local lazyOpts = {
 	checker = {
 		check_pinned = true,
 	},
+	ui = {
+		border = "single",
+		size = {
+			width = 0.8,
+			height = 0.9,
+		},
+	},
 }
 
 lazy.setup({
