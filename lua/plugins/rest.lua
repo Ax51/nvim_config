@@ -3,6 +3,9 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim" },
 	ft = "http",
 
+	-- NOTE: disabled due to a lot of side plugins needed to update for 2 version. Easier to use bun with axios
+	enabled = false,
+
 	config = function()
 		require("rest-nvim").setup({
 			-- Open request results in a horizontal split
