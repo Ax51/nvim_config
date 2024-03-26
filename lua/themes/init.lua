@@ -67,6 +67,14 @@ themesList.tokyonight = {
 			hl.LineNr = {
 				fg = c.comment,
 			}
+			hl.TelescopePromptBorder = {
+				fg = c.border_highlight,
+				bg = c.bg_float,
+			}
+			hl.TelescopePromptTitle = {
+				fg = c.border_highlight,
+				bg = c.bg_float,
+			}
 		end,
 	},
 
