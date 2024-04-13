@@ -20,7 +20,7 @@ return {
 				DELETE = { icon = " ", color = "error", alt = { "REMOVE", "JUNK", "DEL", "DANGER" } },
 				HACK = { icon = " ", color = "warning" },
 				WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-				PERF = { icon = "󰓅 ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+				PERF = { icon = "󰓅 ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE", "THINK" } },
 				NOTE = { icon = " ", color = "#4caf50", alt = { "INFO" } },
 				TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
 			},
