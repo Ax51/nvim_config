@@ -91,7 +91,8 @@ nmap("<leader>X", ":BufferLinePickClose<CR>")
 -- nmap("<leader>x", "<c-w>c") -- NOTE: this remap conflicts with Boole plugin
 nmap("<leader>s", ":BufferLineSortByTabs<CR>")
 nmap("<leader>h", ":nohlsearch<CR>")
-nmap("<leader>rs", ":!bun %<CR>")
+nmap("<leader>rj", ":!bun %<CR>")
+nmap("<leader>rs", "vip:w !sh<CR>") -- NOTE: run entire paragraph as shell script
 remap("jj", "<Esc>", "i")
 remap("<leader>c", ":'<,'>t'><CR>", "v") -- NOTE: copy selected lines and paste them below
 remap("<leader>C", require("utils.copy_and_comment"), "v")
