@@ -62,6 +62,5 @@ return {
 		lspconfig.cssls.setup({
 			capabilities = capabilities,
 		})
-		lspconfig.golangci_lint_ls.setup({})
 	end,
 }
