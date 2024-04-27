@@ -25,11 +25,17 @@ return {
 
 		-- NOTE: Setup language servers
 		local lspconfig = require("lspconfig")
-		lspconfig.mdx_analyzer.setup({})
+		lspconfig.mdx_analyzer.setup({
+			capabilities = capabilities,
+		})
 
-		lspconfig.taplo.setup({})
+		lspconfig.taplo.setup({
+			capabilities = capabilities,
+		})
 
-		lspconfig.biome.setup({})
+		lspconfig.biome.setup({
+			capabilities = capabilities,
+		})
 
 		lspconfig.lua_ls.setup({
 			on_init = function(client)
@@ -72,8 +78,6 @@ return {
 			end,
 			capabilities = capabilities,
 		})
-
-		lspconfig.prismals.setup({})
 
 		lspconfig.cssls.setup({
 			capabilities = capabilities,
