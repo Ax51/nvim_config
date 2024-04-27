@@ -63,6 +63,13 @@ return {
 				end
 				return true
 			end,
+
+			on_attach = function(client, bufnr)
+				if client.server_capabilities.documentSymbolProvider then
+					require("nvim-navic").attach(client, bufnr)
+				end
+			end,
+
 			capabilities = capabilities,
 		})
 
@@ -80,6 +87,12 @@ return {
 		})
 
 		lspconfig.cssls.setup({
+			on_attach = function(client, bufnr)
+				if client.server_capabilities.documentSymbolProvider then
+					require("nvim-navic").attach(client, bufnr)
+				end
+			end,
+
 			capabilities = capabilities,
 		})
 	end,
