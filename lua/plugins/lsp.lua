@@ -67,6 +67,7 @@ return {
 			on_attach = function(client, bufnr)
 				if client.server_capabilities.documentSymbolProvider then
 					require("nvim-navic").attach(client, bufnr)
+					require("nvim-navbuddy").attach(client, bufnr)
 				end
 			end,
 
@@ -77,6 +78,7 @@ return {
 			on_attach = function(client, bufnr)
 				if client.server_capabilities.documentSymbolProvider then
 					require("nvim-navic").attach(client, bufnr)
+					require("nvim-navbuddy").attach(client, bufnr)
 				end
 
 				-- NOTE: disabled tsserver formatting since I use eslint
@@ -90,6 +92,7 @@ return {
 			on_attach = function(client, bufnr)
 				if client.server_capabilities.documentSymbolProvider then
 					require("nvim-navic").attach(client, bufnr)
+					require("nvim-navbuddy").attach(client, bufnr)
 				end
 			end,
 

@@ -133,7 +133,7 @@ return {
 				["g?"] = actions.help(), -- Open mappings help window
 			},
 			lsp = {
-				auto_attach = true,
+				auto_attach = false,
 				preference = nil, -- list of lsp server names in order of preference
 			},
 			source_buffer = {
