@@ -23,10 +23,14 @@ return {
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-		-- Setup language servers.
+		-- NOTE: Setup language servers
 		local lspconfig = require("lspconfig")
 		lspconfig.mdx_analyzer.setup({})
+
 		lspconfig.taplo.setup({})
+
+		lspconfig.biome.setup({})
+
 		lspconfig.lua_ls.setup({
 			on_init = function(client)
 				local path = client.workspace_folders[1].name
@@ -55,15 +59,22 @@ return {
 			end,
 			capabilities = capabilities,
 		})
+
 		lspconfig.tsserver.setup({
 			on_attach = function(client, bufnr)
 				if client.server_capabilities.documentSymbolProvider then
 					require("nvim-navic").attach(client, bufnr)
 				end
+
+				-- NOTE: disabled tsserver formatting since I use eslint
+				client.server_capabilities.documentFormattingProvider = false
+				client.server_capabilities.documentRangeFormattingProvider = false
 			end,
 			capabilities = capabilities,
 		})
+
 		lspconfig.prismals.setup({})
+
 		lspconfig.cssls.setup({
 			capabilities = capabilities,
 		})
