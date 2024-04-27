@@ -3,10 +3,15 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		"SmiteshP/nvim-navic",
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
 	},
 	event = { "BufReadPre", "BufNewFile" },
 
 	config = function()
+		require("mason").setup()
+		require("mason-lspconfig").setup()
+
 		-- NOTE: apply border for hover screens globally to every server
 		local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 		function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
