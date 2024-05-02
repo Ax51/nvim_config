@@ -1,6 +1,17 @@
 return {
 	"kylechui/nvim-surround",
-	event = "VeryLazy",
+	keys = {
+		{ mode = "n", "ys" },
+		{ mode = "n", "yS" },
+		{ mode = "n", "cs" },
+		{ mode = "n", "ds" },
+
+		{ mode = "v", "S" },
+		{ mode = "v", "gS" },
+
+		{ mode = "i", "<C-g>s", desc = "surround" },
+		{ mode = "i", "<C-g>S", desc = "surround line" },
+	},
 
 	config = true,
 	-- NOTE: default keymaps =
