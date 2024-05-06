@@ -33,6 +33,10 @@ return {
 			capabilities = capabilities,
 		})
 
+		lspconfig.bashls.setup({
+			capabilities = capabilities,
+		})
+
 		lspconfig.biome.setup({
 			capabilities = capabilities,
 		})
