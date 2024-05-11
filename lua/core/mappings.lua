@@ -88,7 +88,6 @@ nmap("<leader>QA", function()
 	bufflineUi.refresh()
 end)
 nmap("<leader>X", ":BufferLinePickClose<CR>")
--- nmap("<leader>x", "<c-w>c") -- NOTE: this remap conflicts with Boole plugin
 nmap("<leader>s", ":BufferLineSortByTabs<CR>")
 nmap("<leader>h", ":nohlsearch<CR>")
 nmap("<leader>rj", ":!bun %<CR>")
