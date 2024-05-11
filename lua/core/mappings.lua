@@ -61,6 +61,9 @@ nmap("<leader>fs", ":Telescope lsp_document_symbols<CR>")
 nmap("gr", ":Telescope lsp_references<CR>")
 nmap("gd", ":Telescope lsp_definitions<CR>")
 
+-- Comment: delete commented linewise section
+nmap("dac", require("utils.delete_block_of_linewise_comments"))
+
 -- LazyGit
 nmap("<leader>g", ":LazyGit<CR>")
 
