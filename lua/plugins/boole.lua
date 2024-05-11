@@ -1,10 +1,14 @@
 return {
 	"nat-418/boole.nvim",
 	cmd = "Boole",
+	keys = { "<c-a>", "<c-x>" },
 
 	config = function()
 		require("boole").setup({
-			mappings = {},
+			mappings = {
+				increment = "<C-a>",
+				decrement = "<C-x>",
+			},
 
 			-- User defined loops
 			additions = {

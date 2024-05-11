@@ -152,9 +152,5 @@ nmap("<leader>zt", ":Twilight<CR>")
 nmap("<leader>rq", ':lua require("rest-nvim").run()<CR>')
 nmap("<leader>rl", ':lua require("rest-nvim").last()<CR>')
 
--- Boole
-nmap("<leader>a", ":Boole increment<CR>")
-nmap("<leader>x", ":Boole decrement<CR>")
-
 -- Grpc-nvim
 nmap("<leader>rg", ":Grpc<CR>")
