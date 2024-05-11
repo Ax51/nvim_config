@@ -117,6 +117,10 @@ nmap("<leader>t]", ":Neotest jump next<CR>")
 -- Hop
 nmap("<leader>M", ":HopChar1<CR>")
 nmap("<leader>m", ":HopWord<CR>")
+remap("<c-m>", "<c-\\><c-o>:HopWord<CR>", { "i" })
+remap("<c-m>", function()
+	require("hop").hint_words()
+end, { "v" })
 
 -- GitBlame
 nmap("<leader>Gl", function()
