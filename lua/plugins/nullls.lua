@@ -16,7 +16,7 @@ return {
 
 				require("none-ls.formatting.eslint_d").with({ condition = check_for_eslint }),
 
-				null_ls.builtins.diagnostics.buf,
+				-- null_ls.builtins.diagnostics.buf,
 
 				null_ls.builtins.formatting.buf,
 
