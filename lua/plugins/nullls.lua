@@ -16,6 +16,8 @@ return {
 
 				require("none-ls.formatting.eslint_d").with({ condition = check_for_eslint }),
 
+				null_ls.builtins.formatting.buf,
+
 				null_ls.builtins.formatting.biome.with({ condition = check_for_biome }),
 
 				null_ls.builtins.formatting.stylua,
