@@ -79,6 +79,7 @@ nmap("|", ":vsplit<CR>")
 nmap("\\", ":split<CR>")
 
 -- Other
+nmap("gut", require("utils.convert_camel_to_upper"))
 nmap("<leader>w", ":w<CR>")
 nmap("<leader>q", ":bp|bd #<CR>")
 nmap("<leader>Q", ":bd<CR>")
