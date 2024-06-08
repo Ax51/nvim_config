@@ -65,13 +65,7 @@ return {
 			-- callback where you can add custom code when the Zen window opens
 			on_open = function() end,
 			-- callback where you can add custom code when the Zen window closes
-			on_close = function()
-				if Git_blame_disabled_by_zenmode then
-					vim.cmd("GitBlameEnable")
-					Git_blame_enabled = true
-					Git_blame_disabled_by_zenmode = false
-				end
-			end,
+			on_close = function() end,
 		})
 	end,
 }

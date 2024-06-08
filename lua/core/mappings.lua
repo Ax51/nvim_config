@@ -54,12 +54,17 @@ nmap("<leader>fm", ":Telescope marks<CR>")
 nmap("<leader>fp", ":Telescope persisted<CR>")
 nmap("<leader>fr", ":Telescope resume<CR>")
 nmap("<leader>fc", ":TodoTelescope<CR>")
-nmap("<leader>Gb", ":Telescope git_branches<CR>")
-nmap("<leader>Gc", ":Telescope git_commits<CR>")
-nmap("<leader>Gs", ":Telescope git_status<CR>")
 nmap("<leader>fs", ":Telescope lsp_document_symbols<CR>")
 nmap("gr", ":Telescope lsp_references<CR>")
 nmap("gd", ":Telescope lsp_definitions<CR>")
+
+-- Git
+nmap("<leader>Gb", ":Telescope git_branches<CR>")
+nmap("<leader>Gc", ":Telescope git_commits<CR>")
+nmap("<leader>Gs", ":Telescope git_status<CR>")
+nmap("<leader>Gd", ":Gitsigns toggle_deleted<CR>")
+nmap("<leader>Gl", ":Gitsigns toggle_current_line_blame<CR>")
+nmap("<leader>GL", ":Gitsigns blame_line<CR>")
 
 -- Comment: delete commented linewise section
 nmap("dac", require("utils.delete_block_of_linewise_comments"))
@@ -125,24 +130,8 @@ remap("<c-m>", function()
 	require("hop").hint_words()
 end, { "v" })
 
--- GitBlame
-nmap("<leader>Gl", function()
-	if Git_blame_enabled then
-		vim.cmd("GitBlameDisable")
-		Git_blame_enabled = false
-	else
-		vim.cmd("GitBlameEnable")
-		Git_blame_enabled = true
-	end
-end)
-
 -- Zen Mode
 nmap("<leader>zz", function()
-	if Git_blame_enabled then
-		vim.cmd("GitBlameDisable")
-		Git_blame_enabled = false
-		Git_blame_disabled_by_zenmode = true
-	end
 	vim.cmd("ZenMode")
 end)
 
