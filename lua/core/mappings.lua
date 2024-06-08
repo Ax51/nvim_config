@@ -65,6 +65,9 @@ nmap("<leader>Gs", ":Telescope git_status<CR>")
 nmap("<leader>Gd", ":Gitsigns toggle_deleted<CR>")
 nmap("<leader>Gl", ":Gitsigns toggle_current_line_blame<CR>")
 nmap("<leader>GL", ":Gitsigns blame_line<CR>")
+nmap("<leader>Gp", ":Gitsigns preview_hunk<CR>")
+nmap("[h", ":Gitsigns prev_hunk<CR>")
+nmap("]h", ":Gitsigns next_hunk<CR>")
 
 -- Comment: delete commented linewise section
 nmap("dac", require("utils.delete_block_of_linewise_comments"))
