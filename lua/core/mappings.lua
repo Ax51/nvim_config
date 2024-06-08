@@ -140,7 +140,3 @@ end)
 
 -- Twilight
 nmap("<leader>zt", ":Twilight<CR>")
-
--- REST
-nmap("<leader>rq", ':lua require("rest-nvim").run()<CR>')
-nmap("<leader>rl", ':lua require("rest-nvim").last()<CR>')
