@@ -68,7 +68,6 @@ return {
         name = "Run",
         j = "Execute JS script with Bun",
         s = "Execute entire paragraph as shell script",
-        g = "Execute GRPC",
       },
       t = {
         name = "Tests",
