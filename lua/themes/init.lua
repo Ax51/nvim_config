@@ -9,114 +9,114 @@
 local themesList = {}
 
 themesList.darkplus = {
-	source = "lunarvim/darkplus.nvim",
+  source = "lunarvim/darkplus.nvim",
 
-	day = "darkplus",
-	night = "darkplus",
+  day = "darkplus",
+  night = "darkplus",
 }
 
 themesList.kanagawa = {
-	source = "rebelot/kanagawa.nvim",
+  source = "rebelot/kanagawa.nvim",
 
-	day = "kanagawa-wave",
-	night = "kanagawa-dragon",
+  day = "kanagawa-wave",
+  night = "kanagawa-dragon",
 }
 
 themesList.ayu = {
-	source = "Shatur/neovim-ayu",
+  source = "Shatur/neovim-ayu",
 
-	day = "ayu-mirage",
-	night = "ayu-dark",
+  day = "ayu-mirage",
+  night = "ayu-dark",
 }
 
 themesList.melange = {
-	source = "savq/melange-nvim",
+  source = "savq/melange-nvim",
 
-	day = "melange",
-	night = "melange",
+  day = "melange",
+  night = "melange",
 }
 
 themesList.gruvbox = {
-	source = "luisiacc/gruvbox-baby",
+  source = "luisiacc/gruvbox-baby",
 
-	day = "gruvbox-baby",
-	night = "gruvbox-baby",
+  day = "gruvbox-baby",
+  night = "gruvbox-baby",
 }
 
 themesList.fox = {
-	source = "EdenEast/nightfox.nvim",
+  source = "EdenEast/nightfox.nvim",
 
-	day = "duskfox",
-	night = "carbonfox",
+  day = "duskfox",
+  night = "carbonfox",
 }
 
 themesList.tokyonight = {
-	source = "folke/tokyonight.nvim",
-	opts = {
-		on_colors = function(colors)
-			colors.comment = "#7983b1"
-		end,
-		on_highlights = function(hl, c)
-			-- NOTE: change unused variable color
-			hl.DiagnosticUnnecessary = {
-				fg = c.comment,
-			}
-			hl.EndOfBuffer = {
-				fg = c.comment,
-			}
-			hl.LineNr = {
-				fg = c.comment,
-			}
-			hl.TelescopePromptBorder = {
-				fg = c.border_highlight,
-				bg = c.bg_float,
-			}
-			hl.TelescopePromptTitle = {
-				fg = c.border_highlight,
-				bg = c.bg_float,
-			}
-		end,
-	},
+  source = "folke/tokyonight.nvim",
+  opts = {
+    on_colors = function(colors)
+      colors.comment = "#7983b1"
+    end,
+    on_highlights = function(hl, c)
+      -- NOTE: change unused variable color
+      hl.DiagnosticUnnecessary = {
+        fg = c.comment,
+      }
+      hl.EndOfBuffer = {
+        fg = c.comment,
+      }
+      hl.LineNr = {
+        fg = c.comment,
+      }
+      hl.TelescopePromptBorder = {
+        fg = c.border_highlight,
+        bg = c.bg_float,
+      }
+      hl.TelescopePromptTitle = {
+        fg = c.border_highlight,
+        bg = c.bg_float,
+      }
+    end,
+  },
 
-	day = "tokyonight-storm",
-	night = "tokyonight-night",
+  day = "tokyonight-storm",
+  night = "tokyonight-night",
 }
 
 local function setDefaultTheme(theme)
-	local defThemeOpts = {
-		lazy = false,
-		priority = 1000,
-	}
+  local defThemeOpts = {
+    lazy = false,
+    priority = 1000,
+  }
 
-	local result = {}
+  local result = {}
 
-	for themeName, themeTable in pairs(themesList) do
-		local configuredTheme = {}
+  for themeName, themeTable in pairs(themesList) do
+    local configuredTheme = {}
 
-		if themeName == theme then
-			-- NOTE: selected theme
-			for opt, optValue in pairs(defThemeOpts) do
-				-- NOTE: add each def opt to the selected theme
-				configuredTheme[opt] = optValue
-			end
-		else
-			configuredTheme.lazy = true
-		end
+    if themeName == theme then
+      -- NOTE: selected theme
+      for opt, optValue in pairs(defThemeOpts) do
+        -- NOTE: add each def opt to the selected theme
+        configuredTheme[opt] = optValue
+      end
+    else
+      configuredTheme.lazy = true
+    end
 
-		-- NOTE: spread all theme specific opts
-		for opt, optValue in pairs(themeTable) do
-			if opt == "source" then
-				configuredTheme[1] = optValue
-			elseif opt == "day" or opt == "night" then
-				-- NOTE: continue
-			end
-			configuredTheme[opt] = optValue
-		end
+    -- NOTE: spread all theme specific opts
+    for opt, optValue in pairs(themeTable) do
+      if opt == "source" then
+        configuredTheme[1] = optValue
+      elseif opt == "day" or opt == "night" then
+        -- NOTE: continue
+      end
+      configuredTheme[opt] = optValue
+    end
 
-		table.insert(result, configuredTheme)
-	end
+    table.insert(result, configuredTheme)
+  end
 
-	return result
+  return result
 end
 
 return { setDefaultTheme, themesList }

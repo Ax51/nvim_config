@@ -1,5 +1,5 @@
 return {
-	"hudclark/grpc-nvim",
+  "hudclark/grpc-nvim",
 
-	cmd = "Grpc",
+  cmd = "Grpc",
 }

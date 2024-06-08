@@ -11,33 +11,33 @@ nmap("[d", vim.diagnostic.goto_prev)
 nmap("]d", vim.diagnostic.goto_next)
 nmap("<leader>lD", vim.diagnostic.setloclist)
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-	callback = function(ev)
-		-- Enable completion triggered by <c-x><c-o>
-		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-		-- Buffer local mappings.
-		-- See `:help vim.lsp.*` for documentation on any of the below functions
-		local opts = { buffer = ev.buf, silent = true }
-		nmap("gD", vim.lsp.buf.declaration, opts)
-		nmap("K", function()
-			local filename = vim.fn.expand("%:t")
-			print(filename)
-			if filename == "Cargo.toml" then
-				require("crates").show_popup()
-			else
-				vim.lsp.buf.hover()
-			end
-		end, opts)
-		nmap("gi", vim.lsp.buf.implementation, opts)
-		nmap("gr", vim.lsp.buf.references, opts)
-		nmap("<leader>lr", vim.lsp.buf.rename, opts)
-		nmap("<leader>D", vim.lsp.buf.type_definition, opts)
-		remap("<leader>la", vim.lsp.buf.code_action, { "n", "v" }, opts)
-		nmap("<leader>lf", function()
-			vim.lsp.buf.format({ async = true })
-		end, opts)
-	end,
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf, silent = true }
+    nmap("gD", vim.lsp.buf.declaration, opts)
+    nmap("K", function()
+      local filename = vim.fn.expand("%:t")
+      print(filename)
+      if filename == "Cargo.toml" then
+        require("crates").show_popup()
+      else
+        vim.lsp.buf.hover()
+      end
+    end, opts)
+    nmap("gi", vim.lsp.buf.implementation, opts)
+    nmap("gr", vim.lsp.buf.references, opts)
+    nmap("<leader>lr", vim.lsp.buf.rename, opts)
+    nmap("<leader>D", vim.lsp.buf.type_definition, opts)
+    remap("<leader>la", vim.lsp.buf.code_action, { "n", "v" }, opts)
+    nmap("<leader>lf", function()
+      vim.lsp.buf.format({ async = true })
+    end, opts)
+  end,
 })
 
 -- Telescope
@@ -90,17 +90,17 @@ nmap("<leader>q", ":bp|bd #<CR>")
 nmap("<leader>Q", ":bd<CR>")
 nmap("<leader>QQ", ":bufdo bd<CR>")
 nmap("<leader>QA", function()
-	local closeOther = require("utils.close_all_bufs_ex_curr")
-	local bufflineUi = require("bufferline.ui")
+  local closeOther = require("utils.close_all_bufs_ex_curr")
+  local bufflineUi = require("bufferline.ui")
 
-	closeOther()
-	bufflineUi.refresh()
+  closeOther()
+  bufflineUi.refresh()
 end)
 nmap("<leader>X", ":BufferLinePickClose<CR>")
 nmap("<leader>s", ":BufferLineSortByTabs<CR>")
 nmap("<leader>h", ":nohlsearch<CR>")
 nmap("<leader>rj", ":!bun %<CR>")
-nmap("<leader>rs", "vip:w !sh<CR>") -- NOTE: run entire paragraph as shell script
+nmap("<leader>rs", "vip:w !sh<CR>")      -- NOTE: run entire paragraph as shell script
 remap("jj", "<Esc>", "i")
 remap("<leader>c", ":'<,'>t'><CR>", "v") -- NOTE: copy selected lines and paste them below
 remap("<leader>C", require("utils.copy_and_comment"), "v")
@@ -127,12 +127,12 @@ nmap("<leader>M", ":HopChar1<CR>")
 nmap("<leader>m", ":HopWord<CR>")
 remap("<c-m>", "<c-\\><c-o>:HopWord<CR>", { "i" })
 remap("<c-m>", function()
-	require("hop").hint_words()
+  require("hop").hint_words()
 end, { "v" })
 
 -- Zen Mode
 nmap("<leader>zz", function()
-	vim.cmd("ZenMode")
+  vim.cmd("ZenMode")
 end)
 
 -- Twilight

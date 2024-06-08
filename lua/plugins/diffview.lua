@@ -1,4 +1,4 @@
 return {
-	"sindrets/diffview.nvim",
-	cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+  "sindrets/diffview.nvim",
+  cmd = { "DiffviewOpen", "DiffviewFileHistory" },
 }
