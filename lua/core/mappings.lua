@@ -58,6 +58,9 @@ nmap("<leader>fs", ":Telescope lsp_document_symbols<CR>")
 nmap("gr", ":Telescope lsp_references<CR>")
 nmap("gd", ":Telescope lsp_definitions<CR>")
 
+-- Fzf-lua
+nmap("<leader>fl", ":FzfLua<CR>")
+
 -- Git
 nmap("<leader>Gb", ":Telescope git_branches<CR>")
 nmap("<leader>Gc", ":Telescope git_commits<CR>")
