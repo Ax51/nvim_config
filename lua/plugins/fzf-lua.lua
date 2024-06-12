@@ -4,5 +4,9 @@ return {
 
   cmd = "FzfLua",
 
-  config = true
+  opts = {
+    grep = {
+      rg_opts = "--column --line-number --no-heading --color=always --smart-case --multiline --max-columns=4096 -e",
+    }
+  }
 }
