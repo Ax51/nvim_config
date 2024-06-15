@@ -5,6 +5,7 @@ local allowed_dirs = {
 
 return {
   "olimorris/persisted.nvim",
+
   lazy = false,
 
   cond = function()
@@ -23,9 +24,10 @@ return {
       follow_cwd = true,                                                -- change session file name to match current working directory if it changes
       allowed_dirs = nil,                                               -- table of dirs that the plugin will auto-save and auto-load from
       ignored_dirs = nil,                                               -- table of dirs that are ignored when auto-saving and auto-loading
-      telescope = {                                                     -- options for the telescope extension
-        reset_prompt_after_deletion = true,                             -- whether to reset prompt after session deleted
-      },
+      -- NOTE: we use custom fzf-lua picker fn for this util. Check for `utils.fzf_lua_persisted`
+      -- telescope = {                                                  -- options for the telescope extension
+      --   reset_prompt_after_deletion = true,                          -- whether to reset prompt after session deleted
+      -- },
     })
   end,
 }
