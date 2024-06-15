@@ -8,6 +8,14 @@ return {
     grep = {
       rg_opts = "--column --line-number --no-heading --color=always --smart-case --multiline --max-columns=4096 -e",
       rg_glob = true,
-    }
+    },
+    previewers = {
+      builtin = {
+        extensions = {
+          ["png"] = { "viu", "-b" },
+          ["jpg"] = { "viu", "-b" },
+        }
+      }
+    },
   }
 }
