@@ -52,15 +52,16 @@ nmap("<leader>fd", ":Telescope diagnostics<CR>")
 nmap("<leader>fh", ":Telescope help_tags<CR>")
 nmap("<leader>fm", ":Telescope marks<CR>")
 nmap("<leader>fr", ":Telescope resume<CR>")
-nmap("<leader>fc", ":TodoTelescope<CR>")
 nmap("<leader>fs", ":Telescope lsp_document_symbols<CR>")
 nmap("gr", ":Telescope lsp_references<CR>")
 nmap("gd", ":Telescope lsp_definitions<CR>")
 -- nmap("<leader>fP", ":Telescope persisted<CR>")
 nmap("<leader>fp", require("utils.fzf_lua_persisted"))
+-- nmap("<leader>fc", ":TodoTelescope<CR>")
 
 -- Fzf-lua
 nmap("<leader>fl", ":FzfLua<CR>")
+nmap("<leader>fc", ":lua require(\"todo-comments.fzf\").todo()<CR>")
 
 -- Git
 nmap("<leader>Gb", ":Telescope git_branches<CR>")
