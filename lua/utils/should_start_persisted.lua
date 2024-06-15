@@ -1,4 +1,6 @@
--- NOTE: allowed_dirs - table of strings
+---Session persistence allowed only for provided paths
+---@param allowed_dirs string[]
+---@return boolean
 local function should_start_persisted(allowed_dirs)
   local should_start = false
   local cwdDir = vim.fn.getcwd()

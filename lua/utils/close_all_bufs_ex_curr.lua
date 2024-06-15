@@ -1,4 +1,5 @@
-local closeAllBufsExceptCurrent = function() -- delete all buffers, expect active one
+---delete all buffers, expect active one
+local close_all_bufs_except_current = function()
   local rawBufArr = vim.api.nvim_list_bufs()
   local currBufNum = vim.api.nvim_get_current_buf()
 
@@ -9,4 +10,4 @@ local closeAllBufsExceptCurrent = function() -- delete all buffers, expect activ
   end
 end
 
-return closeAllBufsExceptCurrent
+return close_all_bufs_except_current
