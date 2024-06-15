@@ -1,4 +1,7 @@
-local nmap, remap = unpack(require("utils.keymappings"))
+local remapUtils = require("utils.keymappings")
+
+local nmap = remapUtils.nmap;
+local remap = remapUtils.remap;
 
 -- NeoTree
 nmap("<leader>e", ":Neotree toggle position=float reveal<CR>")

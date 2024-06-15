@@ -1,15 +1,14 @@
-local function remap(shortcut, command, mode, opts)
+local M = {}
+
+M.remap = function(shortcut, command, mode, opts)
   local defmode = "n"
   local defopts = { silent = true }
 
   vim.keymap.set(mode or defmode, shortcut, command, opts or defopts)
 end
 
-local function nmap(shortcut, command, opts)
-  remap(shortcut, command, "n", opts)
+M.nmap = function(shortcut, command, opts)
+  M.remap(shortcut, command, "n", opts)
 end
 
-return {
-  nmap,
-  remap,
-}
+return M
