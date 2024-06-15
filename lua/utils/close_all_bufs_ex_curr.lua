@@ -4,7 +4,7 @@ local close_all_bufs_except_current = function()
   local currBufNum = vim.api.nvim_get_current_buf()
 
   for _, bufnr in ipairs(rawBufArr) do
-    if bufnr ~= currBufNum and vim.fn.buflisted(bufnr) and not vim.api.nvim_buf_get_option(bufnr, "modified") then
+    if bufnr ~= currBufNum and vim.fn.buflisted(bufnr) and not vim.api.nvim_get_option_value("modified", {}) then
       vim.api.nvim_buf_delete(bufnr, {})
     end
   end
