@@ -11,8 +11,6 @@ return {
     local telescope = require("telescope")
     local actions = require("telescope.actions")
 
-    telescope.load_extension("fzf")
-
     telescope.setup({
       extensions = {
         fzf = {
@@ -54,5 +52,7 @@ return {
         end,
       }),
     })
+
+    telescope.load_extension("fzf")
   end,
 }
