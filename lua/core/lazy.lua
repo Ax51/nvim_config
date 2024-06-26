@@ -25,8 +25,6 @@ local lazyOpts = {
   checker = {
     check_pinned = true,
   },
-  -- NOTE: temporary disabled rocks since it breaks build as for now
-  rocks = { enabled = false },
   ui = {
     border = "single",
     size = {
