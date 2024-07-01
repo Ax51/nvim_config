@@ -19,7 +19,7 @@ return {
         TODO = { icon = " ", color = "info" },
         DELETE = { icon = " ", color = "error", alt = { "REMOVE", "JUNK", "DEL", "DANGER" } },
         HACK = { icon = " ", color = "warning" },
-        WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+        WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX", "CHECK" } },
         PERF = { icon = "󰓅 ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE", "THINK" } },
         NOTE = { icon = " ", color = "#4caf50", alt = { "INFO", "HINT" } },
         TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
