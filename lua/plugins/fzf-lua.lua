@@ -8,6 +8,7 @@ return {
     grep = {
       rg_opts = "--column --line-number --no-heading --color=always --smart-case --multiline --max-columns=4096 -e",
       rg_glob = true,
+      git_icons = true,
     },
     previewers = {
       builtin = {
