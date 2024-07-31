@@ -14,7 +14,7 @@
   "crates.nvim": { "branch": "main", "commit": "d1be10c1fcf4adb1eed2f2f510176db035efc68d" },
   "darkplus.nvim": { "branch": "master", "commit": "c7fff5ce62406121fc6c9e4746f118b2b2499c4c" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
-  "fzf-lua": { "branch": "main", "commit": "c7288e60b8dde218f3d3b5b16e1baf32ada20ef3" },
+  "fzf-lua": { "branch": "main", "commit": "2a82a2fff4b3dc73d734edf137b87139352cedbd" },
   "gitsigns.nvim": { "branch": "main", "commit": "f074844b60f9e151970fbcdbeb8a2cd52b6ef25a" },
   "gruvbox-baby": { "branch": "main", "commit": "bd52e62d8134647090108189e69c8b3cd18bdbbf" },
   "headlines.nvim": { "branch": "master", "commit": "618ef1b2502c565c82254ef7d5b04402194d9ce3" },
