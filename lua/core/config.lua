@@ -56,5 +56,6 @@ vim.opt.fillchars = {
 -- Colors
 vim.opt.termguicolors = true
 
+vim.cmd([[set ignorecase smartcase]])
 vim.cmd([[highlight clear LineNr]])
 vim.cmd([[highlight clear SignColumn]])
