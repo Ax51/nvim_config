@@ -27,6 +27,9 @@ return {
     local lspconfig = require("lspconfig")
     lspconfig.mdx_analyzer.setup({
       capabilities = capabilities,
+      filetypes = {
+        "markdown"
+      }
     })
 
     lspconfig.taplo.setup({
