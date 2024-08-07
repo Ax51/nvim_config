@@ -142,7 +142,6 @@ nmap("<leader>zt", ":Twilight<CR>")
 -- Terminal
 -- NOTE: exit from terminal mode with <ESC>
 remap("<ESC>", function()
-  local win = vim.api.nvim_get_current_win()
   -- Do not close lazygit on escape
   if not string.find(vim.api.nvim_buf_get_name(0), "lazygit") then
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, false, true), "n", true)
