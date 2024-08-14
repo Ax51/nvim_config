@@ -55,6 +55,9 @@ nmap("<leader>fm", ":FzfLua marks<CR>")
 nmap("<leader>fp", require("utils.fzf_lua_persisted"))
 nmap("<leader>fc", ":lua require(\"todo-comments.fzf\").todo()<CR>")
 
+-- NOTE: experiment that requires a lot of improvements
+nmap('<leader>fu', require("utils.fzf_lua_new_comments"))
+
 -- Git
 nmap("<leader>Gb", ":FzfLua git_branches<CR>")
 nmap("<leader>Gc", ":FzfLua git_commits<CR>")
