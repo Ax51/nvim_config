@@ -12,11 +12,12 @@ return {
 
     null_ls.setup({
       sources = {
+        -- NOTE: custom eslint_d formatter source
+        require("utils.null-ls-eslint_d-as-a-formatter-source"),
+
         require("none-ls.code_actions.eslint_d").with({ condition = check_for_eslint }),
 
         require("none-ls.diagnostics.eslint_d").with({ condition = check_for_eslint }),
-
-        require("none-ls.formatting.eslint_d").with({ condition = check_for_eslint }),
 
         -- NOTE: temporary disabled since auto formatting causes a lot of changes
         -- null_ls.builtins.diagnostics.buf,
