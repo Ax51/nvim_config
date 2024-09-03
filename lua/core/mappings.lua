@@ -53,7 +53,7 @@ nmap('gd', require("utils.open_fzf_or_go-to_def"))
 nmap("gr", ":FzfLua lsp_references<CR>")
 nmap("<leader>fm", ":FzfLua marks<CR>")
 nmap("<leader>fp", require("utils.fzf_lua_persisted"))
-nmap("<leader>fc", ":lua require(\"todo-comments.fzf\").todo()<CR>")
+nmap("<leader>fc", require("todo-comments.fzf").todo)
 
 -- NOTE: experiment that requires a lot of improvements
 nmap('<leader>fu', require("utils.fzf_lua_new_comments"))
