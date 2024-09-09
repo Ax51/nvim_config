@@ -16,6 +16,7 @@ return {
           -- signs = false, -- configure signs for some keywords individually
         },
         -- TODO = { icon = " ", color = "info" },
+        UNREACHABLE = { icon = " ", color = "info" },
         TODO = { icon = " ", color = "info" },
         DELETE = { icon = " ", color = "error", alt = { "REMOVE", "JUNK", "DEL", "DANGER" } },
         HACK = { icon = " ", color = "warning" },
