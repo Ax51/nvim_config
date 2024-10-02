@@ -4,7 +4,7 @@ return {
   ft = "rust",
 
   init = function()
-    local nmap = unpack(require("utils.keymappings"))
+    local nmap = require("utils.keymappings").nmap
 
     vim.g.rustaceanvim = function()
       return {
