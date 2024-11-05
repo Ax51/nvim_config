@@ -31,4 +31,67 @@ local function git_diff_fzf_lua()
   })
 end
 
+---@param command string
+---@return boolean
+local function check_for_console_command_existence(command)
+  local handle = io.popen("command -v " .. command)
+  ---@type string | nil
+  local result = handle and handle:read("*a") or nil
+
+  if not result then
+    print("Unable to check util [ " .. command .. " ] existence")
+    return false;
+  end
+
+  -- NOTE: already checked for handle in result
+  ---@diagnostic disable-next-line: need-check-nil
+  handle:close();
+
+  return result:len() > 0 and true or false
+end
+
+local function git_diff_fzf_lua_2()
+  if not check_for_console_command_existence("git") then
+    print("Please install [ git ] before")
+    return;
+  end
+
+  if not check_for_console_command_existence("rg") then
+    print("Please install [ git ] before")
+    return;
+  end
+
+  ---@type string
+  local base_branch = "main"
+  -- local base_branch = "staging"
+
+  ---@type string[]
+  local target_keywords_table = { "TODO", "FIXIT", "DELETE" }
+
+  ---@type string
+  local command = "git diff " ..
+      base_branch ..
+      " --unified=0 --output-indicator-new=' ' | rg --no-heading --trim -o -A 1 '^[^-].*(" ..
+      table.concat(target_keywords_table, "|") ..
+      "):.*'"
+
+  local handle = io.popen(command)
+
+  if not handle then
+    print("Failed to execute git command!")
+
+    return
+  end
+
+  ---@type string
+  local result = handle:read("*a")
+
+  handle:close()
+
+  print("result:\n---\n", result, "\n---")
+end
+
+-- TODO: [WIP]
+-- git_diff_fzf_lua_2()
+
 return git_diff_fzf_lua
