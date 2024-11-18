@@ -41,6 +41,7 @@ return {
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-x>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        -- FIXIT: seems that this assignment could cause accidental pointer movement on some <Tab> clicks
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
