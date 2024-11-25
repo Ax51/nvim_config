@@ -28,6 +28,24 @@ function M.get_visual_selection()
   return lines
 end
 
+---@param start_coord number[]
+---@param end_coord number[]
+---@return string[]
+function M.get_text_from_provided_coords(start_coord, end_coord)
+  local n_lines = math.abs(end_coord[2] - start_coord[2]) + 1
+  local lines = vim.api.nvim_buf_get_lines(0, start_coord[2] - 1, end_coord[2], false)
+
+  lines[1] = string.sub(lines[1], start_coord[3], -1)
+
+  if n_lines == 1 then
+    lines[n_lines] = string.sub(lines[n_lines], 1, end_coord[3] - start_coord[3] + 1)
+  else
+    lines[n_lines] = string.sub(lines[n_lines], 1, end_coord[3])
+  end
+
+  return lines
+end
+
 function M.get_paragraph_under_cursor()
   -- Save the current cursor position
   local current_pos = vim.api.nvim_win_get_cursor(0)
@@ -35,15 +53,15 @@ function M.get_paragraph_under_cursor()
   -- Execute the 'vip' command to select the paragraph
   vim.cmd('normal! vip')
 
-  -- Get selected lines as a table of strings
-  local lines = M.get_visual_selection()
-
-  -- Return to normal mode
+  -- Return to normal mode (and save visual selection coordinates)
   local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
   vim.api.nvim_feedkeys(esc, "nx", false)
 
   -- Restore the original cursor position
   vim.api.nvim_win_set_cursor(0, current_pos)
+
+  -- Get previously selected lines as a table of strings
+  local lines = M.get_text_from_provided_coords(vim.fn.getpos("'<"), vim.fn.getpos("'>"))
 
   -- Return table of lines
   return lines

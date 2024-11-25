@@ -104,7 +104,10 @@ nmap("<leader>X", ":BufferLinePickClose<CR>")
 nmap("<leader>s", ":BufferLineSortByTabs<CR>")
 nmap("<leader>h", ":nohlsearch<CR>")
 nmap("<leader>rj", ":!bun %<CR>")
-nmap("<leader>rs", "vip:w !sh<CR>")      -- NOTE: run entire paragraph as shell script
+-- NOTE: run entire paragraph as a script
+nmap("<leader>rs", function()
+  require("utils.execute_shell_block").execute_code_block()
+end)
 remap("jj", "<Esc>", "i")
 remap("<leader>c", ":'<,'>t'><CR>", "v") -- NOTE: copy selected lines and paste them below
 remap("<leader>C", require("utils.copy_and_comment"), "v")
