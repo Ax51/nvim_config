@@ -48,6 +48,7 @@ function M.execute_code_block()
       return;
     end
   else
+    -- TODO: add file recognition with `vim.fn.expand("%:e")`
     code_runner = "sh"
   end
 
