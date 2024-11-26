@@ -26,6 +26,7 @@ return {
     -- NOTE: Setup language servers
     local lspconfig = require("lspconfig")
     lspconfig.mdx_analyzer.setup({
+      filetypes = { "mdx" },
       capabilities = capabilities,
     })
 
