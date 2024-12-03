@@ -11,5 +11,8 @@ return {
     "HopWord",
   },
 
+  -- NOTE: temporary disabled due to `flash.nvim` test
+  enabled = false,
+
   config = true,
 }
