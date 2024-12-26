@@ -10,8 +10,10 @@ nmap("<leader>b", ":Neotree toggle left buffers<CR>")
 
 -- LSP
 nmap("<leader>ld", vim.diagnostic.open_float)
-nmap("[d", vim.diagnostic.goto_prev)
-nmap("]d", vim.diagnostic.goto_next)
+nmap("[D", vim.diagnostic.goto_prev)
+nmap("]D", vim.diagnostic.goto_next)
+nmap("[d", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end)
+nmap("]d", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end)
 nmap("<leader>lD", vim.diagnostic.setloclist)
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
