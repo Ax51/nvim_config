@@ -67,6 +67,7 @@ themesList.tokyonight = {
       hl.LineNr = {
         fg = c.comment,
       }
+      hl.VisimatchOthers = { bg = "#293350" }
     end,
   },
 
