@@ -57,6 +57,9 @@ nmap("<leader>fm", ":FzfLua marks<CR>")
 nmap("<leader>fp", require("utils.fzf_lua_persisted"))
 nmap("<leader>fc", ":TodoFzfLua<CR>")
 
+-- Yazi
+nmap("<leader>y", ":Yazi<CR>")
+
 -- NOTE: experiment that requires a lot of improvements
 nmap('<leader>fu', require("utils.fzf_lua_new_comments"))
 
