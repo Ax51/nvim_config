@@ -4,7 +4,8 @@ local nmap = remapUtils.nmap;
 local remap = remapUtils.remap;
 
 -- NeoTree
-nmap("<leader>e", ":Neotree toggle position=float reveal<CR>")
+-- NOTE: replaced `>e` with `>y` to adapt to using yazi with old keybindings
+nmap("<leader>y", ":Neotree toggle position=float reveal<CR>")
 nmap("<leader>E", ":Neotree right reveal<CR>")
 nmap("<leader>b", ":Neotree toggle left buffers<CR>")
 
@@ -58,7 +59,7 @@ nmap("<leader>fp", require("utils.fzf_lua_persisted"))
 nmap("<leader>fc", ":TodoFzfLua<CR>")
 
 -- Yazi
-nmap("<leader>y", ":Yazi<CR>")
+nmap("<leader>e", ":Yazi<CR>")
 
 -- NOTE: experiment that requires a lot of improvements
 nmap('<leader>fu', require("utils.fzf_lua_new_comments"))
