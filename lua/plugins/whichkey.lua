@@ -38,7 +38,7 @@ return {
       { "<leader>f",  group = "Find" },
       { "<leader>fF", desc = "Find File in selected directories" },
       { "<leader>fW", desc = "Find by word in selected directories" },
-      { "<leader>fb", desc = "Find Buffer" },
+      { "<leader>fb", desc = "Find inside active Buffer" },
       { "<leader>fc", desc = "Show `// COMMENTS:`" },
       { "<leader>ff", desc = "Find File" },
       { "<leader>fh", desc = "Find Help" },
