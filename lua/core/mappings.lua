@@ -93,6 +93,9 @@ nmap("<C-I>", "<C-I>") -- NOTE: we need to separate <C-I> from <tab> by explicit
 nmap("|", ":vsplit<CR>")
 nmap("\\", ":split<CR>")
 
+-- Grug-far (search-n-replace plugin)
+nmap("<leader>s", ":GrugFar<CR>")
+
 -- Other
 nmap("gut", require("utils.convert_camel_to_upper"))
 nmap("<leader>w", ":w<CR>")
@@ -107,7 +110,6 @@ nmap("<leader>QA", function()
   bufflineUi.refresh()
 end)
 nmap("<leader>X", ":BufferLinePickClose<CR>")
-nmap("<leader>s", ":BufferLineSortByTabs<CR>")
 nmap("<leader>h", ":nohlsearch<CR>")
 nmap("<leader>rj", ":!bun %<CR>")
 -- NOTE: run entire paragraph as a script
