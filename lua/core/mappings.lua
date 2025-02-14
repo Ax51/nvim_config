@@ -59,6 +59,7 @@ nmap("<leader>fp", require("utils.fzf_lua_persisted"))
 nmap("<leader>fc", ":TodoFzfLua<CR>")
 nmap("<leader>ft", ":FzfLua treesitter<CR>")
 nmap("<leader>fb", ":FzfLua lgrep_curbuf<CR>")
+nmap("<leader>fB", ":FzfLua buffers<CR>")
 
 -- Yazi
 nmap("<leader>e", ":Yazi<CR>")
