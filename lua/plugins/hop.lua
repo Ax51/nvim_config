@@ -11,7 +11,5 @@ return {
     "HopWord",
   },
 
-  opts = {
-    multi_windows = true,
-  },
+  opts = true,
 }
