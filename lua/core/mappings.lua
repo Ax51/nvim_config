@@ -164,3 +164,6 @@ remap("QQ", function()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, false, true), "n", true)
   end
 end, "t")
+
+-- Copilot
+nmap("<leader>cc", ":CopilotChat<CR>")
