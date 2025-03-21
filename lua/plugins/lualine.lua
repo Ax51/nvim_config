@@ -2,6 +2,8 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
+    -- NOTE: shows the current Copilot connection status
+    'AndreM222/copilot-lualine',
   },
   event = { "BufReadPre", "BufNewFile" },
 
@@ -31,7 +33,8 @@ return {
         lualine_c = {
           { "filename", path = 1 },
         },
-        lualine_x = { "progress" },
+        -- NOTE: requires `AndreM222/copilot-lualine`
+        lualine_x = { "copilot", "progress" },
         lualine_y = { "diff" },
         lualine_z = { "location" },
       },
