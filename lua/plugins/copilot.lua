@@ -3,10 +3,8 @@ return {
 
   event = "InsertEnter",
   config = {
-    suggestion = {
-      enabled = true,
-      auto_trigger = true,
-    },
+    panel = { enabled = false, },
+    suggestion = { enabled = false, },
     copilot_model = "gpt-4o-copilot",
   },
 }

@@ -9,6 +9,9 @@ return {
     "hrsh7th/cmp-nvim-lua",
     "hrsh7th/cmp-nvim-lsp-signature-help",
 
+    -- NOTE: Github copilot CMP:
+    "zbirenbaum/copilot-cmp",
+
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
   },
@@ -18,6 +21,8 @@ return {
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
+    local copilot_cmp = require("copilot_cmp");
+    copilot_cmp.setup();
 
     local has_words_before = function()
       unpack = unpack or table.unpack
@@ -67,6 +72,9 @@ return {
         end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
+        -- NOTE: Copilot Source
+        { name = "copilot", group_index = 2 },
+
         { name = "nvim_lsp" },
         { name = "nvim_lua" },
         { name = "luasnip" },
