@@ -57,6 +57,9 @@ themesList.tokyonight = {
       colors.comment = "#7983b1"
     end,
     on_highlights = function(hl, c)
+      hl.CopilotSuggestion = {
+        fg = "#55718e",
+      }
       -- NOTE: change unused variable color
       hl.DiagnosticUnnecessary = {
         fg = c.comment,
