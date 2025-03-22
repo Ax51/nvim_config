@@ -16,7 +16,7 @@ return {
 
     chat.setup({
       prompts = {
-        CommitMsg = {
+        Commit = {
           prompt =
           "Please provide me a list of at most 10 suggestions for commit message according to the currently staged changes.",
           system_prompt = prompts.COPILOT_BASE.system_prompt .. [[
