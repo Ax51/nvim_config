@@ -7,7 +7,7 @@ return {
   cmd = {
     "Copilot",
     "CopilotChat",
-    "CopilotChatPrompt",
+    "CopilotChatCommit",
   },
   build = "make tiktoken",
   config = function()
