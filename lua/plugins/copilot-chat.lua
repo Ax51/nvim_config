@@ -8,6 +8,9 @@ return {
     "Copilot",
     "CopilotChat",
     "CopilotChatCommit",
+    "CopilotChatAgents",
+    "CopilotChatModels",
+    "CopilotChatSave",
   },
   build = "make tiktoken",
   config = function()
