@@ -15,7 +15,7 @@ return {
               require("nvim-navbuddy").attach(client, bufnr)
             end
 
-            nmap("<leader>a", ":RustLsp codeAction<CR>")
+            nmap("<leader>la", ":RustLsp codeAction<CR>")
             nmap("<leader>k", ":RustLsp openDocs<CR>")
           end,
         },

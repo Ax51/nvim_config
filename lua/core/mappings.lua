@@ -166,4 +166,5 @@ remap("QQ", function()
 end, "t")
 
 -- Copilot
-nmap("<leader>cc", ":CopilotChat<CR>")
+nmap("<leader>a", ":CopilotChat<CR>")
+nmap("<leader>ac", ":CopilotChatCommit<CR>")
