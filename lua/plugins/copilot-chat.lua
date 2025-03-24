@@ -12,7 +12,7 @@ return {
     "CopilotChatModels",
     "CopilotChatSave",
   },
-  build = "make tiktoken",
+
   config = function()
     local chat = require("CopilotChat");
     local prompts = require("CopilotChat.config.prompts");
