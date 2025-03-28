@@ -19,6 +19,12 @@ return {
     local prompts = require("CopilotChat.config.prompts");
 
     chat.setup({
+      mappings = {
+        reset = {
+          normal = '<C-k>',
+          insert = '<C-k>',
+        },
+      },
       prompts = {
         Commit = {
           prompt =
