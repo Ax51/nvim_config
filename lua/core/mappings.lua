@@ -172,3 +172,8 @@ nmap("<leader>ac", ":CopilotChatCommit<CR>")
 nmap("<leader>ag", ":CopilotChatAgents<CR>")
 nmap("<leader>am", ":CopilotChatModels<CR>")
 nmap("<leader>as", ":CopilotChatSave<CR>")
+
+-- Dev notes
+nmap("<leader>n", function()
+  require('utils.open_branch_notes').open_branch_notes()
+end)
