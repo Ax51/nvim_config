@@ -167,6 +167,7 @@ end, "t")
 
 -- Copilot
 nmap("<leader>aa", ":CopilotChat<CR>")
+nmap("<leader>at", ":CopilotChatTests<CR>")
 nmap("<leader>ac", ":CopilotChatCommit<CR>")
 nmap("<leader>ag", ":CopilotChatAgents<CR>")
 nmap("<leader>am", ":CopilotChatModels<CR>")

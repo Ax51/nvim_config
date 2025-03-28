@@ -10,6 +10,7 @@ return {
     "CopilotChatCommit",
     "CopilotChatAgents",
     "CopilotChatModels",
+    "CopilotChatTests",
     "CopilotChatSave",
   },
 
