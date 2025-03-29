@@ -1,3 +1,4 @@
+-- DELETE: candidate
 return {
   "SmiteshP/nvim-navbuddy",
   dependencies = {
