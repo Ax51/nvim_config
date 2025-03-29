@@ -31,5 +31,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-vim.lsp.enable({ "luals" })
+vim.lsp.enable({ "luals", "tsls" })
 vim.diagnostic.config({ virtual_text = true })
