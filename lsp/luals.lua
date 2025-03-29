@@ -1,3 +1,9 @@
+local lazypath = vim.fn.stdpath("data") .. "/lazy"
+
+local library_paths = vim.api.nvim_get_runtime_file("", true)
+table.insert(library_paths, vim.fn.stdpath("config"))
+table.insert(library_paths, lazypath)
+
 return {
   name = "lua-language-server",
   cmd = { "lua-language-server" },
@@ -9,7 +15,7 @@ return {
       diagnostics = { globals = { "vim" } },
       workspace = {
         checkThirdParty = false,
-        library = vim.api.nvim_get_runtime_file("", true),
+        library = library_paths,
       },
     },
   },
