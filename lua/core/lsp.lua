@@ -6,14 +6,6 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
-vim.lsp.config("*", {
-  on_attach = function(client, bufnr)
-    if client.server_capabilities.documentSymbolProvider then
-      require("nvim-navic").attach(client, bufnr)
-    end
-  end,
-});
-
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('my.lsp', {}),
   callback = function(args)

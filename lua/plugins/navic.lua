@@ -3,7 +3,9 @@ return {
   event = { "BufReadPost", "BufNewFile" },
 
   config = function()
-    require("nvim-navic").setup({
+    local navic = require("nvim-navic")
+
+    navic.setup({
       icons = {
         File = " ",
         Module = " ",
@@ -34,5 +36,13 @@ return {
       },
       highlight = true,
     })
+
+    vim.lsp.config("*", {
+      on_attach = function(client, bufnr)
+        if client.server_capabilities.documentSymbolProvider then
+          navic.attach(client, bufnr)
+        end
+      end,
+    });
   end,
 }
