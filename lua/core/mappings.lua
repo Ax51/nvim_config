@@ -127,9 +127,6 @@ remap("<leader>C", require("utils.copy_and_comment"), "v")
 nmap("<Tab>", ":BufferLineCycleNext<CR>")
 nmap("<s-Tab>", ":BufferLineCyclePrev<CR>")
 
--- Navbuddy
-nmap("<leader>fv", ":Navbuddy<CR>")
-
 -- Tests
 nmap("<leader>tt", ":Neotest run<CR>")
 nmap("<leader>tS", ":Neotest stop<CR>")
