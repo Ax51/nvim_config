@@ -23,8 +23,6 @@ return {
 
         null_ls.builtins.formatting.buf,
 
-        null_ls.builtins.formatting.biome.with({ condition = check_for_biome }),
-
         null_ls.builtins.formatting.shfmt,
       },
 
