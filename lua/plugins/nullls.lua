@@ -6,7 +6,7 @@ return {
   -- enabled = false,
 
   config = function()
-    local check_for_biome, check_for_eslint = unpack(require("utils.null_ls_checks"))
+    local check_for_eslint = require("utils.null_ls_checks").check_for_eslint
 
     local null_ls = require("null-ls")
 
