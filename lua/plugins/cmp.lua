@@ -1,7 +1,6 @@
 return {
   "hrsh7th/nvim-cmp",
   dependencies = {
-    "neovim/nvim-lspconfig",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
@@ -13,6 +12,8 @@ return {
     "saadparwaiz1/cmp_luasnip",
   },
   event = "InsertEnter",
+
+  cond = true,
 
   -- TODO: check and validate this config
   config = function()

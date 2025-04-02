@@ -14,6 +14,6 @@ return function()
     end
   end
 
-  local params = vim.lsp.util.make_position_params()
+  local params = vim.lsp.util.make_position_params(0, "utf-8")
   vim.lsp.buf_request(0, 'textDocument/definition', params, handle_definition)
 end

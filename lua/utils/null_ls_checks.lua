@@ -1,12 +1,11 @@
-local function check_for_biome(utils)
+local M = {}
+
+M.check_for_biome = function(utils)
   return utils.root_has_file("biome.json")
 end
 
-local function check_for_eslint(utils)
-  return not check_for_biome(utils)
+M.check_for_eslint = function(utils)
+  return not M.check_for_biome(utils)
 end
 
-return {
-  check_for_biome,
-  check_for_eslint,
-}
+return M
