@@ -71,6 +71,12 @@ themesList.tokyonight = {
         fg = c.comment,
       }
       hl.VisimatchOthers = { bg = "#293350" }
+      hl["@markup.italic"] = {
+        fg = "#e0af68",
+      }
+      hl["@markup.strong"] = {
+        fg = "#e37933"
+      }
     end,
   },
 
