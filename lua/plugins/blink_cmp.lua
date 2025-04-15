@@ -1,7 +1,8 @@
 return {
   'saghen/blink.cmp',
-  -- optional: provides snippets for the snippet source
-  -- dependencies = { 'rafamadriz/friendly-snippets' },
+  dependencies = {
+    "L3MON4D3/LuaSnip",
+  },
 
   event = "InsertEnter",
 
@@ -31,9 +32,17 @@ return {
     -- See :h blink-cmp-config-keymap for defining your own keymap
     keymap = {
       preset = 'default',
-      -- ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+      ['<Tab>'] = {
+        function(cmp)
+          if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then return cmp.accept() end
+        end,
+        'show_and_insert',
+        'select_next',
+      },
+      ['<S-Tab>'] = { 'show_and_insert', 'select_prev' }, -- ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+      ['<CR>'] = { 'select_and_accept', "fallback" },
+
       -- ['<C-x>'] = { 'hide' },
-      -- ['<CR>'] = { 'select_and_accept', "fallback" },
       --
       -- ['<Tab>'] = {
       --   function(cmp)
@@ -90,6 +99,8 @@ return {
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
+
+    snippets = { preset = 'luasnip' },
 
     -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
     -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
