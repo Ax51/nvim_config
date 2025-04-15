@@ -26,6 +26,10 @@ return {
           insert = '<C-k>',
         },
       },
+      selection = function(source)
+        local select = require("CopilotChat.select")
+        return select.visual(source) or select.buffer(source)
+      end,
       prompts = {
         Commit = {
           prompt =
