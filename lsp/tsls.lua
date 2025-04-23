@@ -9,7 +9,8 @@ return {
     'typescriptreact',
     'typescript.tsx',
   },
-  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+  -- NOTE: `root_dir` declaration is moved to a lsp config
+  -- since `tsls` could possibly conflicts with `denols`
   on_init = function(client)
     -- NOTE: Disable formatting capability
     client.server_capabilities.documentFormattingProvider = false
