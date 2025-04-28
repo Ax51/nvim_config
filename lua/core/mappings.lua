@@ -28,7 +28,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     nmap("gD", vim.lsp.buf.declaration, opts)
     nmap("K", function()
       local filename = vim.fn.expand("%:t")
-      print(filename)
       if filename == "Cargo.toml" then
         require("crates").show_popup()
       else
