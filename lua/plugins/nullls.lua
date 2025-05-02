@@ -5,16 +5,23 @@ return {
 
   config = function()
     local check_for_eslint = require("utils.null_ls_checks").check_for_eslint
+    local check_for_eslint_flat_config = require("utils.null_ls_checks").check_for_eslint_flat_config
 
     local null_ls = require("null-ls")
 
+    local eslint_d_config = { condition = check_for_eslint }
+
+    if check_for_eslint_flat_config() == true then
+      eslint_d_config.extra_args = { "--no-warn-ignored" }
+    end;
+
     null_ls.setup({
       sources = {
-        require("none-ls.code_actions.eslint_d").with({ condition = check_for_eslint }),
+        require("none-ls.code_actions.eslint_d").with(eslint_d_config),
 
-        require("none-ls.diagnostics.eslint_d").with({ condition = check_for_eslint }),
+        require("none-ls.diagnostics.eslint_d").with(eslint_d_config),
 
-        require("none-ls.formatting.eslint_d").with({ condition = check_for_eslint }),
+        require("none-ls.formatting.eslint_d").with(eslint_d_config),
 
         -- NOTE: temporary disabled since auto formatting causes a lot of changes
         -- null_ls.builtins.diagnostics.buf,
