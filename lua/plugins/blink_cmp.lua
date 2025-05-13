@@ -4,7 +4,7 @@ return {
     "L3MON4D3/LuaSnip",
   },
 
-  event = "InsertEnter",
+  event = { "InsertEnter", "CmdlineEnter" },
 
   cond = false, -- TODO: finish this config
 
