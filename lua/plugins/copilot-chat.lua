@@ -19,7 +19,7 @@ return {
     local prompts = require("CopilotChat.config.prompts");
 
     chat.setup({
-      model = "claude-3.7-sonnet",
+      model = "gpt-4.1",
       mappings = {
         reset = {
           normal = '<C-k>',
