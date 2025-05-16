@@ -18,6 +18,7 @@ return {
         -- TODO = { icon = " ", color = "info" },
         UNREACHABLE = { icon = " ", color = "info" },
         TODO = { icon = " ", color = "info" },
+        UNIMPLEMENTED = { icon = " ", color = "error" },
         DELETE = { icon = " ", color = "error", alt = { "REMOVE", "JUNK", "DEL", "DANGER" } },
         HACK = { icon = " ", color = "warning" },
         WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX", "CHECK" } },
