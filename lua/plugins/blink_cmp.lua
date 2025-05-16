@@ -6,7 +6,7 @@ return {
 
   event = { "InsertEnter", "CmdlineEnter" },
 
-  cond = false, -- TODO: finish this config
+  cond = true, -- TODO: finish this config
 
   -- use a release tag to download pre-built binaries
   version = '1.*',

@@ -13,7 +13,7 @@ return {
   },
   event = "InsertEnter",
 
-  cond = true,
+  cond = false,
 
   -- TODO: check and validate this config
   config = function()
