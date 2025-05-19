@@ -3,12 +3,6 @@ local remapUtils = require("utils.keymappings")
 local nmap = remapUtils.nmap;
 local remap = remapUtils.remap;
 
--- NeoTree
--- NOTE: replaced `>e` with `>y` to adapt to using yazi with old keybindings
-nmap("<leader>y", ":Neotree toggle position=float reveal<CR>")
-nmap("<leader>E", ":Neotree right reveal<CR>")
-nmap("<leader>b", ":Neotree toggle left buffers<CR>")
-
 -- LSP
 nmap("<leader>ld", vim.diagnostic.open_float)
 nmap("[D", function() vim.diagnostic.jump({ count = -1, float = true }) end)
