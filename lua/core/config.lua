@@ -41,6 +41,8 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.bo.softtabstop = 2
 vim.opt.smartindent = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- Fillchars
 vim.opt.fillchars = {
@@ -56,8 +58,6 @@ vim.opt.fillchars = {
 
 -- Colors
 vim.opt.termguicolors = true
-
-vim.cmd([[set ignorecase smartcase]])
 
 -- NOTE: add luarocks path
 package.cpath = package.cpath .. ';' .. os.getenv("HOME") .. '/.luarocks/lib/lua/5.1/?.so'
