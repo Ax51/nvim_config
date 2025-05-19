@@ -58,8 +58,6 @@ vim.opt.fillchars = {
 vim.opt.termguicolors = true
 
 vim.cmd([[set ignorecase smartcase]])
-vim.cmd([[highlight clear LineNr]])
-vim.cmd([[highlight clear SignColumn]])
 
 -- NOTE: add luarocks path
 package.cpath = package.cpath .. ';' .. os.getenv("HOME") .. '/.luarocks/lib/lua/5.1/?.so'

@@ -18,9 +18,6 @@ if not installed then
   return
 end
 
-local theme = { name = "tokyonight", mode = "day" }
-local getThemesTable, favoriteThemes = unpack(require("themes"))
-
 local lazyOpts = {
   checker = {
     check_pinned = true,
@@ -35,9 +32,7 @@ local lazyOpts = {
 }
 
 lazy.setup({
+  -- NOTE: important to call theme first
+  { import = "themes/tokyonight" },
   { import = "plugins" },
-  getThemesTable(theme.name),
 }, lazyOpts)
-
--- TODO: move this somewhere else
-vim.cmd.colorscheme(favoriteThemes[theme.name][theme.mode])
