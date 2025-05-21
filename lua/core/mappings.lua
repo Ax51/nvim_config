@@ -108,6 +108,7 @@ end)
 nmap("<leader>X", ":BufferLinePickClose<CR>")
 nmap("<leader>h", ":nohlsearch<CR>")
 nmap("<leader>rj", ":!bun %<CR>")
+nmap("<leader>rd", ":!deno --allow-env --env=./supabase/.env --allow-net %<CR>")
 -- NOTE: run entire paragraph as a script
 nmap("<leader>rs", require("utils.execute_shell_block").execute_code_block)
 remap("jj", "<Esc>", "i")
