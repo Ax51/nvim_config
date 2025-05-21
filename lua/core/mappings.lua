@@ -3,12 +3,6 @@ local remapUtils = require("utils.keymappings")
 local nmap = remapUtils.nmap;
 local remap = remapUtils.remap;
 
--- NeoTree
--- NOTE: replaced `>e` with `>y` to adapt to using yazi with old keybindings
-nmap("<leader>y", ":Neotree toggle position=float reveal<CR>")
-nmap("<leader>E", ":Neotree right reveal<CR>")
-nmap("<leader>b", ":Neotree toggle left buffers<CR>")
-
 -- LSP
 nmap("<leader>ld", vim.diagnostic.open_float)
 nmap("[D", function() vim.diagnostic.jump({ count = -1, float = true }) end)
@@ -114,10 +108,9 @@ end)
 nmap("<leader>X", ":BufferLinePickClose<CR>")
 nmap("<leader>h", ":nohlsearch<CR>")
 nmap("<leader>rj", ":!bun %<CR>")
+nmap("<leader>rd", ":!deno --allow-env --env=./supabase/.env --allow-net %<CR>")
 -- NOTE: run entire paragraph as a script
-nmap("<leader>rs", function()
-  require("utils.execute_shell_block").execute_code_block()
-end)
+nmap("<leader>rs", require("utils.execute_shell_block").execute_code_block)
 remap("jj", "<Esc>", "i")
 remap("<leader>c", ":'<,'>t'><CR>", "v") -- NOTE: copy selected lines and paste them below
 remap("<leader>C", require("utils.copy_and_comment"), "v")
@@ -140,14 +133,10 @@ nmap("<leader>t]", ":Neotest jump next<CR>")
 nmap("<leader>M", ":HopChar1<CR>")
 nmap("<leader>m", ":HopWord<CR>")
 remap("<c-m>", "<c-\\><c-o>:HopWord<CR>", { "i" })
-remap("<c-m>", function()
-  require("hop").hint_words()
-end, { "v" })
+remap("<c-m>", require("hop").hint_words, { "v" })
 
 -- Zen Mode
-nmap("<leader>zz", function()
-  vim.cmd("ZenMode")
-end)
+nmap("<leader>zz", ":ZenMode<CR>")
 
 -- Twilight
 nmap("<leader>zt", ":Twilight<CR>")
@@ -170,6 +159,4 @@ nmap("<leader>am", ":CopilotChatModels<CR>")
 nmap("<leader>as", ":CopilotChatSave<CR>")
 
 -- Dev notes
-nmap("<leader>n", function()
-  require('utils.open_branch_notes').open_branch_notes()
-end)
+nmap("<leader>n", require('utils.open_branch_notes').open_branch_notes)
