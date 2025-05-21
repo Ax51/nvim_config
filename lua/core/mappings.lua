@@ -133,7 +133,9 @@ nmap("<leader>t]", ":Neotest jump next<CR>")
 nmap("<leader>M", ":HopChar1<CR>")
 nmap("<leader>m", ":HopWord<CR>")
 remap("<c-m>", "<c-\\><c-o>:HopWord<CR>", { "i" })
-remap("<c-m>", require("hop").hint_words, { "v" })
+remap("<c-m>", function()
+  require("hop").hint_words()
+end, { "v" })
 
 -- Zen Mode
 nmap("<leader>zz", ":ZenMode<CR>")
