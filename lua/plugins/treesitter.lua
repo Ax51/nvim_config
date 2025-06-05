@@ -22,6 +22,7 @@ return {
         "yaml",
         "json",
         "jsonc",
+        "copilot-chat",
       },
       callback = function()
         -- NOTE: syntax highlighting, provided by Neovim
