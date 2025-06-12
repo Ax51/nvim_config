@@ -23,6 +23,7 @@ return {
         "json",
         "jsonc",
         "copilot-chat",
+        "proto",
       },
       callback = function()
         -- NOTE: syntax highlighting, provided by Neovim
