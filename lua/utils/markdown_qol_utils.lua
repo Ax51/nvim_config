@@ -49,4 +49,23 @@ function M.new_list_line_above()
   new_list_line(false)
 end
 
+function M.allow_to_open_local_files()
+  local default_ui_open = vim.ui.open
+
+  ---@diagnostic disable-next-line: duplicate-set-field
+  vim.ui.open = function(path, opts)
+    local buf_path = vim.api.nvim_buf_get_name(0)
+    local buf_dir = vim.fn.fnamemodify(buf_path, ":p:h")
+    local full_path = vim.fn.resolve(buf_dir .. "/" .. path)
+
+    if vim.fn.filereadable(full_path) == 1 then
+      -- It's a local file, open in buffer
+      vim.cmd("edit " .. vim.fn.fnameescape(full_path))
+    else
+      -- Fallback to system open (e.g. for URLs)
+      default_ui_open(path, opts)
+    end
+  end
+end
+
 return M;
