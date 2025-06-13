@@ -41,7 +41,7 @@ local function new_list_line(below)
   vim.cmd("startinsert!")
 end
 
-local function open_if_readable(full_path)
+local function open_file_if_readable(full_path)
   if vim.fn.filereadable(full_path) == 1 then
     vim.cmd("edit " .. vim.fn.fnameescape(full_path))
     return true
@@ -49,35 +49,49 @@ local function open_if_readable(full_path)
   return false
 end
 
+local not_a_path_err_code = "Not a path"
+
+local function file_open(path)
+  local first_char = path:sub(1, 1)
+  local md_root_markers = { ".git", ".marksman.toml" }
+
+  if first_char == "." then
+    local buf_path = vim.api.nvim_buf_get_name(0)
+    local buf_dir = vim.fn.fnamemodify(buf_path, ":p:h")
+    local full_path = vim.fn.resolve(buf_dir .. "/" .. path)
+    if not open_file_if_readable(full_path) then
+      error("Relative file not found: " .. path, 0)
+    end
+  elseif first_char == "/" then
+    local buf_path = vim.api.nvim_buf_get_name(0)
+    local root = vim.fs.root(buf_path, md_root_markers)
+    if root then
+      local full_path = vim.fn.resolve(root .. path)
+      if not open_file_if_readable(full_path) then
+        error("Absolute file not found: " .. path, 0)
+      end
+    else
+      error("No root found for absolute path: " .. path, 0)
+    end
+  else
+    error(not_a_path_err_code, 0)
+  end
+end
 
 local function allow_to_open_local_files()
   local default_ui_open = vim.ui.open
-  local md_root_markers = { ".git", ".marksman.toml" }
 
   ---@diagnostic disable-next-line: duplicate-set-field
   vim.ui.open = function(path, opts)
-    local first_char = path:sub(1, 1)
+    local success, result = pcall(file_open, path)
 
-    if first_char == "." then
-      local buf_path = vim.api.nvim_buf_get_name(0)
-      local buf_dir = vim.fn.fnamemodify(buf_path, ":p:h")
-      local full_path = vim.fn.resolve(buf_dir .. "/" .. path)
-      if not open_if_readable(full_path) then
-        return default_ui_open(path, opts)
+    if not success then
+      if result ~= not_a_path_err_code then
+        -- NOTE: If the error is not about the path, notify the user
+        vim.notify(result, vim.log.levels.ERROR, { title = "Error opening file" })
       end
-    elseif first_char == "/" then
-      local buf_path = vim.api.nvim_buf_get_name(0)
-      local root = vim.fs.root(buf_path, md_root_markers)
-      if root then
-        local full_path = vim.fn.resolve(root .. path)
-        if not open_if_readable(full_path) then
-          return default_ui_open(path, opts)
-        end
-      else
-        return default_ui_open(path, opts)
-      end
-    else
-      return default_ui_open(path, opts)
+
+      default_ui_open(path, opts)
     end
   end
 end
