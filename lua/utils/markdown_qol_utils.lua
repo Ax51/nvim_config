@@ -63,7 +63,7 @@ function M.allow_to_open_local_files()
       vim.cmd("edit " .. vim.fn.fnameescape(full_path))
     else
       -- Fallback to system open (e.g. for URLs)
-      default_ui_open(path, opts)
+      return default_ui_open(path, opts)
     end
   end
 end
