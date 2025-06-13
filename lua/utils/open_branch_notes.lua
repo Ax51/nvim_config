@@ -22,7 +22,6 @@ M.open_branch_notes = function()
   print("Opening notes for [ " .. branch_name .. " ] branch.")
 
   vim.cmd(string.format("edit %s", file_path))
-  vim.bo.textwidth = 120
 end
 
 return M

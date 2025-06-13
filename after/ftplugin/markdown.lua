@@ -1,4 +1,5 @@
 vim.opt_local.wrap = true
+vim.bo.textwidth = 120
 
 local md_utils = require("utils.markdown_qol_utils")
 
