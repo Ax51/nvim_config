@@ -19,7 +19,6 @@ return {
         "sh",
         "markdown",
         "mdx",
-        "yaml",
         "json",
         "jsonc",
         "copilot-chat",
