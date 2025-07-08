@@ -56,6 +56,7 @@ nmap("<leader>fB", ":FzfLua buffers<CR>")
 
 -- Yazi
 nmap("<leader>e", ":Yazi<CR>")
+nmap("<leader>E", ":Yazi toggle<CR>")
 
 -- NOTE: experiment that requires a lot of improvements
 nmap('<leader>fu', require("utils.fzf_lua_new_comments"))
