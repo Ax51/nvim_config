@@ -46,7 +46,7 @@ Commit must starts with one of the following key words:
 -perf
 -test
 after key word please paste `:` that will indicate the start of the commit message.]],
-          context = "git:staged",
+          sticky = "#gitdiff:staged",
           description = "List of 10 commit messages for staged changes",
         }
       },
