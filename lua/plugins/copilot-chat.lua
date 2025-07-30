@@ -1,7 +1,6 @@
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
   dependencies = {
-    "zbirenbaum/copilot.lua",
     "nvim-lua/plenary.nvim",
   },
   cmd = {
@@ -13,6 +12,7 @@ return {
     "CopilotChatTests",
     "CopilotChatSave",
   },
+  build = "make tiktoken",
 
   config = function()
     local chat = require("CopilotChat");
