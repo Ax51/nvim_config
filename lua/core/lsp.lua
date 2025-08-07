@@ -69,5 +69,6 @@ vim.lsp.enable({
   "taplo",
   "bashls",
   "marksman",
+  "jsonls",
 })
 vim.diagnostic.config({ virtual_text = true })
