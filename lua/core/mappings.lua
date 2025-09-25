@@ -41,7 +41,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     nmap("<leader>D", vim.lsp.buf.type_definition, opts)
     remap("<leader>la", vim.lsp.buf.code_action, { "n", "v" }, opts)
     nmap("<leader>lf", function()
-      require("conform").format({ bufnr = ev.buf, async = true })
+      local null_ls_migration_finished = require("constants").null_ls_migration_finished
+
+      if null_ls_migration_finished then
+        require("conform").format({ bufnr = ev.buf, async = true })
+      else
+        vim.lsp.buf.format({ async = true })
+      end
     end, opts)
   end,
 })

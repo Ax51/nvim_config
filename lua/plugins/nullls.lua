@@ -3,7 +3,7 @@ return {
   dependencies = { "nvimtools/none-ls-extras.nvim" },
   event = { "BufReadPre", "BufNewFile" },
 
-  enabled = false,
+  enabled = require("constants").null_ls_migration_finished == false,
 
   config = function()
     local check_for_eslint = require("utils.null_ls_checks").check_for_eslint
@@ -28,6 +28,7 @@ return {
         -- NOTE: temporary disabled since auto formatting causes a lot of changes
         -- null_ls.builtins.diagnostics.buf,
 
+        null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.buf,
 
         null_ls.builtins.formatting.shfmt,

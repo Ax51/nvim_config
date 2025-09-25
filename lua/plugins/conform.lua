@@ -9,6 +9,8 @@ end
 return {
   "stevearc/conform.nvim",
 
+  enabled = require("constants").null_ls_migration_finished == true,
+
   event = { "BufReadPre", "BufNewFile" },
 
   opts = {
