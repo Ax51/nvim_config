@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     nmap("<leader>D", vim.lsp.buf.type_definition, opts)
     remap("<leader>la", vim.lsp.buf.code_action, { "n", "v" }, opts)
     nmap("<leader>lf", function()
-      vim.lsp.buf.format({ async = true })
+      require("conform").format({ bufnr = ev.buf, async = true })
     end, opts)
   end,
 })

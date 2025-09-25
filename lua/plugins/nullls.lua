@@ -3,6 +3,8 @@ return {
   dependencies = { "nvimtools/none-ls-extras.nvim" },
   event = { "BufReadPre", "BufNewFile" },
 
+  enabled = false,
+
   config = function()
     local check_for_eslint = require("utils.null_ls_checks").check_for_eslint
     local check_for_eslint_flat_config = require("utils.null_ls_checks").check_for_eslint_flat_config
