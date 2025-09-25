@@ -21,13 +21,13 @@ local function git_diff_fzf_lua()
   local files = vim.split(result, "\n")
   table.remove(files, #files) -- Remove the last empty entry
 
-  require('fzf-lua').fzf_exec(files, {
-    prompt = 'Select file with TODO: ',
+  require("fzf-lua").fzf_exec(files, {
+    prompt = "Select file with TODO: ",
     actions = {
-      ['default'] = function(selected)
+      ["default"] = function(selected)
         vim.cmd("edit " .. selected[1])
-      end
-    }
+      end,
+    },
   })
 end
 
@@ -40,12 +40,12 @@ local function check_for_console_command_existence(command)
 
   if not result then
     print("Unable to check util [ " .. command .. " ] existence")
-    return false;
+    return false
   end
 
   -- NOTE: already checked for handle in result
   ---@diagnostic disable-next-line: need-check-nil
-  handle:close();
+  handle:close()
 
   return result:len() > 0 and true or false
 end
@@ -53,12 +53,12 @@ end
 local function git_diff_fzf_lua_2()
   if not check_for_console_command_existence("git") then
     print("Please install [ git ] before")
-    return;
+    return
   end
 
   if not check_for_console_command_existence("rg") then
     print("Please install [ git ] before")
-    return;
+    return
   end
 
   ---@type string
@@ -69,11 +69,11 @@ local function git_diff_fzf_lua_2()
   local target_keywords_table = { "TODO", "FIXIT", "DELETE" }
 
   ---@type string
-  local command = "git diff " ..
-      base_branch ..
-      " --unified=0 --output-indicator-new=' ' | rg --no-heading --trim -o -A 1 '^[^-].*(" ..
-      table.concat(target_keywords_table, "|") ..
-      "):.*'"
+  local command = "git diff "
+    .. base_branch
+    .. " --unified=0 --output-indicator-new=' ' | rg --no-heading --trim -o -A 1 '^[^-].*("
+    .. table.concat(target_keywords_table, "|")
+    .. "):.*'"
 
   local handle = io.popen(command)
 

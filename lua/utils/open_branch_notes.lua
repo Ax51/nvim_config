@@ -15,10 +15,9 @@ M.open_branch_notes = function()
 
   local desired_path = string.format(M.config.base_folder_path .. "/%s", branch_name)
 
-  local file_path =
-      vim.fn.isdirectory(desired_path) == 1
+  local file_path = vim.fn.isdirectory(desired_path) == 1
       and string.format(desired_path .. "/%s", M.config.folder_structure_base_file_name)
-      or desired_path .. ".md";
+    or desired_path .. ".md"
 
   if vim.fn.filereadable(file_path) ~= 1 then
     vim.fn.mkdir(M.config.base_folder_path, "p")

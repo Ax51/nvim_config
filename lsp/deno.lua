@@ -35,17 +35,16 @@ vim.api.nvim_create_autocmd({ "BufReadCmd" }, {
   callback = virtual_text_document,
 })
 
-
 return {
-  cmd = { 'deno', 'lsp' },
+  cmd = { "deno", "lsp" },
   cmd_env = { NO_COLOR = true },
   filetypes = {
-    'javascript',
-    'javascriptreact',
-    'javascript.jsx',
-    'typescript',
-    'typescriptreact',
-    'typescript.tsx',
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
   },
   -- NOTE: `root_dir` declaration is moved to a lsp config
   -- since `denols` could possibly conflicts with `tsls`
@@ -55,25 +54,25 @@ return {
       suggest = {
         imports = {
           hosts = {
-            ['https://deno.land'] = true,
+            ["https://deno.land"] = true,
           },
         },
       },
     },
   },
   on_attach = function(client, bufnr)
-    vim.api.nvim_buf_create_user_command(0, 'LspDenolsCache', function()
+    vim.api.nvim_buf_create_user_command(0, "LspDenolsCache", function()
       client:exec_cmd({
-        command = 'deno.cache',
+        command = "deno.cache",
         arguments = { {}, vim.uri_from_bufnr(bufnr) },
       }, { bufnr = bufnr }, function(err, _result, ctx)
         if err then
           local uri = ctx.params.arguments[2]
-          vim.api.nvim_err_writeln('cache command failed for ' .. vim.uri_to_fname(uri))
+          vim.api.nvim_err_writeln("cache command failed for " .. vim.uri_to_fname(uri))
         end
       end)
     end, {
-      desc = 'Cache a module and all of its dependencies.',
+      desc = "Cache a module and all of its dependencies.",
     })
   end,
 }

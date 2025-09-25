@@ -1,13 +1,13 @@
 return {
-  init_options = { hostInfo = 'neovim' },
-  cmd = { 'typescript-language-server', '--stdio' },
+  init_options = { hostInfo = "neovim" },
+  cmd = { "typescript-language-server", "--stdio" },
   filetypes = {
-    'javascript',
-    'javascriptreact',
-    'javascript.jsx',
-    'typescript',
-    'typescriptreact',
-    'typescript.tsx',
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
   },
   -- NOTE: `root_dir` declaration is moved to a lsp config
   -- since `tsls` could possibly conflicts with `denols`

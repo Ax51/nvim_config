@@ -10,10 +10,10 @@ return function()
       vim.lsp.buf.definition()
     else
       -- NOTE: Multiple definitions found
-      require('fzf-lua').lsp_definitions()
+      require("fzf-lua").lsp_definitions()
     end
   end
 
   local params = vim.lsp.util.make_position_params(0, "utf-8")
-  vim.lsp.buf_request(0, 'textDocument/definition', params, handle_definition)
+  vim.lsp.buf_request(0, "textDocument/definition", params, handle_definition)
 end

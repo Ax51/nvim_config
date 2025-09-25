@@ -15,15 +15,15 @@ return {
   build = "make tiktoken",
 
   config = function()
-    local chat = require("CopilotChat");
-    local prompts = require("CopilotChat.config.prompts");
+    local chat = require("CopilotChat")
+    local prompts = require("CopilotChat.config.prompts")
 
     chat.setup({
       model = "gpt-4.1",
       mappings = {
         reset = {
-          normal = '<C-k>',
-          insert = '<C-k>',
+          normal = "<C-k>",
+          insert = "<C-k>",
         },
       },
       selection = function(source)
@@ -32,8 +32,7 @@ return {
       end,
       prompts = {
         Commit = {
-          prompt =
-          "Please provide me a list of at most 10 suggestions for commit message according to the currently staged changes.",
+          prompt = "Please provide me a list of at most 10 suggestions for commit message according to the currently staged changes.",
           system_prompt = prompts.COPILOT_BASE.system_prompt .. [[
 The commit message must be prefixed with `!` since this is a trigger for my commit hook.
 Commit must starts with one of the following key words:
@@ -48,12 +47,11 @@ Commit must starts with one of the following key words:
 after key word please paste `:` that will indicate the start of the commit message.]],
           sticky = "#gitdiff:staged",
           description = "List of 10 commit messages for staged changes",
-        }
+        },
       },
       highlight_headers = false,
-      separator = '---',
-      error_header = '> [!ERROR] Error',
+      separator = "---",
+      error_header = "> [!ERROR] Error",
     })
-  end
-  ,
+  end,
 }

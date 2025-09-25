@@ -1,6 +1,6 @@
 local function config_ts_lsps()
-  local tss_root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' };
-  local deno_root_markers = { 'deno.json', 'deno.jsonc' };
+  local tss_root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
+  local deno_root_markers = { "deno.json", "deno.jsonc" }
 
   vim.lsp.config("deno", {
     root_dir = function(fname, cb)
@@ -10,7 +10,7 @@ local function config_ts_lsps()
       if deno_root ~= nil then
         cb(deno_root)
       end
-    end
+    end,
   })
 
   vim.lsp.config("tsls", {
@@ -22,7 +22,7 @@ local function config_ts_lsps()
         return
       end
 
-      local ts_root_path = vim.fs.root(fname, tss_root_markers);
+      local ts_root_path = vim.fs.root(fname, tss_root_markers)
 
       if ts_root_path ~= nil then
         cb(ts_root_path)
@@ -39,7 +39,7 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
-config_ts_lsps();
+config_ts_lsps()
 
 vim.lsp.enable({
   "luals",

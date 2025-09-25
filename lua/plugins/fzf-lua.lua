@@ -15,8 +15,8 @@ return {
         extensions = {
           ["png"] = { "viu", "-b" },
           ["jpg"] = { "viu", "-b" },
-        }
-      }
+        },
+      },
     },
-  }
+  },
 }

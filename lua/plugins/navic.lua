@@ -43,6 +43,6 @@ return {
           navic.attach(client, bufnr)
         end
       end,
-    });
+    })
   end,
 }

@@ -27,7 +27,7 @@ return {
         fg = "#e0af68",
       }
       hl["@markup.strong"] = {
-        fg = "#e37933"
+        fg = "#e37933",
       }
     end,
   },
@@ -35,5 +35,5 @@ return {
   init = function()
     -- NOTE: init that theme
     vim.cmd.colorscheme("tokyonight-storm")
-  end
+  end,
 }

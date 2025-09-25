@@ -1,14 +1,22 @@
 local remapUtils = require("utils.keymappings")
 
-local nmap = remapUtils.nmap;
-local remap = remapUtils.remap;
+local nmap = remapUtils.nmap
+local remap = remapUtils.remap
 
 -- LSP
 nmap("<leader>ld", vim.diagnostic.open_float)
-nmap("[D", function() vim.diagnostic.jump({ count = -1, float = true }) end)
-nmap("]D", function() vim.diagnostic.jump({ count = 1, float = true }) end)
-nmap("[d", function() vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.ERROR }) end)
-nmap("]d", function() vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.ERROR }) end)
+nmap("[D", function()
+  vim.diagnostic.jump({ count = -1, float = true })
+end)
+nmap("]D", function()
+  vim.diagnostic.jump({ count = 1, float = true })
+end)
+nmap("[d", function()
+  vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.ERROR })
+end)
+nmap("]d", function()
+  vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.ERROR })
+end)
 nmap("<leader>lD", vim.diagnostic.setloclist)
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -45,7 +53,7 @@ nmap("<leader>fd", ":FzfLua diagnostics_document<CR>")
 nmap("<leader>ff", ":FzfLua files<CR>")
 nmap("<leader>fw", ":FzfLua live_grep<CR>")
 nmap("<leader>fW", ":FzfLua grep_cword<CR>")
-nmap('gd', require("utils.open_fzf_or_go-to_def"))
+nmap("gd", require("utils.open_fzf_or_go-to_def"))
 nmap("gr", ":FzfLua lsp_references<CR>")
 nmap("<leader>fm", ":FzfLua marks<CR>")
 nmap("<leader>fp", require("utils.fzf_lua_persisted"))
@@ -59,7 +67,7 @@ nmap("<leader>e", ":Yazi<CR>")
 nmap("<leader>E", ":Yazi toggle<CR>")
 
 -- NOTE: experiment that requires a lot of improvements
-nmap('<leader>fu', require("utils.fzf_lua_new_comments"))
+nmap("<leader>fu", require("utils.fzf_lua_new_comments"))
 
 -- Git
 nmap("<leader>Gb", ":FzfLua git_branches<CR>")
@@ -162,4 +170,4 @@ nmap("<leader>am", ":CopilotChatModels<CR>")
 nmap("<leader>as", ":CopilotChatSave<CR>")
 
 -- Dev notes
-nmap("<leader>n", require('utils.open_branch_notes').open_branch_notes)
+nmap("<leader>n", require("utils.open_branch_notes").open_branch_notes)

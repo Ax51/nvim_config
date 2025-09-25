@@ -4,33 +4,31 @@ local root_markers = {
   ".git",
   "biome.json",
   "biome.jsonc",
-};
+}
 
 -- NOTE: Disable `biome` for projects that contains `eslint` config files
 return {
-  cmd = { 'biome', 'lsp-proxy' },
+  cmd = { "biome", "lsp-proxy" },
   filetypes = {
-    'astro',
-    'css',
-    'graphql',
-    'javascript',
-    'javascriptreact',
-    'json',
-    'jsonc',
-    'svelte',
-    'typescript',
-    'typescript.tsx',
-    'typescriptreact',
-    'vue',
+    "astro",
+    "css",
+    "graphql",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "jsonc",
+    "svelte",
+    "typescript",
+    "typescript.tsx",
+    "typescriptreact",
+    "vue",
   },
   root_markers = root_markers,
   root_dir = function(fname, cb)
-    local eslint_root_path = vim.fs.root(fname,
-      function(name)
-        -- NOTE: all possible eslint config files
-        return name:match('%.?eslint.?r?c?%.?[%a]*') ~= nil
-      end
-    )
+    local eslint_root_path = vim.fs.root(fname, function(name)
+      -- NOTE: all possible eslint config files
+      return name:match("%.?eslint.?r?c?%.?[%a]*") ~= nil
+    end)
 
     if eslint_root_path ~= nil then
       return

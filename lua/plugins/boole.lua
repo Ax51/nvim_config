@@ -12,9 +12,9 @@ return {
 
       -- User defined loops
       additions = {
-        { "private",     "protected", "public" },
-        { "let",         "const" },
-        { "type",        "interface" },
+        { "private", "protected", "public" },
+        { "let", "const" },
+        { "type", "interface" },
         { "toBeVisible", "toBeHidden" },
       },
       allow_caps_additions = {

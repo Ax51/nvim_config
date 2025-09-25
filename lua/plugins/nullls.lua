@@ -15,7 +15,7 @@ return {
 
     if check_for_eslint_flat_config() == true then
       eslint_d_config.extra_args = { "--no-warn-ignored" }
-    end;
+    end
 
     null_ls.setup({
       sources = {

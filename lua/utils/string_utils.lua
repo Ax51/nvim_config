@@ -1,4 +1,4 @@
-local M = {};
+local M = {}
 
 local function get_visual_selection_coordinates()
   local coordinates = {}
@@ -6,7 +6,7 @@ local function get_visual_selection_coordinates()
   coordinates.start_pos = vim.fn.getpos("v")
   coordinates.end_pos = vim.fn.getpos(".")
 
-  return coordinates;
+  return coordinates
 end
 
 function M.get_visual_selection()
@@ -51,7 +51,7 @@ function M.get_paragraph_under_cursor()
   local current_pos = vim.api.nvim_win_get_cursor(0)
 
   -- Execute the 'vip' command to select the paragraph
-  vim.cmd('normal! vip')
+  vim.cmd("normal! vip")
 
   -- Return to normal mode (and save visual selection coordinates)
   local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
@@ -67,4 +67,4 @@ function M.get_paragraph_under_cursor()
   return lines
 end
 
-return M;
+return M

@@ -1,4 +1,4 @@
-local M = {};
+local M = {}
 
 local str_utils = require("utils.string_utils")
 
@@ -19,13 +19,13 @@ function M.execute_code_block()
   local is_code_block = string.match(paragraph_lines[1], code_block_pattern)
       and string.match(paragraph_lines[#paragraph_lines], code_block_pattern)
       and true
-      or false;
+    or false
   local code_block_lang_specifier_pattern = "```(%w+)"
-  local visual_selection_lang = string.match(paragraph_lines[1], code_block_lang_specifier_pattern);
+  local visual_selection_lang = string.match(paragraph_lines[1], code_block_lang_specifier_pattern)
   ---@type string|nil
   local selected_lang = known_interpreters_lang_list[visual_selection_lang]
   ---@type string|nil
-  local code_runner = nil;
+  local code_runner = nil
 
   if is_code_block then
     -- NOTE: remove first and last line from the table (```)
@@ -43,9 +43,9 @@ function M.execute_code_block()
       code_runner = known_interpreters_lang_list[user_input]
     else
       -- NOTE: shortcut because of unknown language specified
-      vim.notify("Provided lang tag is unknown.", 2);
+      vim.notify("Provided lang tag is unknown.", 2)
 
-      return;
+      return
     end
   else
     -- TODO: add file recognition with `vim.fn.expand("%:e")`
@@ -58,4 +58,4 @@ function M.execute_code_block()
   vim.notify(exec_res)
 end
 
-return M;
+return M

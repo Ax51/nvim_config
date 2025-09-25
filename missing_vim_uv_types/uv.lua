@@ -92,8 +92,6 @@ local uv = {}
 
 ---@alias uv.aliases.threadargs userdata|string|number|boolean|nil # numbers of argument limited to 9.
 
-
-
 ---
 ---@section Contents
 ---
@@ -132,8 +130,6 @@ local uv = {}
 
 -- TODO: above section should probably not be hardcoded
 
-
-
 ---
 ---In libuv, errors are negative numbered constants; however, while those errors are exposed through `uv.errno`,
 ---the functions used to handle them are not exposed to luv users. Instead, if an
@@ -165,8 +161,6 @@ local uv = {}
 ---
 ---@type uv.errno
 uv.errno = {}
-
-
 
 ---
 ---@section Version Checking
@@ -419,8 +413,6 @@ function uv.req_get_type(req) end
 
 uv_req_t.get_type = uv.req_get_type
 
-
-
 ---
 ---`uv_handle_t` is the base type for all libuv handle types. All API functions
 ---defined here work with any handle type.
@@ -635,8 +627,6 @@ function uv.handle_get_type(handle) end
 
 uv_handle_t.get_type = uv.handle_get_type
 
-
-
 ---
 ---@section Reference counting
 ---
@@ -651,8 +641,6 @@ uv_handle_t.get_type = uv.handle_get_type
 ---All handles are referenced when active by default, see `uv.is_active()` for a
 ---more detailed explanation on what being active involves.
 ---
-
-
 
 ---
 ---Timer handles are used to schedule callbacks to be called in the future.
@@ -770,8 +758,6 @@ function uv.timer_get_due_in(timer) end
 
 uv_timer_t.get_due_in = uv.timer_get_due_in
 
-
-
 ---
 ---Prepare handles will run the given callback once per loop iteration, right
 ---before polling for I/O.
@@ -817,7 +803,6 @@ function uv.prepare_stop(prepare) end
 
 uv_prepare_t.stop = uv.prepare_stop
 
-
 ---
 ---Check handles will run the given callback once per loop iteration, right after
 ---polling for I/O.
@@ -861,8 +846,6 @@ uv_check_t.start = uv.check_start
 function uv.check_stop(check) end
 
 uv_check_t.stop = uv.check_stop
-
-
 
 ---
 ---Idle handles will run the given callback once per loop iteration, right before
@@ -914,8 +897,6 @@ uv_idle_t.start = uv.idle_start
 function uv.idle_stop(idle) end
 
 uv_idle_t.stop = uv.idle_stop
-
-
 
 ---
 ---Async handles allow the user to "wakeup" the event loop and get a callback
@@ -970,8 +951,6 @@ function uv.new_async(callback) end
 function uv.async_send(async, ...) end
 
 uv_async_t.send = uv.async_send
-
-
 
 ---
 ---Poll handles are used to watch file descriptors for readability and writability,
@@ -1070,8 +1049,6 @@ uv_poll_t.start = uv.poll_start
 function uv.poll_stop(poll) end
 
 uv_poll_t.stop = uv.poll_stop
-
-
 
 ---
 ---Signal handles implement Unix style signal handling on a per-event loop bases.
@@ -1202,8 +1179,6 @@ uv_signal_t.start_oneshot = uv.signal_start_oneshot
 function uv.signal_stop(signal) end
 
 uv_signal_t.stop = uv.signal_stop
-
-
 
 ---
 ---Process handles will spawn a new process and allow the user to control it and
@@ -1365,8 +1340,6 @@ function uv.kill(pid, signum) end
 function uv.process_get_pid(process) end
 
 uv_process_t.get_pid = uv.process_get_pid
-
-
 
 ---
 ---Stream handles provide an abstraction of a duplex communication channel.
@@ -1566,8 +1539,6 @@ uv_stream_t.set_blocking = uv.stream_set_blocking
 function uv.stream_get_write_queue_size() end
 
 uv_stream_t.get_write_queue_size = uv.stream_get_write_queue_size
-
-
 
 ---
 ---TCP handles are used to represent both TCP streams and servers.
@@ -2167,8 +2138,6 @@ function uv.pipe_connect2(pipe, name, flags, callback) end
 
 uv_pipe_t.connect2 = uv.pipe_connect2
 
-
-
 ---
 ---TTY handles represent a stream for the console.
 ---
@@ -2541,8 +2510,6 @@ function uv.udp_connect(udp, host, port) end
 
 uv_udp_t.connect = uv.udp_connect
 
-
-
 ---
 ---FS Event handles allow the user to monitor a given path for changes, for
 ---example, if the file was renamed or there was a generic change in it. This
@@ -2597,8 +2564,6 @@ function uv.fs_event_getpath() end
 
 uv_fs_event_t.getpath = uv.fs_event_getpath
 
-
-
 ---
 ---FS Poll handles allow the user to monitor a given path for changes. Unlike
 ---`uv_fs_event_t`, fs poll handles use `stat` to detect when a file has changed so
@@ -2650,8 +2615,6 @@ uv_fs_poll_t.stop = uv.fs_poll_stop
 function uv.fs_poll_getpath() end
 
 uv_fs_poll_t.getpath = uv.fs_poll_getpath
-
-
 
 ---
 ---@section File system operations
@@ -3646,8 +3609,6 @@ function uv.new_work(work_callback, after_work_callback) end
 function uv.queue_work(work_ctx, ...) end
 
 luv_work_ctx_t.queue = uv.queue_work
-
-
 
 ---
 ---@section DNS utility functions

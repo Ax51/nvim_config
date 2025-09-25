@@ -3,7 +3,7 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
     -- NOTE: shows the current Copilot connection status
-    'AndreM222/copilot-lualine',
+    "AndreM222/copilot-lualine",
   },
   event = { "BufReadPre", "BufNewFile" },
 

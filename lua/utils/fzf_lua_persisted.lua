@@ -1,6 +1,6 @@
 local function show_saved_sessions_in_fzf_lua()
-  local persisted = require('persisted')
-  local fzf_lua = require('fzf-lua')
+  local persisted = require("persisted")
+  local fzf_lua = require("fzf-lua")
 
   local sessions = persisted.list()
 
@@ -11,7 +11,7 @@ local function show_saved_sessions_in_fzf_lua()
 
   local function find_path_from_dir(selected_dir)
     for _, session in ipairs(sessions) do
-      if (session.dir_path == selected_dir) then
+      if session.dir_path == selected_dir then
         return session.file_path
       end
     end
@@ -19,9 +19,9 @@ local function show_saved_sessions_in_fzf_lua()
   end
 
   fzf_lua.fzf_exec(session_dirs, {
-    prompt = 'Saved sessions> ',
+    prompt = "Saved sessions> ",
     actions = {
-      ['default'] = function(selected)
+      ["default"] = function(selected)
         local found_save_file_path = find_path_from_dir(selected[1])
 
         if found_save_file_path then

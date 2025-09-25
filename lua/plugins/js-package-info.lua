@@ -1,7 +1,7 @@
 return {
   "vuki656/package-info.nvim",
   dependencies = {
-    "MunifTanjim/nui.nvim"
+    "MunifTanjim/nui.nvim",
   },
 
   -- NOTE: with lazy-loading somewhy badges colors are missing

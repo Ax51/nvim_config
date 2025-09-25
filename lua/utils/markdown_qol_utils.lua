@@ -1,10 +1,10 @@
-local M = {};
+local M = {}
 
 local function get_list_prefix(line)
   -- Matches "- [ ]", "* [ ]", "- [x]", etc.
   local prefix = line:match("^%s*([-%*]%s%[[ xX-]?%])")
   if prefix then
-    local filled_todo_pattern = "%[[x%-]%]";
+    local filled_todo_pattern = "%[[x%-]%]"
 
     if prefix:match(filled_todo_pattern) then
       -- NOTE: empty prefix for the new line
@@ -104,6 +104,6 @@ function M.new_list_line_above()
   new_list_line(false)
 end
 
-M.allow_to_open_local_files = allow_to_open_local_files;
+M.allow_to_open_local_files = allow_to_open_local_files
 
-return M;
+return M
