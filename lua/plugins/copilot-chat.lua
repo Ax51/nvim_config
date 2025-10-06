@@ -19,20 +19,16 @@ return {
     local prompts = require("CopilotChat.config.prompts")
 
     chat.setup({
-      model = "gpt-4.1",
       mappings = {
         reset = {
           normal = "<C-k>",
           insert = "<C-k>",
         },
       },
-      selection = function(source)
-        local select = require("CopilotChat.select")
-        return select.visual(source) or select.buffer(source)
-      end,
       prompts = {
         Commit = {
-          prompt = "Please provide me a list of at most 10 suggestions for commit message according to the currently staged changes.",
+          prompt =
+          "Please provide me a list of at most 10 suggestions for commit message according to the currently staged changes.",
           system_prompt = prompts.COPILOT_BASE.system_prompt .. [[
 The commit message must be prefixed with `!` since this is a trigger for my commit hook.
 Commit must starts with one of the following key words:
