@@ -1,11 +1,27 @@
 local M = {}
 
+local is_sidekick_plugin_loaded = false
+
+M.check_is_sidekick_plugin_loaded = function()
+  if is_sidekick_plugin_loaded == true then
+    return true
+  end
+
+  local is_plugin_loaded = require("utils.check_lazy_plugin_loaded").is_plugin_loaded("sidekick.nvim")
+
+  if is_plugin_loaded == true then
+    is_sidekick_plugin_loaded = true
+  end
+
+  return is_sidekick_plugin_loaded
+end
+
 M.copilot_status_line = {
   function()
     return " "
   end,
   color = function()
-    local is_plugin_loaded = require("utils.check_lazy_plugin_loaded").is_plugin_loaded("sidekick.nvim")
+    local is_plugin_loaded = M.check_is_sidekick_plugin_loaded()
     if not is_plugin_loaded then
       return "Comment"
     end
@@ -22,7 +38,7 @@ M.copilot_status_line = {
 
 M.sidekick_status_line = {
   function()
-    local is_plugin_loaded = require("utils.check_lazy_plugin_loaded").is_plugin_loaded("sidekick.nvim")
+    local is_plugin_loaded = M.check_is_sidekick_plugin_loaded()
     if not is_plugin_loaded then
       return " "
     end
@@ -31,7 +47,7 @@ M.sidekick_status_line = {
     return " " .. (#status > 1 and #status or "")
   end,
   color = function()
-    local is_plugin_loaded = require("utils.check_lazy_plugin_loaded").is_plugin_loaded("sidekick.nvim")
+    local is_plugin_loaded = M.check_is_sidekick_plugin_loaded()
     if not is_plugin_loaded then
       return "Comment"
     end
