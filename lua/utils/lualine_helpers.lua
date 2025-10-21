@@ -29,9 +29,10 @@ M.copilot_status_line = {
     local status = require("sidekick.status").get()
     if status then
       return status == nil and "DiagnosticError"
-          or status.kind == "Error" and "DiagnosticError"
-          or status.busy and "DiagnosticWarn"
-          or "Special"
+        or status.kind == "Error" and "DiagnosticError"
+        or status.kind == "Warning" and "DiagnosticWarn"
+        or status.busy and "DiagnosticWarn"
+        or "Special"
     end
   end,
 }

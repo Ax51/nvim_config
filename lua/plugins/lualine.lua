@@ -35,7 +35,6 @@ return {
         },
         lualine_x = {
           lualine_utils.copilot_status_line,
-          lualine_utils.sidekick_status_line,
           "progress",
         },
         lualine_y = { "diff" },
