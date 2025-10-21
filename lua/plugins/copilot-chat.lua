@@ -1,5 +1,6 @@
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
+  enabled = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
@@ -27,8 +28,7 @@ return {
       },
       prompts = {
         Commit = {
-          prompt =
-          "Please provide me a list of at most 10 suggestions for commit message according to the currently staged changes.",
+          prompt = "Please provide me a list of at most 10 suggestions for commit message according to the currently staged changes.",
           system_prompt = prompts.COPILOT_BASE.system_prompt .. [[
 The commit message must be prefixed with `!` since this is a trigger for my commit hook.
 Commit must starts with one of the following key words:
