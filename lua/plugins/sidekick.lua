@@ -8,6 +8,11 @@ return {
         backend = "zellij",
         enabled = true,
       },
+      win = {
+        split = {
+          width = 120,
+        },
+      },
     },
   },
 }
