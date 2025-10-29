@@ -3,8 +3,6 @@ return {
   dependencies = { "nvimtools/none-ls-extras.nvim" },
   event = { "BufReadPre", "BufNewFile" },
 
-  enabled = require("constants").null_ls_migration_finished == false,
-
   config = function()
     local check_for_eslint = require("utils.null_ls_checks").check_for_eslint
     local check_for_biome = require("utils.null_ls_checks").check_for_biome

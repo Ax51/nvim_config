@@ -41,13 +41,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     nmap("<leader>D", vim.lsp.buf.type_definition, opts)
     remap("<leader>la", vim.lsp.buf.code_action, { "n", "v" }, opts)
     nmap("<leader>lf", function()
-      local null_ls_migration_finished = require("constants").null_ls_migration_finished
-
-      if null_ls_migration_finished then
-        require("conform").format({ bufnr = ev.buf, async = true })
-      else
-        vim.lsp.buf.format({ async = true })
-      end
+      vim.lsp.buf.format({ async = true })
     end, opts)
   end,
 })
@@ -167,13 +161,40 @@ remap("QQ", function()
   end
 end, "t")
 
--- Copilot
-nmap("<leader>aa", ":CopilotChat<CR>")
-nmap("<leader>at", ":CopilotChatTests<CR>")
-nmap("<leader>ac", ":CopilotChatCommit<CR>")
-nmap("<leader>ag", ":CopilotChatAgents<CR>")
-nmap("<leader>am", ":CopilotChatModels<CR>")
-nmap("<leader>as", ":CopilotChatSave<CR>")
-
 -- Dev notes
 nmap("<leader>n", require("utils.open_branch_notes").open_branch_notes)
+
+-- Sidekick
+remap("<c-.>", function()
+  require("sidekick.nes").apply()
+end, { "i", "n" })
+remap("<c-,>", function()
+  require("sidekick.nes").clear()
+end, { "i", "n" })
+nmap("<leader>aa", function()
+  require("sidekick.cli").toggle()
+end)
+nmap("<leader>as", function()
+  require("sidekick.cli").select()
+end)
+remap("<leader>QQ", function()
+  require("sidekick.cli").close()
+end, "t")
+nmap("<leader>at", function()
+  require("sidekick.cli").send({ msg = "{this}" })
+end)
+remap("<leader>at", function()
+  require("sidekick.cli").send({ msg = "{this}" })
+end, "x")
+nmap("<leader>af", function()
+  require("sidekick.cli").send({ msg = "{file}" })
+end)
+remap("<leader>av", function()
+  require("sidekick.cli").send({ msg = "{selection}" })
+end, "x")
+nmap("<leader>ap", function()
+  require("sidekick.cli").prompt()
+end)
+remap("<leader>ap", function()
+  require("sidekick.cli").prompt()
+end, "x")

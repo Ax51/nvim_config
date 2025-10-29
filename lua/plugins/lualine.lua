@@ -2,12 +2,12 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    -- NOTE: shows the current Copilot connection status
-    "AndreM222/copilot-lualine",
   },
   event = { "BufReadPre", "BufNewFile" },
 
   config = function()
+    local lualine_utils = require("utils.lualine_helpers")
+
     require("lualine").setup({
       options = {
         icons_enabled = true,
@@ -33,8 +33,10 @@ return {
         lualine_c = {
           { "filename", path = 1 },
         },
-        -- NOTE: requires `AndreM222/copilot-lualine`
-        lualine_x = { "copilot", "progress" },
+        lualine_x = {
+          lualine_utils.copilot_status_line,
+          "progress",
+        },
         lualine_y = { "diff" },
         lualine_z = { "location" },
       },
