@@ -46,7 +46,7 @@ M.sidekick_status_line = {
     end
 
     local status = require("sidekick.status").cli()
-    return " " .. (#status > 1 and #status or "")
+    return " " .. (#status > 0 and #status or "")
   end,
   color = function()
     local is_plugin_loaded = M.check_is_sidekick_plugin_loaded()
