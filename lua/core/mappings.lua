@@ -165,9 +165,6 @@ end, "t")
 nmap("<leader>n", require("utils.open_branch_notes").open_branch_notes)
 
 -- Sidekick
-nmap("<c-.>", function()
-  require("sidekick.cli").toggle()
-end)
 remap("<c-.>", function()
   require("sidekick.nes").apply()
 end, { "i", "n" })
