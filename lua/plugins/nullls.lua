@@ -24,6 +24,7 @@ return {
         require("none-ls.diagnostics.eslint_d").with(eslint_config),
 
         require("none-ls.formatting.eslint_d").with(eslint_config),
+        null_ls.builtins.formatting.prettierd.with({ condition = check_for_eslint_flat_config }),
 
         null_ls.builtins.formatting.biome.with(biome_config),
         -- NOTE: temporary disabled since auto formatting causes a lot of changes
