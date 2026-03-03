@@ -5,6 +5,21 @@ return {
 
   branch = "main",
 
+  init = function()
+    -- custom parsers
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "TSUpdate",
+      callback = function()
+        require("nvim-treesitter.parsers").ghactions = {
+          install_info = {
+            url = "https://github.com/rmuir/tree-sitter-ghactions",
+            queries = "queries",
+          },
+        }
+      end,
+    })
+  end,
+
   config = function()
     vim.api.nvim_create_autocmd("FileType", {
       pattern = {
@@ -23,6 +38,7 @@ return {
         "jsonc",
         "copilot-chat",
         "proto",
+        "yaml",
       },
       callback = function()
         -- NOTE: syntax highlighting, provided by Neovim
