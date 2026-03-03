@@ -1,3 +1,6 @@
 .idea
 
+.claude/*
+!.claude/skills
+
 !AGENTS.md
