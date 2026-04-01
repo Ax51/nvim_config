@@ -13,20 +13,23 @@ M.open_branch_notes = function()
     return
   end
 
-  local desired_path = string.format(M.config.base_folder_path .. "/%s", branch_name)
+  local note_name = branch_name:gsub("/", "_")
+  local desired_path = string.format(M.config.base_folder_path .. "/%s", note_name)
 
   local file_path = vim.fn.isdirectory(desired_path) == 1
       and string.format(desired_path .. "/%s", M.config.folder_structure_base_file_name)
     or desired_path .. ".md"
 
   if vim.fn.filereadable(file_path) ~= 1 then
-    vim.fn.mkdir(M.config.base_folder_path, "p")
+    local parent_dir = vim.fn.fnamemodify(file_path, ":h")
+
+    vim.fn.mkdir(parent_dir, "p")
     vim.fn.writefile({}, file_path)
   end
 
   print("Opening notes for [ " .. branch_name .. " ] branch.")
 
-  vim.cmd(string.format("edit %s", file_path))
+  vim.cmd(string.format("edit %s", vim.fn.fnameescape(file_path)))
 end
 
 return M
