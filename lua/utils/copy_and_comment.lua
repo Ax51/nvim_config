@@ -1,6 +1,6 @@
 -- NOTE: copy selected lines, paste them below and comment repeated lines
 local function copyNCommentSelectedLines()
-  local comApi = require("Comment.api")
+  local native_comment = require("vim._comment")
   local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
   vim.api.nvim_feedkeys(esc, "nx", false)
 
@@ -8,10 +8,12 @@ local function copyNCommentSelectedLines()
   local startLine = vim.fn.getpos("'<")[2]
   local endLine = vim.fn.getpos("'>")[2]
   local diffLines = math.abs(startLine - endLine)
+  local pasted_start_line = endLine + 1
+  local pasted_end_line = pasted_start_line + diffLines
 
   vim.cmd("'<,'>t'>")
-  vim.api.nvim_win_set_cursor(0, { endLine + 1, 0 })
-  comApi.comment.linewise.count(diffLines + 1)
+  vim.api.nvim_win_set_cursor(0, { pasted_start_line, 0 })
+  native_comment.toggle_lines(pasted_start_line, pasted_end_line, { pasted_start_line, 0 })
   vim.api.nvim_win_set_cursor(0, initialCursorPos)
 end
 
