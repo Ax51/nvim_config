@@ -13,6 +13,7 @@ return {
           width = 120,
         },
       },
+      picker = "fzf-lua",
     },
   },
 }
