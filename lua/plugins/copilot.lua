@@ -8,7 +8,7 @@ return {
       enabled = true,
       auto_trigger = true,
       keymap = {
-        accept_line = "<M-L>",
+        accept_line = "<M-.>",
       },
     },
     copilot_model = "gpt-41-copilot",
