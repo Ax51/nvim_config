@@ -120,6 +120,12 @@ nmap("<leader>rs", require("utils.execute_shell_block").execute_code_block)
 remap("jj", "<Esc>", "i")
 remap("<leader>c", ":'<,'>t'><CR>", "v") -- NOTE: copy selected lines and paste them below
 remap("<leader>C", require("utils.copy_and_comment"), "v")
+nmap("gco", function()
+  require("utils.comment_line").below()
+end)
+nmap("gcO", function()
+  require("utils.comment_line").above()
+end)
 
 -- Tabs
 nmap("<Tab>", ":BufferLineCycleNext<CR>")
