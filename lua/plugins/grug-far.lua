@@ -8,5 +8,9 @@ return {
       -- NOTE: this option prevents this plugin from loading without call (lazy loading)
       enabled = false,
     },
+    keymaps = {
+      nextInput = { n = "<localleader><tab>" },
+      prevInput = { n = "<localleader><s-tab>" },
+    },
   },
 }
