@@ -17,6 +17,7 @@ Deduplicate overlapping comments, then summarize them in a table with:
 3. expected code updates
 
 PR link:]],
+      fix_merge_conflicts = "Please help me fix the merge conflicts",
 
       -- simple context prompts
       file = "{file}",
