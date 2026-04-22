@@ -26,12 +26,25 @@ return {
     local wk = require("which-key")
 
     wk.add({
+      { "<c-.>", desc = "Sidekick apply", mode = { "i", "n" } },
+      { "<c-,>", desc = "Sidekick clear", mode = { "i", "n" } },
+    })
+
+    wk.add({
+      { "<leader>a", group = "Sidekick" },
+      { "<leader>aa", desc = "Toggle Sidekick CLI" },
+      { "<leader>af", desc = "Send file to Sidekick" },
+      { "<leader>ap", desc = "Prompt Sidekick", mode = { "n", "x" } },
+      { "<leader>as", desc = "Select Sidekick agent" },
+      { "<leader>at", desc = "Send current context to Sidekick", mode = { "n", "x" } },
+      { "<leader>av", desc = "Send selection to Sidekick", mode = "x" },
       { "<leader>E", desc = "Right side file Manager" },
       { "<leader>G", group = "Git options" },
       { "<leader>Gl", desc = "Toggle GitBlame" },
       { "<leader>Q", group = "Close Buffer & it's tab" },
       { "<leader>Q!", desc = "Quit NVIM" },
       { "<leader>QA", desc = "Close all buffers except current" },
+      { "<leader>QQ", desc = "Close Sidekick CLI", mode = "t" },
       { "<leader>X", desc = "Select tabs to close" },
       { "<leader>e", desc = "Float file Manager" },
       { "<leader>f", group = "Find" },
