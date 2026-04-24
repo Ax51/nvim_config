@@ -9,6 +9,13 @@ return {
     local sidekick_config = require("sidekick.config")
     local sidekick_prompt_picker = require("utils.sidekick_prompt_picker")
 
+    local default_ai_tools = {
+      claude = {},
+      codex = {},
+      cursor = {},
+      copilot = {},
+    }
+
     local prompts = {
       pr_comments_review = [[Fetch all review comments from the pull request linked below.
 Deduplicate overlapping comments, then summarize them in a table with:
@@ -40,13 +47,15 @@ PR link:]],
             width = 120,
           },
         },
+        tools = default_ai_tools,
         prompts = prompts,
       },
       picker = "fzf-lua",
     })
 
-    -- NOTE: Sidekick deep-merges custom prompts with its defaults,
-    -- so replace the prompt table to show only your prompts.
+    -- NOTE: Sidekick deep-merges custom CLI tables with its defaults,
+    -- so replace them to show only your prompts and tools.
+    sidekick_config.cli.tools = default_ai_tools
     sidekick_config.cli.prompts = prompts
 
     -- NOTE: intentional override to replace Sidekick's default prompt
