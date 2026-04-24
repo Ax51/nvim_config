@@ -39,7 +39,7 @@ PR link:]],
     sidekick.setup({
       cli = {
         mux = {
-          backend = "tmux",
+          backend = "zellij",
           enabled = true,
         },
         win = {
