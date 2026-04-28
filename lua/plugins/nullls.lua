@@ -38,7 +38,7 @@ return {
 
       on_attach = function(client, bufnr)
         -- NOTE: format on save
-        if client.supports_method("textDocument/formatting") then
+        if client:supports_method("textDocument/formatting") then
           local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
           vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
