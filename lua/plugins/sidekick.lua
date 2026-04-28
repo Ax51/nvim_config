@@ -18,7 +18,7 @@ return {
 
     local prompts = {
       pr_comments_review = [[Fetch all review comments from the pull request linked below.
-Deduplicate overlapping comments, then summarize them in a table with:
+Deduplicate overlapping comments, ignore outdated / resolved ones, then summarize them in a table with:
 1. requirement
 2. your opinion
 3. expected code updates
