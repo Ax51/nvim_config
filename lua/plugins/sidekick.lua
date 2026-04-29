@@ -25,6 +25,12 @@ Deduplicate overlapping comments, ignore outdated / resolved ones, then summariz
 
 PR link:]],
       fix_merge_conflicts = "Please help me fix the merge conflicts",
+      plan_from_jira_ticket = [[Create a development plan based on the following Jira ticket.
+Use Atlassian MCP to fetch ticket details, and any linked tickets, to understand the full context of the task.
+Break down the implementation into clear steps, and provide a brief description for each step.
+Ask me questions if you need more information or description is unclear.
+
+Jira ticket:]],
 
       -- simple context prompts
       file = "{file}",
