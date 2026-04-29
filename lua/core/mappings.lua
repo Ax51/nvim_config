@@ -166,6 +166,7 @@ end, "t")
 
 -- Dev notes
 nmap("<leader>n", require("utils.open_branch_notes").open_branch_notes)
+nmap("<leader>N", require("utils.open_branch_notes").open_branch_notes_folder)
 
 -- Sidekick
 remap("<c-.>", function()
