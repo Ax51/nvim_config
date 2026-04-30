@@ -6,5 +6,6 @@ return {
     "tpope/vim-repeat",
   },
   -- NOTE: use `<leader>lt` to cycle through list types
+  -- NOTE: use `<C-Space>` to toggle list item status
   opts = true,
 }
