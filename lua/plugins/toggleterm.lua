@@ -22,8 +22,16 @@ local function toggle_lazygit()
     persistent_lazygit = Terminal:new({
       count = 10,
       cmd = "lazygit",
-      direction = "float",
       display_name = "lazygit",
+      direction = "float",
+      float_opts = {
+        width = function()
+          return math.floor(vim.o.columns * 0.95)
+        end,
+        height = function()
+          return math.floor(vim.o.lines * 0.90)
+        end,
+      },
     })
   end
   persistent_lazygit:toggle()
