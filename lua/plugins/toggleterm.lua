@@ -1,4 +1,5 @@
 local persistent_shell = nil
+local persistent_lazygit = nil
 
 local function get_persistent_shell()
   if persistent_shell == nil then
@@ -14,6 +15,20 @@ local function get_persistent_shell()
   return persistent_shell
 end
 
+local function toggle_lazygit()
+  if persistent_lazygit == nil then
+    local Terminal = require("toggleterm.terminal").Terminal
+
+    persistent_lazygit = Terminal:new({
+      count = 10,
+      cmd = "lazygit",
+      direction = "float",
+      display_name = "lazygit",
+    })
+  end
+  persistent_lazygit:toggle()
+end
+
 return {
   "akinsho/toggleterm.nvim",
   version = "*",
@@ -26,6 +41,13 @@ return {
         get_persistent_shell():toggle()
       end,
       desc = "Toggle persistent terminal",
+    },
+    {
+      "<leader>g",
+      function()
+        toggle_lazygit()
+      end,
+      desc = "Toggle lazygit terminal",
     },
   },
 
