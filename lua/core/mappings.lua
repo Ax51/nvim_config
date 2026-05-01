@@ -132,14 +132,14 @@ nmap("<Tab>", ":BufferLineCycleNext<CR>")
 nmap("<s-Tab>", ":BufferLineCyclePrev<CR>")
 
 -- Tests
-nmap("<leader>tt", ":Neotest run<CR>")
-nmap("<leader>tS", ":Neotest stop<CR>")
-nmap("<leader>ts", ":Neotest summary<CR>")
-nmap("<leader>ta", ":Neotest run file<CR>")
-nmap("<leader>tl", ":Neotest run last<CR>")
-nmap("<leader>to", ":Neotest output<CR>")
-nmap("<leader>t[", ":Neotest jump prev<CR>")
-nmap("<leader>t]", ":Neotest jump next<CR>")
+nmap("<leader>Tt", ":Neotest run<CR>")
+nmap("<leader>TS", ":Neotest stop<CR>")
+nmap("<leader>Ts", ":Neotest summary<CR>")
+nmap("<leader>Ta", ":Neotest run file<CR>")
+nmap("<leader>Tl", ":Neotest run last<CR>")
+nmap("<leader>To", ":Neotest output<CR>")
+nmap("<leader>T[", ":Neotest jump prev<CR>")
+nmap("<leader>T]", ":Neotest jump next<CR>")
 
 -- Hop
 nmap("<leader>M", ":HopChar1<CR>")
