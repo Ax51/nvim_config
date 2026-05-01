@@ -81,9 +81,6 @@ nmap("<leader>Gx", ":Gitsigns reset_hunk<CR>")
 nmap("[h", ":Gitsigns prev_hunk<CR>")
 nmap("]h", ":Gitsigns next_hunk<CR>")
 
--- LazyGit
-nmap("<leader>g", ":LazyGit<CR>")
-
 -- Navigation
 nmap("<c-k>", ":wincmd k<CR>")
 nmap("<c-j>", ":wincmd j<CR>")
@@ -132,14 +129,14 @@ nmap("<Tab>", ":BufferLineCycleNext<CR>")
 nmap("<s-Tab>", ":BufferLineCyclePrev<CR>")
 
 -- Tests
-nmap("<leader>tt", ":Neotest run<CR>")
-nmap("<leader>tS", ":Neotest stop<CR>")
-nmap("<leader>ts", ":Neotest summary<CR>")
-nmap("<leader>ta", ":Neotest run file<CR>")
-nmap("<leader>tl", ":Neotest run last<CR>")
-nmap("<leader>to", ":Neotest output<CR>")
-nmap("<leader>t[", ":Neotest jump prev<CR>")
-nmap("<leader>t]", ":Neotest jump next<CR>")
+nmap("<leader>Tt", ":Neotest run<CR>")
+nmap("<leader>TS", ":Neotest stop<CR>")
+nmap("<leader>Ts", ":Neotest summary<CR>")
+nmap("<leader>Ta", ":Neotest run file<CR>")
+nmap("<leader>Tl", ":Neotest run last<CR>")
+nmap("<leader>To", ":Neotest output<CR>")
+nmap("<leader>T[", ":Neotest jump prev<CR>")
+nmap("<leader>T]", ":Neotest jump next<CR>")
 
 -- Hop
 nmap("<leader>M", ":HopChar1<CR>")
@@ -156,13 +153,16 @@ nmap("<leader>zz", ":ZenMode<CR>")
 nmap("<leader>zt", ":Twilight<CR>")
 
 -- Terminal
--- NOTE: exit from terminal mode with <ESC>
-remap("QQ", function()
-  -- Do not close lazygit on escape
-  if not string.find(vim.api.nvim_buf_get_name(0), "lazygit") then
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, false, true), "n", true)
+remap("<ESC>", function()
+  local is_lazygit_term = string.find(vim.api.nvim_buf_get_name(0), "lazygit", 1, true) ~= nil
+  if is_lazygit_term then
+    -- NOTE: return original behaviour for <ESC> btn for lazygit terminal
+    -- since it has its own keybindings that rely on <ESC>
+    return vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
   end
-end, "t")
+  -- NOTE: exit from terminal mode with <ESC>
+  return vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, false, true)
+end, "t", { expr = true, silent = true, replace_keycodes = false })
 
 -- Dev notes
 nmap("<leader>n", require("utils.open_branch_notes").open_branch_notes)
