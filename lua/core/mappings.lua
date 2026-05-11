@@ -153,7 +153,7 @@ nmap("<leader>zz", ":ZenMode<CR>")
 nmap("<leader>zt", ":Twilight<CR>")
 
 -- Terminal
-remap("<ESC>", function()
+remap("QQ", function()
   local is_lazygit_term = string.find(vim.api.nvim_buf_get_name(0), "lazygit", 1, true) ~= nil
   if is_lazygit_term then
     -- NOTE: return original behaviour for <ESC> btn for lazygit terminal
