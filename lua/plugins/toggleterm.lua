@@ -62,6 +62,8 @@ return {
   config = function()
     require("toggleterm").setup({
       direction = "horizontal",
+      persist_size = false,
+      size = 50,
     })
   end,
 }
