@@ -30,15 +30,15 @@ detect_home_dir() {
   fi
 
   case "$current_user" in
-    ""|*[!A-Za-z0-9._-]*)
-      ;;
-    *)
-      detected_home="$(eval "printf '%s' ~$current_user" 2>/dev/null || true)"
-      if [ -n "$detected_home" ] && [ "$detected_home" != "~$current_user" ]; then
-        printf '%s\n' "$detected_home"
-        return
-      fi
-      ;;
+  "" | *[!A-Za-z0-9._-]*)
+    ;;
+  *)
+    detected_home="$(eval "printf '%s' ~$current_user" 2>/dev/null || true)"
+    if [ -n "$detected_home" ] && [ "$detected_home" != "~$current_user" ]; then
+      printf '%s\n' "$detected_home"
+      return
+    fi
+    ;;
   esac
 
   if [ -n "$current_uid" ] && [ -r /etc/passwd ]; then
@@ -130,6 +130,24 @@ brew_install() {
   brew install "$1"
 }
 
+install_npm_package_if_missing() {
+  binary_name="$1"
+  package_name="$2"
+
+  if command_exists "$binary_name"; then
+    return
+  fi
+
+  if ! command_exists npm; then
+    warn "Skipping $binary_name because npm is unavailable"
+    return
+  fi
+
+  log "Installing $binary_name with npm"
+  npm install -g --prefix "$HOME/.local" "$package_name" ||
+    warn "Could not install $binary_name with npm"
+}
+
 install_os_packages() {
   log "Installing OS packages"
 
@@ -137,14 +155,19 @@ install_os_packages() {
     as_root apt-get update
     install_each apt_install \
       bash \
+      bat \
       build-essential \
       ca-certificates \
       curl \
+      diff-so-fancy \
       fd-find \
       fzf \
       git \
+      gh \
+      git-delta \
       golang-go \
       gzip \
+      jq \
       luajit \
       luarocks \
       nodejs \
@@ -166,16 +189,21 @@ install_os_packages() {
       zsh
   elif command_exists dnf; then
     install_each dnf_install \
+      bat \
       bash \
       ca-certificates \
       curl \
+      diff-so-fancy \
       fd-find \
       fzf \
       gcc \
       gcc-c++ \
       git \
+      gh \
+      git-delta \
       golang \
       gzip \
+      jq \
       luajit \
       luarocks \
       make \
@@ -197,15 +225,20 @@ install_os_packages() {
       zsh
   elif command_exists yum; then
     install_each yum_install \
+      bat \
       bash \
       ca-certificates \
       curl \
+      diff-so-fancy \
       fzf \
       gcc \
       gcc-c++ \
       git \
+      gh \
+      git-delta \
       golang \
       gzip \
+      jq \
       make \
       nodejs \
       npm \
@@ -222,14 +255,19 @@ install_os_packages() {
   elif command_exists apk; then
     install_each apk_install \
       bash \
+      bat \
       build-base \
       ca-certificates \
       curl \
+      delta \
+      diff-so-fancy \
       fd \
       fzf \
       git \
+      github-cli \
       go \
       gzip \
+      jq \
       luajit \
       luarocks \
       nodejs \
@@ -251,12 +289,17 @@ install_os_packages() {
   elif command_exists brew; then
     install_each brew_install \
       bash \
+      bat \
       bufbuild/buf/buf \
       curl \
+      diff-so-fancy \
       fd \
       fzf \
       git \
+      gh \
+      git-delta \
       go \
+      jq \
       luajit \
       luarocks \
       node \
@@ -271,7 +314,7 @@ install_os_packages() {
       xz \
       zsh
   else
-    warn "No supported package manager found. Install curl, git, gcc/make, zsh, node/npm, python3, ripgrep, fd, fzf, luajit, shellcheck, shfmt, tree-sitter-cli, and clipboard tools manually."
+    warn "No supported package manager found. Install bat, curl, delta, diff-so-fancy, fd, fzf, gh, git, gcc/make, jq, zsh, node/npm, python3, ripgrep, luajit, shellcheck, shfmt, tree-sitter-cli, and clipboard tools manually."
   fi
 
   mkdir -p "$LOCAL_BIN"
@@ -279,6 +322,16 @@ install_os_packages() {
   if ! command_exists fd && command_exists fdfind; then
     ln -sf "$(command -v fdfind)" "$LOCAL_BIN/fd"
   fi
+
+  if ! command_exists bat && command_exists batcat; then
+    ln -sf "$(command -v batcat)" "$LOCAL_BIN/bat"
+  fi
+
+  if ! command_exists delta && command_exists git-delta; then
+    ln -sf "$(command -v git-delta)" "$LOCAL_BIN/delta"
+  fi
+
+  install_npm_package_if_missing diff-so-fancy diff-so-fancy
 }
 
 download_file() {
@@ -292,6 +345,32 @@ download_file() {
   else
     die "Need curl or wget to download $url"
   fi
+}
+
+github_latest_asset_url() {
+  repo="$1"
+  asset_pattern="$2"
+  api_url="https://api.github.com/repos/$repo/releases/latest"
+
+  if command_exists curl; then
+    curl -fsSL "$api_url"
+  elif command_exists wget; then
+    wget -qO- "$api_url"
+  else
+    return 1
+  fi | awk -F'"' -v pattern="$asset_pattern" '
+    $2 == "browser_download_url" {
+      url = $4
+      if (matched == "" && url ~ pattern) {
+        matched = url
+      }
+    }
+    END {
+      if (matched != "") {
+        print matched
+      }
+    }
+  '
 }
 
 install_neovim() {
@@ -313,17 +392,17 @@ install_neovim() {
   fi
 
   case "$arch_name" in
-    x86_64|amd64)
-      nvim_asset_arch="x86_64"
-      nvim_legacy_asset="nvim-linux64.tar.gz"
-      ;;
-    aarch64|arm64)
-      nvim_asset_arch="arm64"
-      nvim_legacy_asset="nvim-linux-arm64.tar.gz"
-      ;;
-    *)
-      die "Unsupported CPU architecture for Neovim archive: $arch_name"
-      ;;
+  x86_64 | amd64)
+    nvim_asset_arch="x86_64"
+    nvim_legacy_asset="nvim-linux64.tar.gz"
+    ;;
+  aarch64 | arm64)
+    nvim_asset_arch="arm64"
+    nvim_legacy_asset="nvim-linux-arm64.tar.gz"
+    ;;
+  *)
+    die "Unsupported CPU architecture for Neovim archive: $arch_name"
+    ;;
   esac
 
   tmp_dir="$(mktemp -d)"
@@ -359,11 +438,11 @@ ensure_profile_path() {
       {
         printf '\n%s\n' '# Added by nvim coder bootstrap'
         printf '%s\n' "$path_line"
-      } >> "$profile_file"
+      } >>"$profile_file"
     fi
 
     if ! grep -F "$nvim_alias" "$profile_file" >/dev/null 2>&1; then
-      printf '%s\n' "$nvim_alias" >> "$profile_file"
+      printf '%s\n' "$nvim_alias" >>"$profile_file"
     fi
   done
 
@@ -379,7 +458,7 @@ set_zsh_login_shell() {
   fi
 
   if [ "$(id -u)" -eq 0 ] && [ -w /etc/shells ] && ! grep -Fx "$zsh_path" /etc/shells >/dev/null 2>&1; then
-    printf '%s\n' "$zsh_path" >> /etc/shells
+    printf '%s\n' "$zsh_path" >>/etc/shells
   fi
 
   current_shell="$(getent passwd "$(id -un)" 2>/dev/null | awk -F: '{ print $7; exit }' || true)"
@@ -438,9 +517,9 @@ install_deno() {
 }
 
 tree_sitter_cli_works() {
-  command_exists tree-sitter \
-    && tree-sitter --version >/dev/null 2>&1 \
-    && tree-sitter build --help >/dev/null 2>&1
+  command_exists tree-sitter &&
+    tree-sitter --version >/dev/null 2>&1 &&
+    tree-sitter build --help >/dev/null 2>&1
 }
 
 install_rust() {
@@ -464,8 +543,8 @@ install_tree_sitter_cli() {
 
   if command_exists npm; then
     log "Installing tree-sitter CLI with npm"
-    npm install -g --prefix "$HOME/.local" "tree-sitter-cli@$TREE_SITTER_CLI_NPM_VERSION" \
-      || warn "Could not install tree-sitter CLI with npm"
+    npm install -g --prefix "$HOME/.local" "tree-sitter-cli@$TREE_SITTER_CLI_NPM_VERSION" ||
+      warn "Could not install tree-sitter CLI with npm"
 
     if tree_sitter_cli_works; then
       return
@@ -474,8 +553,8 @@ install_tree_sitter_cli() {
 
   if install_rust; then
     log "Installing tree-sitter CLI from source with cargo"
-    cargo install --locked --root "$HOME/.local" "tree-sitter-cli" \
-      || warn "Could not install tree-sitter CLI with cargo"
+    cargo install --locked --root "$HOME/.local" "tree-sitter-cli" ||
+      warn "Could not install tree-sitter CLI with cargo"
 
     if tree_sitter_cli_works; then
       return
@@ -494,22 +573,22 @@ install_yazi() {
   arch_name="$(uname -m)"
 
   case "$os_name:$arch_name" in
-    Linux:x86_64|Linux:amd64)
-      yazi_target="x86_64-unknown-linux-musl"
-      ;;
-    Linux:aarch64|Linux:arm64)
-      yazi_target="aarch64-unknown-linux-musl"
-      ;;
-    Darwin:x86_64|Darwin:amd64)
-      yazi_target="x86_64-apple-darwin"
-      ;;
-    Darwin:aarch64|Darwin:arm64)
-      yazi_target="aarch64-apple-darwin"
-      ;;
-    *)
-      warn "Skipping Yazi prebuilt install for unsupported platform: $os_name $arch_name"
-      return
-      ;;
+  Linux:x86_64 | Linux:amd64)
+    yazi_target="x86_64-unknown-linux-musl"
+    ;;
+  Linux:aarch64 | Linux:arm64)
+    yazi_target="aarch64-unknown-linux-musl"
+    ;;
+  Darwin:x86_64 | Darwin:amd64)
+    yazi_target="x86_64-apple-darwin"
+    ;;
+  Darwin:aarch64 | Darwin:arm64)
+    yazi_target="aarch64-apple-darwin"
+    ;;
+  *)
+    warn "Skipping Yazi prebuilt install for unsupported platform: $os_name $arch_name"
+    return
+    ;;
   esac
 
   log "Installing Yazi from prebuilt release"
@@ -559,28 +638,34 @@ install_zellij() {
   arch_name="$(uname -m)"
 
   case "$os_name:$arch_name" in
-    Linux:x86_64|Linux:amd64)
-      zellij_target="x86_64-unknown-linux-musl"
-      ;;
-    Linux:aarch64|Linux:arm64)
-      zellij_target="aarch64-unknown-linux-musl"
-      ;;
-    Darwin:x86_64|Darwin:amd64)
-      zellij_target="x86_64-apple-darwin"
-      ;;
-    Darwin:aarch64|Darwin:arm64)
-      zellij_target="aarch64-apple-darwin"
-      ;;
-    *)
-      warn "Skipping Zellij prebuilt install for unsupported platform: $os_name $arch_name"
-      return
-      ;;
+  Linux:x86_64 | Linux:amd64)
+    zellij_asset_pattern="zellij-x86_64-unknown-linux-musl[.]tar[.]gz$"
+    ;;
+  Linux:aarch64 | Linux:arm64)
+    zellij_asset_pattern="zellij-aarch64-unknown-linux-musl[.]tar[.]gz$"
+    ;;
+  Darwin:x86_64 | Darwin:amd64)
+    zellij_asset_pattern="zellij-x86_64-apple-darwin[.]tar[.]gz$"
+    ;;
+  Darwin:aarch64 | Darwin:arm64)
+    zellij_asset_pattern="zellij-aarch64-apple-darwin[.]tar[.]gz$"
+    ;;
+  *)
+    warn "Skipping Zellij prebuilt install for unsupported platform: $os_name $arch_name"
+    return
+    ;;
   esac
 
   log "Installing Zellij from prebuilt release"
   tmp_dir="$(mktemp -d)"
   zellij_archive="$tmp_dir/zellij.tar.gz"
-  zellij_url="https://github.com/zellij-org/zellij/releases/latest/download/zellij-$zellij_target.tar.gz"
+  zellij_url="$(github_latest_asset_url "zellij-org/zellij" "$zellij_asset_pattern" || true)"
+
+  if [ -z "$zellij_url" ]; then
+    rm -rf "$tmp_dir"
+    warn "Could not find a Zellij release asset matching: $zellij_asset_pattern"
+    return
+  fi
 
   if ! download_file "$zellij_url" "$zellij_archive"; then
     rm -rf "$tmp_dir"
@@ -610,6 +695,10 @@ install_zellij() {
   cp "$zellij_bin" "$LOCAL_BIN/zellij"
   chmod +x "$LOCAL_BIN/zellij"
   rm -rf "$tmp_dir"
+
+  if ! command_exists zellij; then
+    warn "Zellij was installed to $LOCAL_BIN/zellij, but it is not visible in PATH"
+  fi
 }
 
 install_viu() {
@@ -621,13 +710,13 @@ install_viu() {
   arch_name="$(uname -m)"
 
   case "$os_name:$arch_name" in
-    Linux:x86_64|Linux:amd64)
-      viu_target="x86_64-unknown-linux-musl"
-      ;;
-    *)
-      warn "Skipping Viu prebuilt install for unsupported platform: $os_name $arch_name"
-      return
-      ;;
+  Linux:x86_64 | Linux:amd64)
+    viu_target="x86_64-unknown-linux-musl"
+    ;;
+  *)
+    warn "Skipping Viu prebuilt install for unsupported platform: $os_name $arch_name"
+    return
+    ;;
   esac
 
   log "Installing Viu from prebuilt release"
@@ -644,6 +733,223 @@ install_viu() {
   mkdir -p "$LOCAL_BIN"
   cp "$viu_bin" "$LOCAL_BIN/viu"
   chmod +x "$LOCAL_BIN/viu"
+  rm -rf "$tmp_dir"
+}
+
+install_gh() {
+  if command_exists gh; then
+    return
+  fi
+
+  os_name="$(uname -s)"
+  arch_name="$(uname -m)"
+
+  case "$os_name:$arch_name" in
+  Linux:x86_64 | Linux:amd64)
+    gh_asset_pattern="gh_[0-9][^/]*_linux_amd64[.]tar[.]gz$"
+    ;;
+  Linux:aarch64 | Linux:arm64)
+    gh_asset_pattern="gh_[0-9][^/]*_linux_arm64[.]tar[.]gz$"
+    ;;
+  Darwin:x86_64 | Darwin:amd64)
+    gh_asset_pattern="gh_[0-9][^/]*_macOS_amd64[.]zip$"
+    ;;
+  Darwin:aarch64 | Darwin:arm64)
+    gh_asset_pattern="gh_[0-9][^/]*_macOS_arm64[.]zip$"
+    ;;
+  *)
+    warn "Skipping GitHub CLI prebuilt install for unsupported platform: $os_name $arch_name"
+    return
+    ;;
+  esac
+
+  log "Installing GitHub CLI from prebuilt release"
+  tmp_dir="$(mktemp -d)"
+  gh_url="$(github_latest_asset_url "cli/cli" "$gh_asset_pattern" || true)"
+
+  if [ -z "$gh_url" ]; then
+    rm -rf "$tmp_dir"
+    warn "Could not find a GitHub CLI release asset matching: $gh_asset_pattern"
+    return
+  fi
+
+  case "$gh_url" in
+  *.zip)
+    gh_archive="$tmp_dir/gh.zip"
+    if ! download_file "$gh_url" "$gh_archive" || ! unzip -q "$gh_archive" -d "$tmp_dir/extract"; then
+      rm -rf "$tmp_dir"
+      warn "Could not download or extract GitHub CLI release archive"
+      return
+    fi
+    ;;
+  *)
+    gh_archive="$tmp_dir/gh.tar.gz"
+    if ! download_file "$gh_url" "$gh_archive" || ! tar -xzf "$gh_archive" -C "$tmp_dir"; then
+      rm -rf "$tmp_dir"
+      warn "Could not download or extract GitHub CLI release archive"
+      return
+    fi
+    ;;
+  esac
+
+  gh_bin="$(find "$tmp_dir" -type f -path "*/bin/gh" | head -n 1)"
+  if [ -z "$gh_bin" ]; then
+    gh_bin="$(find "$tmp_dir" -type f -name gh | head -n 1)"
+  fi
+
+  if [ -z "$gh_bin" ]; then
+    rm -rf "$tmp_dir"
+    warn "GitHub CLI archive did not contain a gh binary"
+    return
+  fi
+
+  mkdir -p "$LOCAL_BIN"
+  cp "$gh_bin" "$LOCAL_BIN/gh"
+  chmod +x "$LOCAL_BIN/gh"
+  rm -rf "$tmp_dir"
+}
+
+install_delta() {
+  if command_exists delta; then
+    return
+  fi
+
+  if command_exists git-delta; then
+    ln -sf "$(command -v git-delta)" "$LOCAL_BIN/delta"
+    return
+  fi
+
+  os_name="$(uname -s)"
+  arch_name="$(uname -m)"
+
+  case "$os_name:$arch_name" in
+  Linux:x86_64 | Linux:amd64)
+    delta_asset_pattern="delta-[0-9][^/]*-x86_64-unknown-linux-musl[.]tar[.]gz$"
+    ;;
+  Linux:aarch64 | Linux:arm64)
+    delta_asset_pattern="delta-[0-9][^/]*-aarch64-unknown-linux-gnu[.]tar[.]gz$"
+    ;;
+  Darwin:x86_64 | Darwin:amd64)
+    delta_asset_pattern="delta-[0-9][^/]*-x86_64-apple-darwin[.]tar[.]gz$"
+    ;;
+  Darwin:aarch64 | Darwin:arm64)
+    delta_asset_pattern="delta-[0-9][^/]*-aarch64-apple-darwin[.]tar[.]gz$"
+    ;;
+  *)
+    warn "Skipping delta prebuilt install for unsupported platform: $os_name $arch_name"
+    return
+    ;;
+  esac
+
+  log "Installing delta from prebuilt release"
+  tmp_dir="$(mktemp -d)"
+  delta_archive="$tmp_dir/delta.tar.gz"
+  delta_url="$(github_latest_asset_url "dandavison/delta" "$delta_asset_pattern" || true)"
+
+  if [ -z "$delta_url" ]; then
+    rm -rf "$tmp_dir"
+    warn "Could not find a delta release asset matching: $delta_asset_pattern"
+    return
+  fi
+
+  if ! download_file "$delta_url" "$delta_archive"; then
+    rm -rf "$tmp_dir"
+    warn "Could not download delta release archive: $delta_url"
+    return
+  fi
+
+  if ! tar -xzf "$delta_archive" -C "$tmp_dir"; then
+    rm -rf "$tmp_dir"
+    warn "Could not extract delta release archive"
+    return
+  fi
+
+  delta_bin="$(find "$tmp_dir" -type f -name delta -perm -u+x | head -n 1)"
+  if [ -z "$delta_bin" ]; then
+    delta_bin="$(find "$tmp_dir" -type f -name delta | head -n 1)"
+  fi
+
+  if [ -z "$delta_bin" ]; then
+    rm -rf "$tmp_dir"
+    warn "delta archive did not contain a delta binary"
+    return
+  fi
+
+  mkdir -p "$LOCAL_BIN"
+  cp "$delta_bin" "$LOCAL_BIN/delta"
+  chmod +x "$LOCAL_BIN/delta"
+  rm -rf "$tmp_dir"
+}
+
+install_bat() {
+  if command_exists bat; then
+    return
+  fi
+
+  if command_exists batcat; then
+    ln -sf "$(command -v batcat)" "$LOCAL_BIN/bat"
+    return
+  fi
+
+  os_name="$(uname -s)"
+  arch_name="$(uname -m)"
+
+  case "$os_name:$arch_name" in
+  Linux:x86_64 | Linux:amd64)
+    bat_asset_pattern="bat-v[0-9][^/]*-x86_64-unknown-linux-musl[.]tar[.]gz$"
+    ;;
+  Linux:aarch64 | Linux:arm64)
+    bat_asset_pattern="bat-v[0-9][^/]*-aarch64-unknown-linux-musl[.]tar[.]gz$"
+    ;;
+  Darwin:x86_64 | Darwin:amd64)
+    bat_asset_pattern="bat-v[0-9][^/]*-x86_64-apple-darwin[.]tar[.]gz$"
+    ;;
+  Darwin:aarch64 | Darwin:arm64)
+    bat_asset_pattern="bat-v[0-9][^/]*-aarch64-apple-darwin[.]tar[.]gz$"
+    ;;
+  *)
+    warn "Skipping bat prebuilt install for unsupported platform: $os_name $arch_name"
+    return
+    ;;
+  esac
+
+  log "Installing bat from prebuilt release"
+  tmp_dir="$(mktemp -d)"
+  bat_archive="$tmp_dir/bat.tar.gz"
+  bat_url="$(github_latest_asset_url "sharkdp/bat" "$bat_asset_pattern" || true)"
+
+  if [ -z "$bat_url" ]; then
+    rm -rf "$tmp_dir"
+    warn "Could not find a bat release asset matching: $bat_asset_pattern"
+    return
+  fi
+
+  if ! download_file "$bat_url" "$bat_archive"; then
+    rm -rf "$tmp_dir"
+    warn "Could not download bat release archive: $bat_url"
+    return
+  fi
+
+  if ! tar -xzf "$bat_archive" -C "$tmp_dir"; then
+    rm -rf "$tmp_dir"
+    warn "Could not extract bat release archive"
+    return
+  fi
+
+  bat_bin="$(find "$tmp_dir" -type f -name bat -perm -u+x | head -n 1)"
+  if [ -z "$bat_bin" ]; then
+    bat_bin="$(find "$tmp_dir" -type f -name bat | head -n 1)"
+  fi
+
+  if [ -z "$bat_bin" ]; then
+    rm -rf "$tmp_dir"
+    warn "bat archive did not contain a bat binary"
+    return
+  fi
+
+  mkdir -p "$LOCAL_BIN"
+  cp "$bat_bin" "$LOCAL_BIN/bat"
+  chmod +x "$LOCAL_BIN/bat"
   rm -rf "$tmp_dir"
 }
 
@@ -668,6 +974,9 @@ install_runtime_clis() {
   install_yazi
   install_zellij
   install_viu
+  install_bat
+  install_gh
+  install_delta
   install_lazygit
 }
 
@@ -694,7 +1003,7 @@ install_mason_packages() {
   log "Installing Mason packages"
 
   mason_script="$(mktemp)"
-  cat > "$mason_script" <<'LUA'
+  cat >"$mason_script" <<'LUA'
 local packages = {}
 for name in string.gmatch(vim.env.MASON_PACKAGES or "", "%S+") do
   table.insert(packages, name)
@@ -782,7 +1091,7 @@ install_treesitter_parsers() {
   log "Installing tree-sitter parsers"
 
   ts_script="$(mktemp)"
-  cat > "$ts_script" <<'LUA'
+  cat >"$ts_script" <<'LUA'
 local parsers = {}
 for name in string.gmatch(vim.env.TS_PARSERS or "", "%S+") do
   table.insert(parsers, name)
@@ -865,6 +1174,24 @@ report_missing_optional_tools() {
   fi
 }
 
+report_cli_availability() {
+  missing=""
+
+  for tool_name in bat delta diff-so-fancy fd fzf gh git jq rg zellij; do
+    if ! command_exists "$tool_name"; then
+      missing="$missing $tool_name"
+    fi
+  done
+
+  if [ -n "$missing" ]; then
+    warn "Some expected CLI tools are unavailable after bootstrap:$missing"
+  fi
+
+  if command_exists git; then
+    log "Git version: $(git --version)"
+  fi
+}
+
 main() {
   ensure_profile_path
   install_os_packages
@@ -876,6 +1203,7 @@ main() {
   sync_lazy
   install_mason_packages
   install_treesitter_parsers
+  report_cli_availability
   report_missing_optional_tools
 
   log "Done. Start Neovim with: $NVIM_BIN"
