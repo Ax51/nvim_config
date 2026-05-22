@@ -948,6 +948,18 @@ install_bat() {
   rm -rf "$tmp_dir"
 }
 
+install_zoxide() {
+  if command_exists zoxide; then
+    return
+  fi
+
+  log "Installing zoxide with the official install script"
+  mkdir -p "$LOCAL_BIN"
+  curl -fsSL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh |
+    sh -s -- --bin-dir "$LOCAL_BIN" ||
+    warn "Could not install zoxide with the official install script"
+}
+
 install_lazygit() {
   if command_exists lazygit; then
     return
@@ -972,6 +984,7 @@ install_runtime_clis() {
   install_bat
   install_gh
   install_delta
+  install_zoxide
   install_lazygit
 }
 
@@ -1172,7 +1185,7 @@ report_missing_optional_tools() {
 report_cli_availability() {
   missing=""
 
-  for tool_name in bat delta diff-so-fancy fd fzf gh git jq rg zellij; do
+  for tool_name in bat delta diff-so-fancy fd fzf gh git jq rg zellij zoxide; do
     if ! command_exists "$tool_name"; then
       missing="$missing $tool_name"
     fi
