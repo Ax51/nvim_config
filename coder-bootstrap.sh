@@ -178,6 +178,7 @@ install_os_packages() {
       python3-pip \
       python3-venv \
       ripgrep \
+      rsync \
       shellcheck \
       shfmt \
       tar \
@@ -214,6 +215,7 @@ install_os_packages() {
       python3 \
       python3-pip \
       ripgrep \
+      rsync \
       ShellCheck \
       shfmt \
       tar \
@@ -246,6 +248,7 @@ install_os_packages() {
       python3 \
       python3-pip \
       ripgrep \
+      rsync \
       tar \
       tree-sitter-cli \
       unzip \
@@ -277,6 +280,7 @@ install_os_packages() {
       python3 \
       py3-pip \
       ripgrep \
+      rsync \
       shellcheck \
       shfmt \
       tar \
@@ -307,6 +311,7 @@ install_os_packages() {
       protobuf \
       python \
       ripgrep \
+      rsync \
       shellcheck \
       shfmt \
       tree-sitter \
@@ -314,7 +319,7 @@ install_os_packages() {
       xz \
       zsh
   else
-    warn "No supported package manager found. Install bat, curl, delta, diff-so-fancy, fd, fzf, gh, git, gcc/make, jq, zsh, node/npm, python3, ripgrep, luajit, shellcheck, shfmt, tree-sitter-cli, and clipboard tools manually."
+    warn "No supported package manager found. Install bat, curl, delta, diff-so-fancy, fd, fzf, gh, git, gcc/make, jq, rsync, zsh, node/npm, python3, ripgrep, luajit, shellcheck, shfmt, tree-sitter-cli, and clipboard tools manually."
   fi
 
   mkdir -p "$LOCAL_BIN"
