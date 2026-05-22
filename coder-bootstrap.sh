@@ -68,8 +68,9 @@ LOCAL_BIN="${LOCAL_BIN:-$HOME/.local/bin}"
 LOCAL_NVIM_DIR="${LOCAL_NVIM_DIR:-$HOME/.local/nvim}"
 NVIM_BIN="$LOCAL_BIN/nvim"
 
-MASON_PACKAGES="${MASON_PACKAGES:-lua-language-server pyright typescript-language-server deno biome mdx-analyzer css-lsp taplo bash-language-server marksman json-lsp rust-analyzer eslint_d prettierd stylua buf shfmt shellcheck tree-sitter-cli}"
+MASON_PACKAGES="${MASON_PACKAGES:-lua-language-server pyright typescript-language-server deno biome mdx-analyzer css-lsp taplo bash-language-server marksman json-lsp rust-analyzer eslint_d prettierd stylua buf shfmt shellcheck}"
 TS_PARSERS="${TS_PARSERS:-bash css ghactions go html javascript jsdoc json lua markdown markdown_inline proto python regex rust toml tsx typescript yaml}"
+TREE_SITTER_CLI_NPM_VERSION="${TREE_SITTER_CLI_NPM_VERSION:-0.25.9}"
 
 log() {
   printf '%s\n' "==> $*"
@@ -157,6 +158,7 @@ install_os_packages() {
       shellcheck \
       shfmt \
       tar \
+      tree-sitter-cli \
       unzip \
       wl-clipboard \
       xclip \
@@ -187,6 +189,7 @@ install_os_packages() {
       ShellCheck \
       shfmt \
       tar \
+      tree-sitter-cli \
       unzip \
       wl-clipboard \
       xclip \
@@ -211,6 +214,7 @@ install_os_packages() {
       python3-pip \
       ripgrep \
       tar \
+      tree-sitter-cli \
       unzip \
       xclip \
       xz \
@@ -238,6 +242,7 @@ install_os_packages() {
       shellcheck \
       shfmt \
       tar \
+      tree-sitter-cli \
       unzip \
       wl-clipboard \
       xclip \
@@ -266,7 +271,7 @@ install_os_packages() {
       xz \
       zsh
   else
-    warn "No supported package manager found. Install curl, git, gcc/make, zsh, node/npm, python3, ripgrep, fd, fzf, luajit, shellcheck, shfmt, and clipboard tools manually."
+    warn "No supported package manager found. Install curl, git, gcc/make, zsh, node/npm, python3, ripgrep, fd, fzf, luajit, shellcheck, shfmt, tree-sitter-cli, and clipboard tools manually."
   fi
 
   mkdir -p "$LOCAL_BIN"
@@ -378,6 +383,54 @@ install_deno() {
   log "Installing Deno"
   curl -fsSL https://deno.land/install.sh | sh
   export PATH="$HOME/.deno/bin:$PATH"
+}
+
+tree_sitter_cli_works() {
+  command_exists tree-sitter \
+    && tree-sitter --version >/dev/null 2>&1 \
+    && tree-sitter build --help >/dev/null 2>&1
+}
+
+install_rust() {
+  if command_exists cargo; then
+    return 0
+  fi
+
+  log "Installing Rust toolchain for tree-sitter-cli fallback"
+  if ! curl -fsSL https://sh.rustup.rs | sh -s -- -y --profile minimal; then
+    warn "Could not install Rust toolchain"
+    return 1
+  fi
+
+  export PATH="$HOME/.cargo/bin:$PATH"
+}
+
+install_tree_sitter_cli() {
+  if tree_sitter_cli_works; then
+    return
+  fi
+
+  if command_exists npm; then
+    log "Installing tree-sitter CLI with npm"
+    npm install -g --prefix "$HOME/.local" "tree-sitter-cli@$TREE_SITTER_CLI_NPM_VERSION" \
+      || warn "Could not install tree-sitter CLI with npm"
+
+    if tree_sitter_cli_works; then
+      return
+    fi
+  fi
+
+  if install_rust; then
+    log "Installing tree-sitter CLI from source with cargo"
+    cargo install --locked --root "$HOME/.local" "tree-sitter-cli" \
+      || warn "Could not install tree-sitter CLI with cargo"
+
+    if tree_sitter_cli_works; then
+      return
+    fi
+  fi
+
+  warn "tree-sitter CLI is still unavailable or incompatible; tree-sitter parser installation may fail"
 }
 
 install_yazi() {
@@ -558,6 +611,7 @@ install_lazygit() {
 install_runtime_clis() {
   install_bun
   install_deno
+  install_tree_sitter_cli
 
   install_yazi
   install_zellij
