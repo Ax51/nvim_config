@@ -352,6 +352,7 @@ install_neovim() {
 ensure_profile_path() {
   # shellcheck disable=SC2016
   path_line='export PATH="$HOME/.local/bin:$HOME/.local/share/nvim/mason/bin:$HOME/.bun/bin:$HOME/.deno/bin:$HOME/go/bin:$PATH"'
+  nvim_alias="alias nvim='$NVIM_BIN'"
 
   for profile_file in "$HOME/.profile" "$HOME/.zshrc"; do
     if [ ! -f "$profile_file" ] || ! grep -F "$path_line" "$profile_file" >/dev/null 2>&1; then
@@ -359,6 +360,10 @@ ensure_profile_path() {
         printf '\n%s\n' '# Added by nvim coder bootstrap'
         printf '%s\n' "$path_line"
       } >> "$profile_file"
+    fi
+
+    if ! grep -F "$nvim_alias" "$profile_file" >/dev/null 2>&1; then
+      printf '%s\n' "$nvim_alias" >> "$profile_file"
     fi
   done
 
