@@ -9,7 +9,9 @@ Core configuration lives in `lua/core`, plugin specs live in `lua/plugins`, LSP 
 On a fresh Coder or remote development machine, run:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Ax51/nvim_config/main/coder-bootstrap.sh | sh
+curl -fsSL \
+  -H "Cache-Control: no-cache" \
+  "https://raw.githubusercontent.com/Ax51/nvim_config/main/coder-bootstrap.sh?$(date +%s)" | sh
 ```
 
 The bootstrap script installs Neovim, backs up any existing `~/.config/nvim` directory to `~/.config/nvim.bak.<timestamp>`, clones this config, installs required CLI tools, syncs Lazy plugins, installs Mason packages, and installs tree-sitter parsers.
@@ -19,8 +21,12 @@ The script can be customized with environment variables:
 ```sh
 NVIM_CONFIG_BRANCH=main \
 NVIM_CONFIG_DIR="$HOME/.config/nvim" \
-curl -fsSL https://raw.githubusercontent.com/Ax51/nvim_config/main/coder-bootstrap.sh | sh
+curl -fsSL \
+  -H "Cache-Control: no-cache" \
+  "https://raw.githubusercontent.com/Ax51/nvim_config/main/coder-bootstrap.sh?$(date +%s)" | sh
 ```
+
+The timestamp query avoids stale responses from CDN or corporate proxy caches while still serving the same `main` branch file.
 
 ## Manual Setup
 
