@@ -346,7 +346,7 @@ install_neovim() {
 
 ensure_profile_path() {
   # shellcheck disable=SC2016
-  path_line='export PATH="$HOME/.local/bin:$HOME/.local/share/nvim/mason/bin:$HOME/.cargo/bin:$HOME/.bun/bin:$HOME/.deno/bin:$HOME/go/bin:$PATH"'
+  path_line='export PATH="$HOME/.local/bin:$HOME/.local/share/nvim/mason/bin:$HOME/.bun/bin:$HOME/.deno/bin:$HOME/go/bin:$PATH"'
 
   for profile_file in "$HOME/.profile" "$HOME/.zshrc"; do
     if [ ! -f "$profile_file" ] || ! grep -F "$path_line" "$profile_file" >/dev/null 2>&1; then
@@ -357,17 +357,7 @@ ensure_profile_path() {
     fi
   done
 
-  export PATH="$HOME/.local/bin:$HOME/.local/share/nvim/mason/bin:$HOME/.cargo/bin:$HOME/.bun/bin:$HOME/.deno/bin:$HOME/go/bin:$PATH"
-}
-
-install_rust() {
-  if command_exists cargo; then
-    return
-  fi
-
-  log "Installing Rust toolchain"
-  curl -fsSL https://sh.rustup.rs | sh -s -- -y --profile minimal
-  export PATH="$HOME/.cargo/bin:$PATH"
+  export PATH="$HOME/.local/bin:$HOME/.local/share/nvim/mason/bin:$HOME/.bun/bin:$HOME/.deno/bin:$HOME/go/bin:$PATH"
 }
 
 install_bun() {
@@ -390,23 +380,166 @@ install_deno() {
   export PATH="$HOME/.deno/bin:$PATH"
 }
 
-cargo_install_crate_if_missing() {
-  binary_name="$1"
-  crate_name="$2"
-
-  if command_exists "$binary_name"; then
+install_yazi() {
+  if command_exists yazi && command_exists ya; then
     return
   fi
 
-  if ! command_exists cargo; then
-    warn "Skipping $binary_name because cargo is unavailable"
+  os_name="$(uname -s)"
+  arch_name="$(uname -m)"
+
+  case "$os_name:$arch_name" in
+    Linux:x86_64|Linux:amd64)
+      yazi_target="x86_64-unknown-linux-musl"
+      ;;
+    Linux:aarch64|Linux:arm64)
+      yazi_target="aarch64-unknown-linux-musl"
+      ;;
+    Darwin:x86_64|Darwin:amd64)
+      yazi_target="x86_64-apple-darwin"
+      ;;
+    Darwin:aarch64|Darwin:arm64)
+      yazi_target="aarch64-apple-darwin"
+      ;;
+    *)
+      warn "Skipping Yazi prebuilt install for unsupported platform: $os_name $arch_name"
+      return
+      ;;
+  esac
+
+  log "Installing Yazi from prebuilt release"
+  tmp_dir="$(mktemp -d)"
+  yazi_archive="$tmp_dir/yazi.zip"
+  yazi_url="https://github.com/sxyazi/yazi/releases/latest/download/yazi-$yazi_target.zip"
+
+  if ! download_file "$yazi_url" "$yazi_archive"; then
+    rm -rf "$tmp_dir"
+    warn "Could not download Yazi release archive: $yazi_url"
     return
   fi
 
-  log "Installing $binary_name with cargo"
-  if ! cargo install --locked "$crate_name"; then
-    warn "Could not install $binary_name with cargo"
+  if ! unzip -q "$yazi_archive" -d "$tmp_dir/extract"; then
+    rm -rf "$tmp_dir"
+    warn "Could not extract Yazi release archive"
+    return
   fi
+
+  yazi_bin="$(find "$tmp_dir/extract" -type f -name yazi -perm -u+x | head -n 1)"
+  ya_bin="$(find "$tmp_dir/extract" -type f -name ya -perm -u+x | head -n 1)"
+
+  if [ -z "$yazi_bin" ] || [ -z "$ya_bin" ]; then
+    yazi_bin="$(find "$tmp_dir/extract" -type f -name yazi | head -n 1)"
+    ya_bin="$(find "$tmp_dir/extract" -type f -name ya | head -n 1)"
+  fi
+
+  if [ -z "$yazi_bin" ] || [ -z "$ya_bin" ]; then
+    rm -rf "$tmp_dir"
+    warn "Yazi archive did not contain both yazi and ya binaries"
+    return
+  fi
+
+  mkdir -p "$LOCAL_BIN"
+  cp "$yazi_bin" "$LOCAL_BIN/yazi"
+  cp "$ya_bin" "$LOCAL_BIN/ya"
+  chmod +x "$LOCAL_BIN/yazi" "$LOCAL_BIN/ya"
+  rm -rf "$tmp_dir"
+}
+
+install_zellij() {
+  if command_exists zellij; then
+    return
+  fi
+
+  os_name="$(uname -s)"
+  arch_name="$(uname -m)"
+
+  case "$os_name:$arch_name" in
+    Linux:x86_64|Linux:amd64)
+      zellij_target="x86_64-unknown-linux-musl"
+      ;;
+    Linux:aarch64|Linux:arm64)
+      zellij_target="aarch64-unknown-linux-musl"
+      ;;
+    Darwin:x86_64|Darwin:amd64)
+      zellij_target="x86_64-apple-darwin"
+      ;;
+    Darwin:aarch64|Darwin:arm64)
+      zellij_target="aarch64-apple-darwin"
+      ;;
+    *)
+      warn "Skipping Zellij prebuilt install for unsupported platform: $os_name $arch_name"
+      return
+      ;;
+  esac
+
+  log "Installing Zellij from prebuilt release"
+  tmp_dir="$(mktemp -d)"
+  zellij_archive="$tmp_dir/zellij.tar.gz"
+  zellij_url="https://github.com/zellij-org/zellij/releases/latest/download/zellij-$zellij_target.tar.gz"
+
+  if ! download_file "$zellij_url" "$zellij_archive"; then
+    rm -rf "$tmp_dir"
+    warn "Could not download Zellij release archive: $zellij_url"
+    return
+  fi
+
+  if ! tar -xzf "$zellij_archive" -C "$tmp_dir"; then
+    rm -rf "$tmp_dir"
+    warn "Could not extract Zellij release archive"
+    return
+  fi
+
+  zellij_bin="$(find "$tmp_dir" -type f -name zellij -perm -u+x | head -n 1)"
+
+  if [ -z "$zellij_bin" ]; then
+    zellij_bin="$(find "$tmp_dir" -type f -name zellij | head -n 1)"
+  fi
+
+  if [ -z "$zellij_bin" ]; then
+    rm -rf "$tmp_dir"
+    warn "Zellij archive did not contain a zellij binary"
+    return
+  fi
+
+  mkdir -p "$LOCAL_BIN"
+  cp "$zellij_bin" "$LOCAL_BIN/zellij"
+  chmod +x "$LOCAL_BIN/zellij"
+  rm -rf "$tmp_dir"
+}
+
+install_viu() {
+  if command_exists viu; then
+    return
+  fi
+
+  os_name="$(uname -s)"
+  arch_name="$(uname -m)"
+
+  case "$os_name:$arch_name" in
+    Linux:x86_64|Linux:amd64)
+      viu_target="x86_64-unknown-linux-musl"
+      ;;
+    *)
+      warn "Skipping Viu prebuilt install for unsupported platform: $os_name $arch_name"
+      return
+      ;;
+  esac
+
+  log "Installing Viu from prebuilt release"
+  tmp_dir="$(mktemp -d)"
+  viu_bin="$tmp_dir/viu"
+  viu_url="https://github.com/atanunq/viu/releases/latest/download/viu-$viu_target"
+
+  if ! download_file "$viu_url" "$viu_bin"; then
+    rm -rf "$tmp_dir"
+    warn "Could not download Viu release binary: $viu_url"
+    return
+  fi
+
+  mkdir -p "$LOCAL_BIN"
+  cp "$viu_bin" "$LOCAL_BIN/viu"
+  chmod +x "$LOCAL_BIN/viu"
+  rm -rf "$tmp_dir"
 }
 
 install_lazygit() {
@@ -423,14 +556,12 @@ install_lazygit() {
 }
 
 install_runtime_clis() {
-  install_rust
   install_bun
   install_deno
 
-  cargo_install_crate_if_missing yazi yazi-fm
-  cargo_install_crate_if_missing ya yazi-cli
-  cargo_install_crate_if_missing zellij zellij
-  cargo_install_crate_if_missing viu viu
+  install_yazi
+  install_zellij
+  install_viu
   install_lazygit
 }
 
