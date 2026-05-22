@@ -12,6 +12,55 @@ set -eu
 #   NVIM_CONFIG_BRANCH=main
 #   NVIM_CONFIG_DIR="$HOME/.config/nvim"
 
+detect_home_dir() {
+  if [ -n "${HOME:-}" ]; then
+    printf '%s\n' "$HOME"
+    return
+  fi
+
+  current_uid="$(id -u 2>/dev/null || true)"
+  current_user="$(id -un 2>/dev/null || true)"
+
+  if [ -n "$current_user" ] && command -v getent >/dev/null 2>&1; then
+    detected_home="$(getent passwd "$current_user" | awk -F: '{ print $6; exit }' || true)"
+    if [ -n "$detected_home" ]; then
+      printf '%s\n' "$detected_home"
+      return
+    fi
+  fi
+
+  case "$current_user" in
+    ""|*[!A-Za-z0-9._-]*)
+      ;;
+    *)
+      detected_home="$(eval "printf '%s' ~$current_user" 2>/dev/null || true)"
+      if [ -n "$detected_home" ] && [ "$detected_home" != "~$current_user" ]; then
+        printf '%s\n' "$detected_home"
+        return
+      fi
+      ;;
+  esac
+
+  if [ -n "$current_uid" ] && [ -r /etc/passwd ]; then
+    detected_home="$(awk -F: -v uid="$current_uid" '$3 == uid { print $6; exit }' /etc/passwd || true)"
+    if [ -n "$detected_home" ]; then
+      printf '%s\n' "$detected_home"
+      return
+    fi
+  fi
+
+  if [ -n "${PWD:-}" ]; then
+    printf '%s\n' "$PWD"
+    return
+  fi
+
+  printf '%s\n' "ERROR: HOME is unset and no fallback home directory could be detected" >&2
+  exit 1
+}
+
+HOME="$(detect_home_dir)"
+export HOME
+
 NVIM_CONFIG_REPO="${NVIM_CONFIG_REPO:-https://github.com/Ax51/nvim_config.git}"
 NVIM_CONFIG_BRANCH="${NVIM_CONFIG_BRANCH:-main}"
 NVIM_CONFIG_DIR="${NVIM_CONFIG_DIR:-$HOME/.config/nvim}"
