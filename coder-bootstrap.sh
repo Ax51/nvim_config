@@ -354,7 +354,7 @@ ensure_profile_path() {
   path_line='export PATH="$HOME/.local/bin:$HOME/.local/share/nvim/mason/bin:$HOME/.bun/bin:$HOME/.deno/bin:$HOME/go/bin:$PATH"'
   nvim_alias="alias nvim='$NVIM_BIN'"
 
-  for profile_file in "$HOME/.profile" "$HOME/.zshrc"; do
+  for profile_file in "$HOME/.profile" "$HOME/.bashrc" "$HOME/.bash_profile" "$HOME/.zshrc"; do
     if [ ! -f "$profile_file" ] || ! grep -F "$path_line" "$profile_file" >/dev/null 2>&1; then
       {
         printf '\n%s\n' '# Added by nvim coder bootstrap'
@@ -368,6 +368,53 @@ ensure_profile_path() {
   done
 
   export PATH="$HOME/.local/bin:$HOME/.local/share/nvim/mason/bin:$HOME/.bun/bin:$HOME/.deno/bin:$HOME/go/bin:$PATH"
+}
+
+set_zsh_login_shell() {
+  zsh_path="$(command -v zsh || true)"
+
+  if [ -z "$zsh_path" ]; then
+    warn "zsh is not available; leaving login shell unchanged"
+    return
+  fi
+
+  if [ "$(id -u)" -eq 0 ] && [ -w /etc/shells ] && ! grep -Fx "$zsh_path" /etc/shells >/dev/null 2>&1; then
+    printf '%s\n' "$zsh_path" >> /etc/shells
+  fi
+
+  current_shell="$(getent passwd "$(id -un)" 2>/dev/null | awk -F: '{ print $7; exit }' || true)"
+
+  if [ "$current_shell" = "$zsh_path" ]; then
+    return
+  fi
+
+  if command_exists chsh; then
+    if chsh -s "$zsh_path" "$(id -un)" >/dev/null 2>&1; then
+      log "Set default login shell to $zsh_path"
+      return
+    fi
+
+    if [ "$(id -u)" -ne 0 ] && command_exists sudo; then
+      if sudo chsh -s "$zsh_path" "$(id -un)" >/dev/null 2>&1; then
+        log "Set default login shell to $zsh_path"
+        return
+      fi
+    fi
+  fi
+
+  if [ "$(id -u)" -eq 0 ] && command_exists usermod; then
+    target_user="$(id -un)"
+    if [ -n "${SUDO_USER:-}" ] && [ "$SUDO_USER" != "root" ]; then
+      target_user="$SUDO_USER"
+    fi
+
+    if usermod --shell "$zsh_path" "$target_user" >/dev/null 2>&1; then
+      log "Set default login shell for $target_user to $zsh_path"
+      return
+    fi
+  fi
+
+  warn "Could not change the login shell automatically. Run: chsh -s $zsh_path"
 }
 
 install_bun() {
@@ -821,6 +868,7 @@ report_missing_optional_tools() {
 main() {
   ensure_profile_path
   install_os_packages
+  set_zsh_login_shell
   install_neovim
   install_runtime_clis
   backup_existing_config
