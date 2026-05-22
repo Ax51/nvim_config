@@ -60,4 +60,7 @@ vim.opt.fillchars = {
 vim.opt.termguicolors = true
 
 -- NOTE: add luarocks path
-package.cpath = package.cpath .. ";" .. os.getenv("HOME") .. "/.luarocks/lib/lua/5.1/?.so"
+local home_dir = vim.env.HOME or vim.uv.os_homedir()
+if home_dir ~= nil and home_dir ~= "" then
+  package.cpath = package.cpath .. ";" .. home_dir .. "/.luarocks/lib/lua/5.1/?.so"
+end
