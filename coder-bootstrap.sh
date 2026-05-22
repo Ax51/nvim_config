@@ -68,7 +68,7 @@ LOCAL_BIN="${LOCAL_BIN:-$HOME/.local/bin}"
 LOCAL_NVIM_DIR="${LOCAL_NVIM_DIR:-$HOME/.local/nvim}"
 NVIM_BIN="$LOCAL_BIN/nvim"
 
-MASON_PACKAGES="${MASON_PACKAGES:-lua-language-server pyright typescript-language-server deno biome mdx-analyzer css-lsp taplo bash-language-server marksman json-lsp rust-analyzer eslint_d prettierd stylua buf shfmt shellcheck}"
+MASON_PACKAGES="${MASON_PACKAGES:-lua-language-server pyright typescript-language-server deno biome mdx-analyzer css-lsp taplo bash-language-server marksman json-lsp rust-analyzer eslint_d prettierd stylua buf shfmt shellcheck tree-sitter-cli}"
 TS_PARSERS="${TS_PARSERS:-bash css ghactions go html javascript jsdoc json lua markdown markdown_inline proto python regex rust toml tsx typescript yaml}"
 
 log() {
@@ -687,25 +687,47 @@ if ok_lazy then
   lazy.load({ plugins = { "nvim-treesitter" } })
 end
 
+local ok_ts, ts = pcall(require, "nvim-treesitter")
+if not ok_ts then
+  vim.api.nvim_err_writeln("nvim-treesitter is not available")
+  vim.cmd("cquit")
+end
+
 local ok_parsers, parser_config = pcall(require, "nvim-treesitter.parsers")
 if not ok_parsers then
   vim.api.nvim_err_writeln("nvim-treesitter parser module is not available")
   vim.cmd("cquit")
 end
 
-parser_config.ghactions = {
-  install_info = {
-    url = "https://github.com/rmuir/tree-sitter-ghactions",
-    queries = "queries",
-  },
-}
+local function register_ghactions_parser()
+  parser_config.ghactions = {
+    install_info = {
+      url = "https://github.com/rmuir/tree-sitter-ghactions",
+      queries = "queries",
+    },
+  }
+end
+
+register_ghactions_parser()
+vim.api.nvim_create_autocmd("User", {
+  pattern = "TSUpdate",
+  callback = function()
+    parser_config = require("nvim-treesitter.parsers")
+    register_ghactions_parser()
+  end,
+})
 
 local failed = {}
-for _, name in ipairs(parsers) do
-  local ok_install, err = pcall(vim.cmd, "TSInstallSync " .. name)
-  if not ok_install then
-    table.insert(failed, name .. " (" .. tostring(err) .. ")")
-  end
+local install_task = ts.install(parsers, {
+  max_jobs = 4,
+  summary = true,
+})
+local ok_install, install_result = install_task:pwait(900000)
+
+if not ok_install then
+  table.insert(failed, tostring(install_result))
+elseif install_result ~= true then
+  table.insert(failed, "one or more parser installs failed")
 end
 
 if #failed > 0 then
