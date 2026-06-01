@@ -11,6 +11,5 @@ return {
         accept_line = "<M-.>",
       },
     },
-    copilot_model = "gpt-41-copilot",
   },
 }
