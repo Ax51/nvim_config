@@ -13,6 +13,7 @@ set -eu
 #   NVIM_CONFIG_BRANCH=main
 #   NVIM_CONFIG_DIR="$HOME/.config/nvim"
 #   SET_ZSH_LOGIN_SHELL=1
+#   BOOTSTRAP_VERBOSE=1
 
 detect_home_dir() {
   if [ -n "${HOME:-}" ]; then
@@ -74,6 +75,11 @@ MASON_PACKAGES="${MASON_PACKAGES:-lua-language-server pyright typescript-languag
 TS_PARSERS="${TS_PARSERS:-bash css ghactions go html javascript jsdoc json lua markdown markdown_inline proto python regex rust toml tsx typescript yaml}"
 TREE_SITTER_CLI_NPM_VERSION="${TREE_SITTER_CLI_NPM_VERSION:-0.25.9}"
 SET_ZSH_LOGIN_SHELL="${SET_ZSH_LOGIN_SHELL:-0}"
+BOOTSTRAP_VERBOSE="${BOOTSTRAP_VERBOSE:-0}"
+
+if [ "$BOOTSTRAP_VERBOSE" = "1" ]; then
+  set -x
+fi
 
 log() {
   printf '%s\n' "==> $*"
@@ -147,6 +153,7 @@ install_npm_package_if_missing() {
   fi
 
   log "Installing $binary_name with npm"
+  log "Running npm install for $package_name"
   npm install -g --prefix "$HOME/.local" "$package_name" ||
     warn "Could not install $binary_name with npm"
 }
@@ -346,12 +353,44 @@ download_file() {
   url="$1"
   output="$2"
 
+  log "Downloading $url"
+
   if command_exists curl; then
-    curl -fL "$url" -o "$output"
+    if [ "$BOOTSTRAP_VERBOSE" = "1" ]; then
+      curl -fLv "$url" -o "$output"
+    else
+      curl -fL "$url" -o "$output"
+    fi
   elif command_exists wget; then
-    wget -O "$output" "$url"
+    if [ "$BOOTSTRAP_VERBOSE" = "1" ]; then
+      wget -d -O "$output" "$url"
+    else
+      wget -O "$output" "$url"
+    fi
   else
     die "Need curl or wget to download $url"
+  fi
+}
+
+fetch_url() {
+  url="$1"
+
+  warn "Fetching $url"
+
+  if command_exists curl; then
+    if [ "$BOOTSTRAP_VERBOSE" = "1" ]; then
+      curl -fLsv "$url"
+    else
+      curl -fsSL "$url"
+    fi
+  elif command_exists wget; then
+    if [ "$BOOTSTRAP_VERBOSE" = "1" ]; then
+      wget -d -qO- "$url"
+    else
+      wget -qO- "$url"
+    fi
+  else
+    return 1
   fi
 }
 
@@ -360,13 +399,8 @@ github_latest_asset_url() {
   asset_pattern="$2"
   api_url="https://api.github.com/repos/$repo/releases/latest"
 
-  if command_exists curl; then
-    curl -fsSL "$api_url"
-  elif command_exists wget; then
-    wget -qO- "$api_url"
-  else
-    return 1
-  fi | awk -F'"' -v pattern="$asset_pattern" '
+  warn "Resolving latest GitHub release asset for $repo matching $asset_pattern"
+  fetch_url "$api_url" | awk -F'"' -v pattern="$asset_pattern" '
     $2 == "browser_download_url" {
       url = $4
       if (matched == "" && url ~ pattern) {
@@ -510,7 +544,9 @@ install_bun() {
   fi
 
   log "Installing Bun"
-  curl -fsSL https://bun.sh/install | bash
+  bun_install_url="https://bun.sh/install"
+  warn "Fetching $bun_install_url"
+  fetch_url "$bun_install_url" | bash
   export PATH="$HOME/.bun/bin:$PATH"
 }
 
@@ -520,7 +556,9 @@ install_deno() {
   fi
 
   log "Installing Deno"
-  curl -fsSL https://deno.land/install.sh | sh
+  deno_install_url="https://deno.land/install.sh"
+  warn "Fetching $deno_install_url"
+  fetch_url "$deno_install_url" | sh
   export PATH="$HOME/.deno/bin:$PATH"
 }
 
@@ -536,7 +574,9 @@ install_rust() {
   fi
 
   log "Installing Rust toolchain for tree-sitter-cli fallback"
-  if ! curl -fsSL https://sh.rustup.rs | sh -s -- -y --profile minimal; then
+  rustup_install_url="https://sh.rustup.rs"
+  warn "Fetching $rustup_install_url"
+  if ! fetch_url "$rustup_install_url" | sh -s -- -y --profile minimal; then
     warn "Could not install Rust toolchain"
     return 1
   fi
@@ -551,6 +591,7 @@ install_tree_sitter_cli() {
 
   if command_exists npm; then
     log "Installing tree-sitter CLI with npm"
+    log "Running npm install for tree-sitter-cli@$TREE_SITTER_CLI_NPM_VERSION"
     npm install -g --prefix "$HOME/.local" "tree-sitter-cli@$TREE_SITTER_CLI_NPM_VERSION" ||
       warn "Could not install tree-sitter CLI with npm"
 
@@ -561,6 +602,7 @@ install_tree_sitter_cli() {
 
   if install_rust; then
     log "Installing tree-sitter CLI from source with cargo"
+    log "Running cargo install for tree-sitter-cli"
     cargo install --locked --root "$HOME/.local" "tree-sitter-cli" ||
       warn "Could not install tree-sitter CLI with cargo"
 
@@ -968,8 +1010,9 @@ install_zoxide() {
 
   log "Installing zoxide with the official install script"
   mkdir -p "$LOCAL_BIN"
-  curl -fsSL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh |
-    sh -s -- --bin-dir "$LOCAL_BIN" ||
+  zoxide_install_url="https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh"
+  warn "Fetching $zoxide_install_url"
+  fetch_url "$zoxide_install_url" | sh -s -- --bin-dir "$LOCAL_BIN" ||
     warn "Could not install zoxide with the official install script"
 }
 
@@ -980,6 +1023,7 @@ install_lazygit() {
 
   if command_exists go; then
     log "Installing lazygit with go"
+    log "Running go install github.com/jesseduffield/lazygit@latest"
     GOBIN="$LOCAL_BIN" go install github.com/jesseduffield/lazygit@latest || warn "Could not install lazygit with go"
   else
     warn "Skipping lazygit because go is unavailable"
@@ -1011,6 +1055,7 @@ backup_existing_config() {
 
 clone_config() {
   log "Cloning Neovim config"
+  log "Running git clone for $NVIM_CONFIG_REPO branch $NVIM_CONFIG_BRANCH"
   mkdir -p "$(dirname "$NVIM_CONFIG_DIR")"
   git clone --depth 1 --branch "$NVIM_CONFIG_BRANCH" "$NVIM_CONFIG_REPO" "$NVIM_CONFIG_DIR"
 }

@@ -28,6 +28,15 @@ curl -fsSL \
 
 The timestamp query avoids stale responses from CDN or corporate proxy caches while still serving the same `main` branch file.
 
+For troubleshooting network failures, enable verbose mode:
+
+```sh
+BOOTSTRAP_VERBOSE=1 \
+curl -fsSL \
+  -H "Cache-Control: no-cache" \
+  "https://raw.githubusercontent.com/Ax51/nvim_config/main/ssh-bootstrap.sh?$(date +%s)" | sh
+```
+
 By default the script installs `zsh` for Neovim shell usage but does not change the account login shell. To make new SSH sessions start in `zsh`, run:
 
 ```sh
