@@ -545,7 +545,6 @@ install_bun() {
 
   log "Installing Bun"
   bun_install_url="https://bun.sh/install"
-  warn "Fetching $bun_install_url"
   fetch_url "$bun_install_url" | bash
   export PATH="$HOME/.bun/bin:$PATH"
 }
@@ -557,8 +556,14 @@ install_deno() {
 
   log "Installing Deno"
   deno_install_url="https://deno.land/install.sh"
-  warn "Fetching $deno_install_url"
-  fetch_url "$deno_install_url" | sh
+  deno_install_script="$(mktemp)"
+  if ! download_file "$deno_install_url" "$deno_install_script"; then
+    rm -f "$deno_install_script"
+    warn "Could not download Deno install script"
+    return
+  fi
+  printf 'n\n' | sh "$deno_install_script"
+  rm -f "$deno_install_script"
   export PATH="$HOME/.deno/bin:$PATH"
 }
 
@@ -575,7 +580,6 @@ install_rust() {
 
   log "Installing Rust toolchain for tree-sitter-cli fallback"
   rustup_install_url="https://sh.rustup.rs"
-  warn "Fetching $rustup_install_url"
   if ! fetch_url "$rustup_install_url" | sh -s -- -y --profile minimal; then
     warn "Could not install Rust toolchain"
     return 1
@@ -1011,7 +1015,6 @@ install_zoxide() {
   log "Installing zoxide with the official install script"
   mkdir -p "$LOCAL_BIN"
   zoxide_install_url="https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh"
-  warn "Fetching $zoxide_install_url"
   fetch_url "$zoxide_install_url" | sh -s -- --bin-dir "$LOCAL_BIN" ||
     warn "Could not install zoxide with the official install script"
 }
