@@ -6,12 +6,12 @@ Core configuration lives in `lua/core`, plugin specs live in `lua/plugins`, LSP 
 
 ## Fresh Machine Bootstrap
 
-On a fresh Coder or remote development machine, run:
+On a fresh GitHub Codespaces, Coder, or remote development machine, run:
 
 ```sh
 curl -fsSL \
   -H "Cache-Control: no-cache" \
-  "https://raw.githubusercontent.com/Ax51/nvim_config/main/coder-bootstrap.sh?$(date +%s)" | sh
+  "https://raw.githubusercontent.com/Ax51/nvim_config/main/ssh-bootstrap.sh?$(date +%s)" | sh
 ```
 
 The bootstrap script installs Neovim, backs up any existing `~/.config/nvim` directory to `~/.config/nvim.bak.<timestamp>`, clones this config, installs required CLI tools, syncs Lazy plugins, installs Mason packages, and installs tree-sitter parsers.
@@ -23,10 +23,19 @@ NVIM_CONFIG_BRANCH=main \
 NVIM_CONFIG_DIR="$HOME/.config/nvim" \
 curl -fsSL \
   -H "Cache-Control: no-cache" \
-  "https://raw.githubusercontent.com/Ax51/nvim_config/main/coder-bootstrap.sh?$(date +%s)" | sh
+  "https://raw.githubusercontent.com/Ax51/nvim_config/main/ssh-bootstrap.sh?$(date +%s)" | sh
 ```
 
 The timestamp query avoids stale responses from CDN or corporate proxy caches while still serving the same `main` branch file.
+
+By default the script installs `zsh` for Neovim shell usage but does not change the account login shell. To make new SSH sessions start in `zsh`, run:
+
+```sh
+SET_ZSH_LOGIN_SHELL=1 \
+curl -fsSL \
+  -H "Cache-Control: no-cache" \
+  "https://raw.githubusercontent.com/Ax51/nvim_config/main/ssh-bootstrap.sh?$(date +%s)" | sh
+```
 
 ## Manual Setup
 

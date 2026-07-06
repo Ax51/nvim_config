@@ -2,15 +2,17 @@
 
 set -eu
 
-# Bootstrap this Neovim config on a fresh Linux/Coder machine.
+# Bootstrap this Neovim config on a fresh Linux development machine.
+# Works for GitHub Codespaces, Coder workspaces, and regular remote VMs.
 #
 # Intended usage:
-#   curl -fsSL https://raw.githubusercontent.com/Ax51/nvim_config/main/coder-bootstrap.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/Ax51/nvim_config/main/ssh-bootstrap.sh | sh
 #
 # Useful overrides:
 #   NVIM_CONFIG_REPO=https://github.com/Ax51/nvim_config.git
 #   NVIM_CONFIG_BRANCH=main
 #   NVIM_CONFIG_DIR="$HOME/.config/nvim"
+#   SET_ZSH_LOGIN_SHELL=1
 
 detect_home_dir() {
   if [ -n "${HOME:-}" ]; then
@@ -71,6 +73,7 @@ NVIM_BIN="$LOCAL_BIN/nvim"
 MASON_PACKAGES="${MASON_PACKAGES:-lua-language-server pyright typescript-language-server deno biome mdx-analyzer css-lsp taplo bash-language-server marksman json-lsp rust-analyzer eslint_d prettierd stylua buf shfmt shellcheck}"
 TS_PARSERS="${TS_PARSERS:-bash css ghactions go html javascript jsdoc json lua markdown markdown_inline proto python regex rust toml tsx typescript yaml}"
 TREE_SITTER_CLI_NPM_VERSION="${TREE_SITTER_CLI_NPM_VERSION:-0.25.9}"
+SET_ZSH_LOGIN_SHELL="${SET_ZSH_LOGIN_SHELL:-0}"
 
 log() {
   printf '%s\n' "==> $*"
@@ -440,7 +443,7 @@ ensure_profile_path() {
   for profile_file in "$HOME/.profile" "$HOME/.bashrc" "$HOME/.bash_profile" "$HOME/.zshrc"; do
     if [ ! -f "$profile_file" ] || ! grep -F "$path_line" "$profile_file" >/dev/null 2>&1; then
       {
-        printf '\n%s\n' '# Added by nvim coder bootstrap'
+        printf '\n%s\n' '# Added by nvim ssh bootstrap'
         printf '%s\n' "$path_line"
       } >>"$profile_file"
     fi
@@ -450,6 +453,11 @@ ensure_profile_path() {
 }
 
 set_zsh_login_shell() {
+  if [ "$SET_ZSH_LOGIN_SHELL" != "1" ]; then
+    log "Leaving login shell unchanged. Set SET_ZSH_LOGIN_SHELL=1 to switch it to zsh."
+    return
+  fi
+
   zsh_path="$(command -v zsh || true)"
 
   if [ -z "$zsh_path" ]; then
@@ -1208,9 +1216,9 @@ report_cli_availability() {
 main() {
   ensure_profile_path
   install_os_packages
-  set_zsh_login_shell
   install_neovim
   install_runtime_clis
+  set_zsh_login_shell
   backup_existing_config
   clone_config
   sync_lazy
