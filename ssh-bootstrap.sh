@@ -1269,6 +1269,7 @@ main() {
   set_zsh_login_shell
   backup_existing_config
   clone_config
+  sh "$NVIM_CONFIG_DIR/scripts/link-cli-config.sh"
   sync_lazy
   install_mason_packages
   install_treesitter_parsers

@@ -16,6 +16,22 @@ curl -fsSL \
 
 The bootstrap script installs Neovim, backs up any existing `~/.config/nvim` directory to `~/.config/nvim.bak.<timestamp>`, clones this config, installs required CLI tools, syncs Lazy plugins, installs Mason packages, and installs tree-sitter parsers.
 
+It also links Yazi, lazygit, and Zellij settings to the tracked files in `config/` and runs `ya pkg install` to restore Yazi's locked packages. Existing settings are preserved in adjacent `.bak.XXXXXX/original` backups.
+
+## Shared CLI Settings
+
+`config/yazi/`, `config/lazygit/config.yml`, and `config/zellij/config.kdl` are the source of truth. To link an existing machine without running the full bootstrap:
+
+```sh
+sh scripts/link-cli-config.sh
+```
+
+Run this from the cloned repository with Yazi installed. The script is safe to rerun. It respects `XDG_CONFIG_HOME`, `YAZI_CONFIG_HOME`, and `ZELLIJ_CONFIG_DIR`, and asks `lazygit --print-config-dir` for lazygit's active directory (or accepts `LAZYGIT_CONFIG_DIR`).
+
+Yazi's entire config directory is linked so new settings files and package-manager updates also land in the repository. Only lazygit's `config.yml` and Zellij's `config.kdl` are linked; other files remain local. Installed Yazi plugins and flavors are ignored by Git and restored from `package.toml`.
+
+Editing settings through their usual paths edits the repository files directly. Commit and push those changes to make them available to new machines; existing machines receive them with `git pull`. After package changes, run `ya pkg install`. After upgrading Yazi, use `ya pkg upgrade` if plugin compatibility requires it, then commit the updated `package.toml`.
+
 The script can be customized with environment variables:
 
 ```sh

@@ -1,0 +1,12 @@
+# https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+gui:
+  language: "en"
+  nerdFontsVersion: "3"
+git:
+  mainBranches: [master, main, staging]
+  autoForwardBranches: none
+  diffRenderers:
+    - colorArg: always
+      command: delta --dark --paging=never --line-numbers
+os:
+  editPreset: "nvim"
